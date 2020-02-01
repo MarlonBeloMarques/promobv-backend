@@ -1,12 +1,17 @@
 package com.marlonmarqs.promobv.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Usuario implements Serializable {
@@ -20,6 +25,10 @@ public class Usuario implements Serializable {
 	private Date dataDeNascimento;
 	private String telefone;
 	private String email;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="usuario")
+	private List<Promocao> promocoes = new ArrayList<>();
 	
 	public Usuario() {
 		
@@ -88,6 +97,14 @@ public class Usuario implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Promocao> getPromocoes() {
+		return promocoes;
+	}
+
+	public void setPromocoes(List<Promocao> promocoes) {
+		this.promocoes = promocoes;
 	}
 
 	@Override
