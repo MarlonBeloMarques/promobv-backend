@@ -2,12 +2,14 @@ package com.marlonmarqs.promobv.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Promocao implements Serializable {
@@ -29,6 +31,9 @@ public class Promocao implements Serializable {
 	@JoinColumn(name="categoria_id")
 	private Categoria categoria;
 	
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="promocao") // necessario, pois da erro de identidade transiente quando vai salvar uma promocao e a galeria
+	private GaleriaDeImagens galeriaDeImagens;
+	
 	public Promocao() {
 		
 	}
@@ -42,7 +47,7 @@ public class Promocao implements Serializable {
 		this.titulo = titulo;
 	}
 	
-	public Promocao(Integer id, String descricao, Float preco, String localizacao, String titulo, Categoria categoria, Usuario usuario) {
+	public Promocao(Integer id, String descricao, Float preco, String localizacao, String titulo, Categoria categoria, Usuario usuario, GaleriaDeImagens galeriaDeImagens) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -51,6 +56,7 @@ public class Promocao implements Serializable {
 		this.titulo = titulo;
 		this.categoria = categoria;
 		this.usuario = usuario;
+		this.galeriaDeImagens = galeriaDeImagens;
 	}
 
 	public Integer getId() {
@@ -107,6 +113,14 @@ public class Promocao implements Serializable {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public GaleriaDeImagens getGaleriaDeImagens() {
+		return galeriaDeImagens;
+	}
+
+	public void setGaleriaDeImagens(GaleriaDeImagens galeriaDeImagens) {
+		this.galeriaDeImagens = galeriaDeImagens;
 	}
 
 	@Override
