@@ -25,6 +25,10 @@ public class Promocao implements Serializable {
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
+	@ManyToOne
+	@JoinColumn(name="categoria_id")
+	private Categoria categoria;
+	
 	public Promocao() {
 		
 	}
@@ -84,6 +88,14 @@ public class Promocao implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	@Override
