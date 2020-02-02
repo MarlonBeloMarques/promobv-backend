@@ -44,6 +44,17 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 	
+	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, Promocao promocao) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.apelido = apelido;
+		this.dataDeNascimento = dataDeNascimento;
+		this.telefone = telefone;
+		this.email = email;
+		this.promocoes.add(promocao);
+	}
+	
 	public Usuario(Integer id, String nome, String email) {
 		super();
 		this.id = id;
