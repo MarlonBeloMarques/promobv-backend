@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.marlonmarqs.promobv.domain.Usuario;
-import com.marlonmarqs.promobv.service.UsuarioService;
+import com.marlonmarqs.promobv.domain.Promocao;
+import com.marlonmarqs.promobv.service.PromocaoService;
 
 @RestController
-@RequestMapping(value = "/usuarios")
-public class UsuarioResource {
+@RequestMapping(value = "/promocoes")
+public class PromocaoResource {
 
 	@Autowired
-	private UsuarioService service;
+	private PromocaoService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Optional<Usuario> obj = service.find(id);
+		Optional<Promocao> obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 }
