@@ -24,7 +24,7 @@ public class Promocao implements Serializable {
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
-	private Float preco;
+	private Double preco;
 	private String localizacao;
 	private String titulo;
 	
@@ -47,7 +47,7 @@ public class Promocao implements Serializable {
 		
 	}
 
-	public Promocao(Integer id, String descricao, Float preco, String localizacao, String titulo) {
+	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -56,7 +56,7 @@ public class Promocao implements Serializable {
 		this.titulo = titulo;
 	}
 	
-	public Promocao(Integer id, String descricao, Float preco, String localizacao, String titulo, Categoria categoria, Usuario usuario, GaleriaDeImagens galeriaDeImagens, Notificacao notificacao) {
+	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo, Categoria categoria, Usuario usuario, GaleriaDeImagens galeriaDeImagens, Notificacao notificacao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -67,6 +67,17 @@ public class Promocao implements Serializable {
 		this.usuario = usuario;
 		this.galeriaDeImagens = galeriaDeImagens;
 		this.notificacoes.add(notificacao);
+	}
+	
+	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo, Categoria categoria, Usuario usuario) {
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.localizacao = localizacao;
+		this.titulo = titulo;
+		this.categoria = categoria;
+		this.usuario = usuario;
 	}
 
 	public Integer getId() {
@@ -85,11 +96,11 @@ public class Promocao implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Float getPreco() {
+	public Double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(Float preco) {
+	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
 
