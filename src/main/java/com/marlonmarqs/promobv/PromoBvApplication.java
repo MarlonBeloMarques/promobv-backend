@@ -40,12 +40,13 @@ public class PromoBvApplication implements CommandLineRunner {
 		Usuario user2 = new Usuario(2, "Matheus", "matheus.belo@gmail.com");
 		
 		Promocao promo1 = new Promocao(null, "Aulas de espanhol com material didatico", 50.00, "Rua XXX", "Aulas de Espanhol", cat1, user1);
-		user1.setPromocoes(Arrays.asList(promo1));
-		cat1.setPromocoes(Arrays.asList(promo1));
+		Promocao promo2 = new Promocao(null, "Aulas de ingles com material didatico", 50.00, "Rua YYY", "Aulas de Ingles", cat1, user1);
+		user1.setPromocoes(Arrays.asList(promo1, promo2));
+		cat1.setPromocoes(Arrays.asList(promo1, promo2));
 		
 		usuarioRepository.saveAll(Arrays.asList(user1, user2));
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
-		promocaoRepository.save(promo1);
+		promocaoRepository.saveAll(Arrays.asList(promo1, promo2));
 	}
 
 }
