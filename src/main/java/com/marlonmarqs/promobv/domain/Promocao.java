@@ -56,7 +56,7 @@ public class Promocao implements Serializable {
 		this.titulo = titulo;
 	}
 	
-	public Promocao(Integer id, String descricao, Float preco, String localizacao, String titulo, Categoria categoria, Usuario usuario, GaleriaDeImagens galeriaDeImagens, List<Notificacao> notificacoes) {
+	public Promocao(Integer id, String descricao, Float preco, String localizacao, String titulo, Categoria categoria, Usuario usuario, GaleriaDeImagens galeriaDeImagens, Notificacao notificacao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -66,7 +66,7 @@ public class Promocao implements Serializable {
 		this.categoria = categoria;
 		this.usuario = usuario;
 		this.galeriaDeImagens = galeriaDeImagens;
-		this.notificacoes = notificacoes;
+		this.notificacoes.add(notificacao);
 	}
 
 	public Integer getId() {
