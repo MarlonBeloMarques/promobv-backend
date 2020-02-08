@@ -15,14 +15,7 @@ public class UsuarioResource {
 
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Usuario> listar() {
-
-		Usuario user1 = new Usuario(1, "Marlon", "marlon.belohd@gmail.com");
-		Usuario user2 = new Usuario(2, "Matheus", "matheus.belo@gmail.com");
-
-		List<Usuario> lista = new ArrayList<>();
-		lista.add(user1);
-		lista.add(user2);
-
+			List<Usuario> lista = new ArrayList<>();
 		return lista;
 	}
 }
