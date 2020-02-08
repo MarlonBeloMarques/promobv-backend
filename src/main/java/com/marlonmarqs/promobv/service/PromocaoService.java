@@ -1,5 +1,6 @@
 package com.marlonmarqs.promobv.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,10 @@ public class PromocaoService {
 	public Optional<Promocao> find(Integer id) {
 		Optional<Promocao> obj = repo.findById(id);
 		return obj;
+	}
+	
+	public List<Promocao> findAll() {
+		List<Promocao> objs = repo.findAll();
+		return objs;
 	}
 }

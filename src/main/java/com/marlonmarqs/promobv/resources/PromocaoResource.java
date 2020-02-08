@@ -1,5 +1,6 @@
 package com.marlonmarqs.promobv.resources;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,11 @@ public class PromocaoResource {
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Optional<Promocao> obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<?> findAll() {
+		List<Promocao> objs = service.findAll();
+		return ResponseEntity.ok().body(objs);
 	}
 }
