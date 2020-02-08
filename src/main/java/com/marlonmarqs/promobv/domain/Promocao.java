@@ -1,6 +1,8 @@
 package com.marlonmarqs.promobv.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,7 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Promocao implements Serializable {
@@ -31,6 +36,10 @@ public class Promocao implements Serializable {
 	@JoinColumn(name="categoria_id")
 	private Categoria categoria;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="promocao")
+	private List<Notificacao> notificacoes = new ArrayList<>();
+	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="promocao") // necessario, pois da erro de identidade transiente quando vai salvar uma promocao e a galeria
 	private GaleriaDeImagens galeriaDeImagens;
 	
@@ -47,7 +56,7 @@ public class Promocao implements Serializable {
 		this.titulo = titulo;
 	}
 	
-	public Promocao(Integer id, String descricao, Float preco, String localizacao, String titulo, Categoria categoria, Usuario usuario, GaleriaDeImagens galeriaDeImagens) {
+	public Promocao(Integer id, String descricao, Float preco, String localizacao, String titulo, Categoria categoria, Usuario usuario, GaleriaDeImagens galeriaDeImagens, List<Notificacao> notificacoes) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -57,6 +66,7 @@ public class Promocao implements Serializable {
 		this.categoria = categoria;
 		this.usuario = usuario;
 		this.galeriaDeImagens = galeriaDeImagens;
+		this.notificacoes = notificacoes;
 	}
 
 	public Integer getId() {
@@ -121,6 +131,14 @@ public class Promocao implements Serializable {
 
 	public void setGaleriaDeImagens(GaleriaDeImagens galeriaDeImagens) {
 		this.galeriaDeImagens = galeriaDeImagens;
+	}
+
+	public List<Notificacao> getNotificacoes() {
+		return notificacoes;
+	}
+
+	public void setNotificacoes(List<Notificacao> notificacoes) {
+		this.notificacoes = notificacoes;
 	}
 
 	@Override
