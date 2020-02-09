@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.marlonmarqs.promobv.domain.Categoria;
 import com.marlonmarqs.promobv.domain.Promocao;
 import com.marlonmarqs.promobv.domain.Usuario;
+import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
 import com.marlonmarqs.promobv.repository.CategoriaRepository;
 import com.marlonmarqs.promobv.repository.PromocaoRepository;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
@@ -36,8 +37,8 @@ public class PromoBvApplication implements CommandLineRunner {
 		Categoria cat1 = new Categoria(null, "Auto e peças");
 		Categoria cat2 = new Categoria(null, "Eletrônicos");
 		
-		Usuario user1 = new Usuario(1, "Marlon", "marlon.belohd@gmail.com");
-		Usuario user2 = new Usuario(2, "Matheus", "matheus.belo@gmail.com");
+		Usuario user1 = new Usuario(1, "Marlon", "marlon.belohd@gmail.com", TipoPerfil.CLIENTE);
+		Usuario user2 = new Usuario(2, "Matheus", "matheus.belo@gmail.com", TipoPerfil.CLIENTE);
 		
 		Promocao promo1 = new Promocao(null, "Aulas de espanhol com material didatico", 50.00, "Rua XXX", "Aulas de Espanhol", cat1, user1);
 		Promocao promo2 = new Promocao(null, "Aulas de ingles com material didatico", 50.00, "Rua YYY", "Aulas de Ingles", cat1, user1);

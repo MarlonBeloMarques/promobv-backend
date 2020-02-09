@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.marlonmarqs.promobv.domain.enums.TipoNotificacao;
+
 @Entity
 public class Notificacao implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,6 +22,8 @@ public class Notificacao implements Serializable {
 	private Date data;
 	private Date hora;
 	
+	private Integer tipo;
+	
 	@ManyToOne
 	@JoinColumn(name="promocao_id")
 	private Promocao promocao;
@@ -28,11 +32,21 @@ public class Notificacao implements Serializable {
 		
 	}
 
-	public Notificacao(Integer id, Date data, Date hora) {
+	public Notificacao(Integer id, Date data, Date hora, TipoNotificacao tipo) {
 		super();
 		this.id = id;
 		this.data = data;
 		this.hora = hora;
+		this.tipo = tipo.getCod();
+	}
+	
+	public Notificacao(Integer id, Date data, Date hora, Promocao promocao, TipoNotificacao tipo) {
+		super();
+		this.id = id;
+		this.data = data;
+		this.hora = hora;
+		this.promocao = promocao;
+		this.tipo = tipo.getCod();
 	}
 
 	public Integer getId() {
@@ -57,6 +71,22 @@ public class Notificacao implements Serializable {
 
 	public void setHora(Date hora) {
 		this.hora = hora;
+	}
+
+	public Promocao getPromocao() {
+		return promocao;
+	}
+
+	public void setPromocao(Promocao promocao) {
+		this.promocao = promocao;
+	}
+
+	public Integer getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
 	}
 
 	@Override
