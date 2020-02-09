@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.marlonmarqs.promobv.domain.Usuario;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
-import com.marlonmarqs.promobv.resources.exceptions.ObjectNotFoundException;
+import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
 
 @Service
 public class UsuarioService {
