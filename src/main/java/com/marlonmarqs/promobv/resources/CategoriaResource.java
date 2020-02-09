@@ -1,5 +1,6 @@
 package com.marlonmarqs.promobv.resources;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +27,9 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<?> findAll() {
+		List<Categoria> objs = service.findAll();
+		return ResponseEntity.ok().body(objs);
+	}
 }
