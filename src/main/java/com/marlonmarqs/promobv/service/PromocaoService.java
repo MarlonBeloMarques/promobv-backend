@@ -15,6 +15,9 @@ public class PromocaoService {
 
 	@Autowired
 	private PromocaoRepository repo;
+	
+	@Autowired
+	private UsuarioService userService;
 
 	public Optional<Promocao> find(Integer id) {
 		Optional<Promocao> obj = repo.findById(id);
@@ -27,6 +30,11 @@ public class PromocaoService {
 
 	public List<Promocao> findAll() {
 		List<Promocao> objs = repo.findAll();
+		return objs;
+	}
+	
+	public List<Promocao> findAllUser(Integer idUser) {
+		List<Promocao> objs = repo.findByUsuario(userService.find(idUser));
 		return objs;
 	}
 }
