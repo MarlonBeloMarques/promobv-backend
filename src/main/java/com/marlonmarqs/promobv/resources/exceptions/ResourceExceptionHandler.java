@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
+
 @ControllerAdvice //metodo padrão do controlleradvice
 public class ResourceExceptionHandler {
 

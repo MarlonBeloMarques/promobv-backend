@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.marlonmarqs.promobv.domain.Promocao;
 import com.marlonmarqs.promobv.repository.PromocaoRepository;
-import com.marlonmarqs.promobv.resources.exceptions.ObjectNotFoundException;
+import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
 
 @Service
 public class PromocaoService {

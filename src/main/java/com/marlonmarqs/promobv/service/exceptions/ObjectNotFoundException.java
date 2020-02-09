@@ -1,4 +1,4 @@
-package com.marlonmarqs.promobv.resources.exceptions;
+package com.marlonmarqs.promobv.service.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
