@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
 
 @Entity
 public class Usuario implements Serializable {
@@ -26,15 +27,16 @@ public class Usuario implements Serializable {
 	private String telefone;
 	private String email;
 	
+	private Integer tipo;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="usuario")
 	private List<Promocao> promocoes = new ArrayList<>();
 	
 	public Usuario() {
-		
 	}
 
-	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email) {
+	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, TipoPerfil tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -42,9 +44,10 @@ public class Usuario implements Serializable {
 		this.dataDeNascimento = dataDeNascimento;
 		this.telefone = telefone;
 		this.email = email;
+		this.tipo = tipo.getCod();
 	}
 	
-	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, Promocao promocao) {
+	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, Promocao promocao, TipoPerfil tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -53,13 +56,15 @@ public class Usuario implements Serializable {
 		this.telefone = telefone;
 		this.email = email;
 		this.promocoes.add(promocao);
+		this.tipo = tipo.getCod();
 	}
 	
-	public Usuario(Integer id, String nome, String email) {
+	public Usuario(Integer id, String nome, String email, TipoPerfil tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
+		this.tipo = tipo.getCod();
 	}
 
 	public Integer getId() {
@@ -116,6 +121,14 @@ public class Usuario implements Serializable {
 
 	public void setPromocoes(List<Promocao> promocoes) {
 		this.promocoes = promocoes;
+	}
+
+	public Integer getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
 	}
 
 	@Override
