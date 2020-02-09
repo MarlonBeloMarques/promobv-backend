@@ -33,6 +33,10 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy="usuario")
 	private List<Promocao> promocoes = new ArrayList<>();
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="usuario")
+	private List<Notificacao> notificacoes = new ArrayList<>();
+	
 	public Usuario() {
 	}
 
@@ -47,7 +51,7 @@ public class Usuario implements Serializable {
 		this.tipo = tipo.getCod();
 	}
 	
-	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, Promocao promocao, TipoPerfil tipo) {
+	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, Promocao promocao, Notificacao notificacao, TipoPerfil tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -56,6 +60,7 @@ public class Usuario implements Serializable {
 		this.telefone = telefone;
 		this.email = email;
 		this.promocoes.add(promocao);
+		this.notificacoes.add(notificacao);
 		this.tipo = tipo.getCod();
 	}
 	
@@ -121,6 +126,14 @@ public class Usuario implements Serializable {
 
 	public void setPromocoes(List<Promocao> promocoes) {
 		this.promocoes = promocoes;
+	}
+
+	public List<Notificacao> getNotificacoes() {
+		return notificacoes;
+	}
+
+	public void setNotificacoes(List<Notificacao> notificacoes) {
+		this.notificacoes = notificacoes;
 	}
 
 	public Integer getTipo() {
