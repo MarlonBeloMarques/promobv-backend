@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.marlonmarqs.promobv.domain.Usuario;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
+import com.marlonmarqs.promobv.resources.exceptions.ObjectNotFoundException;
 
 @Service
 public class UsuarioService {
@@ -16,6 +17,12 @@ public class UsuarioService {
 	
 	public Optional<Usuario> find(Integer id) {
 		Optional<Usuario> obj = repo.findById(id);
+		
+		if(obj == null) {
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id
+					+ ", Tipo: " + Usuario.class.getName());
+		}
+		
 		return obj;
 	}
 }
