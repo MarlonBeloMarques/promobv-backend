@@ -28,6 +28,10 @@ public class Notificacao implements Serializable {
 	@JoinColumn(name="promocao_id")
 	private Promocao promocao;
 	
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
+	
 	private Notificacao() {
 		
 	}
@@ -40,12 +44,13 @@ public class Notificacao implements Serializable {
 		this.tipo = tipo.getCod();
 	}
 	
-	public Notificacao(Integer id, Date data, Date hora, Promocao promocao, TipoNotificacao tipo) {
+	public Notificacao(Integer id, Date data, Date hora, Promocao promocao, Usuario usuario, TipoNotificacao tipo) {
 		super();
 		this.id = id;
 		this.data = data;
 		this.hora = hora;
 		this.promocao = promocao;
+		this.usuario = usuario;
 		this.tipo = tipo.getCod();
 	}
 
@@ -87,6 +92,14 @@ public class Notificacao implements Serializable {
 
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
