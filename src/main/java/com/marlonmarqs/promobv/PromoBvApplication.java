@@ -55,12 +55,13 @@ public class PromoBvApplication implements CommandLineRunner {
 		Promocao promo2 = new Promocao(null, "Aulas de ingles com material didatico", 50.00, "Rua YYY", "Aulas de Ingles", cat1, user1);
 		Promocao promo3 = new Promocao(null, "Aulas de japones com material didatico", 60.00, "Rua ZZZ", "Aulas de Japones", cat1, user2);
 		
-		Notificacao not1 = new Notificacao(null, sdf1.parse("20/01/2020"), sdf2.parse("12:30:00"), promo1, TipoNotificacao.CURTIDA);
-		Notificacao not2 = new Notificacao(null, sdf1.parse("20/01/2020"), sdf2.parse("14:30:00"), promo2, TipoNotificacao.CURTIDA);
+		Notificacao not1 = new Notificacao(null, sdf1.parse("20/01/2020"), sdf2.parse("12:30:00"), promo1, user1, TipoNotificacao.CURTIDA);
+		Notificacao not2 = new Notificacao(null, sdf1.parse("20/01/2020"), sdf2.parse("14:30:00"), promo2, user1,  TipoNotificacao.CURTIDA);
 		
 		promo1.setNotificacoes(Arrays.asList(not1));
 		promo2.setNotificacoes(Arrays.asList(not2));
 		user1.setPromocoes(Arrays.asList(promo1, promo2));
+		user1.setNotificacoes(Arrays.asList(not1, not2));
 		user2.setPromocoes(Arrays.asList(promo3));
 		cat1.setPromocoes(Arrays.asList(promo1, promo2));
 		
