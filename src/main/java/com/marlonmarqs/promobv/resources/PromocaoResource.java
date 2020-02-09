@@ -31,4 +31,10 @@ public class PromocaoResource {
 		List<Promocao> objs = service.findAll();
 		return ResponseEntity.ok().body(objs);
 	}
+	
+	@RequestMapping(value="/user/{id}", method=RequestMethod.GET)
+	public ResponseEntity<?> findAllUser(@PathVariable Integer id) {
+		List<Promocao> obj = service.findAllUser(id);
+		return ResponseEntity.ok().body(obj);
+	}
 }
