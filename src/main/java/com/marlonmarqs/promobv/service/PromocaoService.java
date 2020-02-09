@@ -19,10 +19,9 @@ public class PromocaoService {
 	public Optional<Promocao> find(Integer id) {
 		Optional<Promocao> obj = repo.findById(id);
 		
-		if (obj == null) {
-			throw new ObjectNotFoundException(
-					"Objeto não encontrado! Id: " + id + ", Tipo: " + Promocao.class.getName());
-		}
+		obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id
+				+ ", Tipo: " + Promocao.class.getName()));
+		
 		return obj;
 	}
 
