@@ -1,5 +1,6 @@
 package com.marlonmarqs.promobv.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,10 @@ public class CategoriaService {
 				+ ", Tipo: " + Categoria.class.getName()));
 
 		return obj;
+	}
+	
+	public List<Categoria> findAll() {
+		List<Categoria> objs = repo.findAll();
+		return objs;
 	}
 }
