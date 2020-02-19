@@ -44,8 +44,13 @@ public class CategoriaService {
 	}
 	
 	public Categoria update(Categoria obj) {
-		find(obj.getId());
+		Optional<Categoria> newObj = find(obj.getId());
+		updateData(newObj, obj);
 		return repo.save(obj);
+	}
+	
+	public void updateData(Optional<Categoria> newObj, Categoria obj) {
+		newObj.get().setNome(obj.getNome());
 	}
 	
 	public void delete(Integer id) throws DataIntegrityException {
