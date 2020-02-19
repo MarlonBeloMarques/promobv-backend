@@ -27,6 +27,11 @@ public class UsuarioInsertValidator implements ConstraintValidator<UsuarioInsert
 	public boolean isValid(UsuarioNewDTO objDto, ConstraintValidatorContext context) {
 		List<FieldMessage> list = new ArrayList<>();
 		
+		Usuario aux = repo.findByEmail(objDto.getEmail());
+		if(aux != null) {
+			list.add(new FieldMessage("email", "Email já existente"));
+		}
+		
 		for(FieldMessage e : list) {
 			// lista de erros do framework, permite transportar a minha lista de erros para o framework
 			context.disableDefaultConstraintViolation();
