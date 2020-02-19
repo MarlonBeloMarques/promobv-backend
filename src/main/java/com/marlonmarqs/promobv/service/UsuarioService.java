@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.marlonmarqs.promobv.domain.Categoria;
 import com.marlonmarqs.promobv.domain.Usuario;
 import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
 import com.marlonmarqs.promobv.dto.UsuarioDTO;
@@ -34,12 +33,9 @@ public class UsuarioService {
 		return repo.findAll();
 	}
 	
-	public Usuario insert(Usuario obj) throws DataIntegrityException {
+	public Usuario insert(Usuario obj) {
 		obj.setId(null);
-		if(repo.findByEmail(obj.getEmail()) != null)
-			throw new DataIntegrityException("Não é possível se cadastrar, pois já existe um usuário com esse email");	
-		else
-			return obj = repo.save(obj);
+		return obj = repo.save(obj);
 	}
 	
 	public void delete(Integer id) throws DataIntegrityException {

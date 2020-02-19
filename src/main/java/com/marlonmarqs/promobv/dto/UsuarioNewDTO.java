@@ -10,7 +10,9 @@ import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marlonmarqs.promobv.domain.Usuario;
+import com.marlonmarqs.promobv.service.validation.UsuarioInsert;
 
+@UsuarioInsert
 public class UsuarioNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
