@@ -3,6 +3,7 @@ package com.marlonmarqs.promobv.resources;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.marlonmarqs.promobv.domain.Categoria;
+import com.marlonmarqs.promobv.dto.CategoriaDTO;
 import com.marlonmarqs.promobv.service.CategoriaService;
 
 @RestController
@@ -31,9 +33,11 @@ public class CategoriaResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<?> findAll() {
+	public ResponseEntity<List<CategoriaDTO>> findAll() {
 		List<Categoria> objs = service.findAll();
-		return ResponseEntity.ok().body(objs);
+		List<CategoriaDTO> listDto = objs.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(listDto);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
