@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
 
@@ -23,6 +24,8 @@ public class Usuario implements Serializable {
 	private Integer id;
 	private String nome;
 	private String apelido;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataDeNascimento;
 	private String telefone;
 	private String email;
