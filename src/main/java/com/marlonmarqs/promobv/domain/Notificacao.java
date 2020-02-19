@@ -41,7 +41,7 @@ public class Notificacao implements Serializable {
 		this.id = id;
 		this.data = data;
 		this.hora = hora;
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 	
 	public Notificacao(Integer id, Date data, Date hora, Promocao promocao, Usuario usuario, TipoNotificacao tipo) {
@@ -51,7 +51,7 @@ public class Notificacao implements Serializable {
 		this.hora = hora;
 		this.promocao = promocao;
 		this.usuario = usuario;
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 
 	public Integer getId() {
