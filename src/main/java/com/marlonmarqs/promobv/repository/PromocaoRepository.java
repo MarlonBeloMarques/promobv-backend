@@ -21,4 +21,7 @@ public interface PromocaoRepository extends JpaRepository<Promocao, Integer> {
 	
 	@Transactional(readOnly = true)
 	Page<Promocao> findByCategoria(Optional<Categoria> categoria, Pageable pageRequest);
+	
+	@Transactional(readOnly = true)
+	Page<Promocao> findAll(Pageable pageRequest);
 }

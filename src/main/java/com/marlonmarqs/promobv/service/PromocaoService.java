@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.marlonmarqs.promobv.domain.Categoria;
 import com.marlonmarqs.promobv.domain.Promocao;
+import com.marlonmarqs.promobv.dto.PromocaoDTO;
 import com.marlonmarqs.promobv.repository.PromocaoRepository;
 import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
 
@@ -50,5 +51,11 @@ public class PromocaoService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Optional<Categoria> cat = categoriaService.find(idCat);
 		return repo.findByCategoria(cat, pageRequest);
+	}
+	
+	public Page<Promocao> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+		
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return repo.findAll(pageRequest);
 	}
 }
