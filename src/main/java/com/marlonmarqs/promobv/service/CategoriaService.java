@@ -29,4 +29,9 @@ public class CategoriaService {
 		List<Categoria> objs = repo.findAll();
 		return objs;
 	}
+	
+	public Categoria insert(Categoria obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
 }
