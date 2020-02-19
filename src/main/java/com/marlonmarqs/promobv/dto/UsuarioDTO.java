@@ -8,7 +8,9 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.marlonmarqs.promobv.domain.Usuario;
+import com.marlonmarqs.promobv.service.validation.UsuarioUpdate;
 
+@UsuarioUpdate
 public class UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
