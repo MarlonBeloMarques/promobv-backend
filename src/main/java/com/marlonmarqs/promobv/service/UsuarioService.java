@@ -34,9 +34,12 @@ public class UsuarioService {
 		return repo.findAll();
 	}
 	
-	public Usuario insert(Usuario obj) {
+	public Usuario insert(Usuario obj) throws DataIntegrityException {
 		obj.setId(null);
-		return obj = repo.save(obj);
+		if(repo.findByEmail(obj.getEmail()) != null)
+			throw new DataIntegrityException("Não é possível se cadastrar, pois já existe um usuário com esse email");	
+		else
+			return obj = repo.save(obj);
 	}
 	
 	public void delete(Integer id) throws DataIntegrityException {
