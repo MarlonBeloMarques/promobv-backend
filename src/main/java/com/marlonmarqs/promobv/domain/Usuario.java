@@ -48,7 +48,7 @@ public class Usuario implements Serializable {
 		this.dataDeNascimento = dataDeNascimento;
 		this.telefone = telefone;
 		this.email = email;
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 	
 	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, Promocao promocao, Notificacao notificacao, TipoPerfil tipo) {
@@ -61,7 +61,7 @@ public class Usuario implements Serializable {
 		this.email = email;
 		this.promocoes.add(promocao);
 		this.notificacoes.add(notificacao);
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 	
 	public Usuario(Integer id, String nome, String email, TipoPerfil tipo) {
@@ -69,7 +69,7 @@ public class Usuario implements Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 
 	public Integer getId() {
