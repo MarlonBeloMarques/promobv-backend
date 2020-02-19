@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marlonmarqs.promobv.domain.Usuario;
+import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
 import com.marlonmarqs.promobv.dto.UsuarioDTO;
+import com.marlonmarqs.promobv.dto.UsuarioNewDTO;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
 import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
 
@@ -30,6 +32,11 @@ public class UsuarioService {
 		return repo.findAll();
 	}
 	
+	public Usuario insert(Usuario obj) {
+		obj.setId(null);
+		return obj = repo.save(obj);
+	}
+	
 	public Usuario update(Usuario obj) {
 		Optional<Usuario> newObj = find(obj.getId());
 		updateData(newObj, obj);
@@ -38,6 +45,10 @@ public class UsuarioService {
 	
 	public Usuario fromDTO(UsuarioDTO objDto) {
 		return new Usuario(objDto.getId(), objDto.getNome(), objDto.getEmail(), null);
+	}
+	
+	public Usuario fromDTO(UsuarioNewDTO objDto) {
+		return new Usuario (null, objDto.getNome(), objDto.getApelido(), objDto.getDataDeNascimento(), objDto.getTelefone(), objDto.getEmail(), TipoPerfil.CLIENTE);
 	}
 	
 	private void updateData(Optional<Usuario> newObj, Usuario obj) {
