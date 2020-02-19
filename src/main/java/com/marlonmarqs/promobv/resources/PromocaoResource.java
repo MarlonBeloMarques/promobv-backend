@@ -2,6 +2,7 @@ package com.marlonmarqs.promobv.resources;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.marlonmarqs.promobv.domain.Promocao;
+import com.marlonmarqs.promobv.dto.PromocaoDTO;
+import com.marlonmarqs.promobv.dto.PromocaoPageDTO;
 import com.marlonmarqs.promobv.service.PromocaoService;
 
 @RestController
@@ -23,15 +26,21 @@ public class PromocaoResource {
 	private PromocaoService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Optional<Promocao>> find(@PathVariable Integer id) {
+	public ResponseEntity<Optional<PromocaoDTO>> find(@PathVariable Integer id) {
 		Optional<Promocao> obj = service.find(id);
-		return ResponseEntity.ok().body(obj);
+		Optional<PromocaoDTO> objDto = obj.map(promo -> new PromocaoDTO(promo));
+		return ResponseEntity.ok().body(objDto);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<?> findAll() {
-		List<Promocao> objs = service.findAll();
-		return ResponseEntity.ok().body(objs);
+	public ResponseEntity<Page<PromocaoPageDTO>> findAll(
+			@RequestParam(value="page", defaultValue="0")Integer page, // valor padrão 
+			@RequestParam(value="linesPerPage", defaultValue="24")Integer linesPerPage, 
+			@RequestParam(value="orderBy", defaultValue="id")String orderBy, 
+			@RequestParam(value="direction", defaultValue="DESC")String direction) { 
+		Page<Promocao> list = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<PromocaoPageDTO> pageDto = list.map(obj -> new PromocaoPageDTO(obj));
+		return ResponseEntity.ok().body(pageDto);
 	}
 	
 	@RequestMapping(value="/user/{id}", method=RequestMethod.GET)
@@ -41,13 +50,14 @@ public class PromocaoResource {
 	}
 	
 	@RequestMapping(value="/categoria/{id}", method=RequestMethod.GET) 
-	public ResponseEntity<Page<Promocao>> findAll(
+	public ResponseEntity<Page<PromocaoPageDTO>> findAll(
 			@PathVariable Integer id,
 			@RequestParam(value="page", defaultValue="0")Integer page, // valor padrão 
 			@RequestParam(value="linesPerPage", defaultValue="24")Integer linesPerPage, 
 			@RequestParam(value="orderBy", defaultValue="id")String orderBy, 
 			@RequestParam(value="direction", defaultValue="DESC")String direction) { 
 		Page<Promocao> list = service.findPage(id, page, linesPerPage, orderBy, direction);
-		return ResponseEntity.ok().body(list); 
+		Page<PromocaoPageDTO> pageDto = list.map(obj -> new PromocaoPageDTO(obj));
+		return ResponseEntity.ok().body(pageDto); 
 	}
 }
