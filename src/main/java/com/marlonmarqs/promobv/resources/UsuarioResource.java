@@ -20,7 +20,7 @@ public class UsuarioResource {
 	private UsuarioService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Optional<Usuario>> find(@PathVariable Integer id) {
 		Optional<Usuario> obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}

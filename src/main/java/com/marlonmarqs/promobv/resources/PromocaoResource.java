@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.marlonmarqs.promobv.domain.Notificacao;
 import com.marlonmarqs.promobv.domain.Promocao;
 import com.marlonmarqs.promobv.service.PromocaoService;
 
@@ -24,7 +23,7 @@ public class PromocaoResource {
 	private PromocaoService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Optional<Promocao>> find(@PathVariable Integer id) {
 		Optional<Promocao> obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
@@ -36,7 +35,7 @@ public class PromocaoResource {
 	}
 	
 	@RequestMapping(value="/user/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> findAllUser(@PathVariable Integer id) {
+	public ResponseEntity<List<Promocao>> findAllUser(@PathVariable Integer id) {
 		List<Promocao> obj = service.findAllUser(id);
 		return ResponseEntity.ok().body(obj);
 	}
