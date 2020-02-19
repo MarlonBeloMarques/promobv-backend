@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marlonmarqs.promobv.domain.Categoria;
+import com.marlonmarqs.promobv.dto.CategoriaDTO;
 import com.marlonmarqs.promobv.repository.CategoriaRepository;
 import com.marlonmarqs.promobv.service.exceptions.DataIntegrityException;
 import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
@@ -31,6 +32,10 @@ public class CategoriaService {
 	public List<Categoria> findAll() {
 		List<Categoria> objs = repo.findAll();
 		return objs;
+	}
+	
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
 	}
 	
 	public Categoria insert(Categoria obj) {
