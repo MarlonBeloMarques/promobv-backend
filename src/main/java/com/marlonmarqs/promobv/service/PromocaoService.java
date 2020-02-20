@@ -1,5 +1,6 @@
 package com.marlonmarqs.promobv.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +19,6 @@ import com.marlonmarqs.promobv.dto.PromocaoUpdateDTO;
 import com.marlonmarqs.promobv.repository.CategoriaRepository;
 import com.marlonmarqs.promobv.repository.PromocaoRepository;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
-import com.marlonmarqs.promobv.service.exceptions.DataIntegrityException;
 import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
 
 @Service
@@ -92,6 +92,21 @@ public class PromocaoService {
 		Optional<Promocao> obj = find(id);
 
 		repo.deleteById(id);
+	}
+	
+	public List<String> deleteCheckDenuncia(Integer idUser) {
+		String msg = "A publicação foi desativada para análise: ";
+		
+		List<Promocao> objs = findAllUser(idUser);
+		List<String> messages = new ArrayList<>();
+		
+		for (Promocao promocao : objs) {
+			if(promocao.getNotificacoes().stream().map(obj -> obj.getTipo().compareTo(2)).count() >= 10) {
+				messages.add(msg + promocao.getTitulo());
+			}
+		}
+		
+		return messages.isEmpty() ? Arrays.asList("Não há publicações denunciadas") : messages;
 	}
 
 	public List<Promocao> findAll() {

@@ -80,6 +80,12 @@ public class PromocaoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@RequestMapping(value="/check-denuncias/user/{id}", method=RequestMethod.GET)
+	public ResponseEntity<?> checkDenuncias(@PathVariable Integer id) {
+		List<String> msgs = service.deleteCheckDenuncia(id);
+		return ResponseEntity.ok().body(msgs);
+	}
+	
 	@RequestMapping(value="/categoria/{id}", method=RequestMethod.GET) 
 	public ResponseEntity<Page<PromocaoPageDTO>> findAll(
 			@PathVariable Integer id,

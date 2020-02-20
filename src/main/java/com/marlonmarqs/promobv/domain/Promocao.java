@@ -27,6 +27,7 @@ public class Promocao implements Serializable {
 	private Double preco;
 	private String localizacao;
 	private String titulo;
+	private boolean publicada;
 	
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
@@ -44,7 +45,7 @@ public class Promocao implements Serializable {
 	private GaleriaDeImagens galeriaDeImagens;
 	
 	public Promocao() {
-		
+		setPublicada(true);
 	}
 
 	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo) {
@@ -54,6 +55,8 @@ public class Promocao implements Serializable {
 		this.preco = preco;
 		this.localizacao = localizacao;
 		this.titulo = titulo;
+		setPublicada(true);
+
 	}
 	
 	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo, Categoria categoria, Usuario usuario, GaleriaDeImagens galeriaDeImagens, Notificacao notificacao) {
@@ -67,6 +70,8 @@ public class Promocao implements Serializable {
 		this.usuario = usuario;
 		this.galeriaDeImagens = galeriaDeImagens;
 		this.notificacoes.add(notificacao);
+		setPublicada(true);
+
 	}
 	
 	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo, Categoria categoria, Usuario usuario) {
@@ -78,6 +83,8 @@ public class Promocao implements Serializable {
 		this.titulo = titulo;
 		this.categoria = categoria;
 		this.usuario = usuario;
+		setPublicada(true);
+
 	}
 	
 	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo, Categoria categoria) {
@@ -87,6 +94,8 @@ public class Promocao implements Serializable {
 		this.localizacao = localizacao;
 		this.titulo = titulo;
 		this.categoria = categoria;
+		setPublicada(true);
+
 	}
 
 	public Integer getId() {
@@ -159,6 +168,14 @@ public class Promocao implements Serializable {
 
 	public void setNotificacoes(List<Notificacao> notificacoes) {
 		this.notificacoes = notificacoes;
+	}
+
+	public boolean isPublicada() {
+		return publicada;
+	}
+
+	public void setPublicada(boolean publicada) {
+		this.publicada = publicada;
 	}
 
 	@Override
