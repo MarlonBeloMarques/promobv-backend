@@ -55,7 +55,7 @@ public class UsuarioService {
 	}
 	
 	public Usuario fromDTO(UsuarioDTO objDto) {
-		return new Usuario(objDto.getId(), objDto.getNome(), objDto.getEmail(), null);
+		return new Usuario(null, objDto.getNome(), objDto.getApelido(), objDto.getTelefone(), objDto.getEmail(), null);
 	}
 	
 	public Usuario fromDTO(UsuarioNewDTO objDto) {
@@ -63,7 +63,13 @@ public class UsuarioService {
 	}
 	
 	private void updateData(Optional<Usuario> newObj, Usuario obj) {
-		newObj.get().setNome(obj.getNome());
-		newObj.get().setEmail(obj.getEmail());
+		if(obj.getNome() != null)
+			newObj.get().setNome(obj.getNome());
+		if(obj.getEmail() != null)
+			newObj.get().setEmail(obj.getEmail());
+		if(obj.getApelido() != null) 
+			newObj.get().setApelido(obj.getApelido());
+		if(obj.getTelefone() != null)
+			newObj.get().setTelefone(obj.getTelefone());
 	}
 }
