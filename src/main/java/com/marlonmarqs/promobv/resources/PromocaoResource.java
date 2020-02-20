@@ -57,6 +57,12 @@ public class PromocaoResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) { 
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Page<PromocaoPageDTO>> findAll(
 			@RequestParam(value="page", defaultValue="0")Integer page, // valor padrão 
