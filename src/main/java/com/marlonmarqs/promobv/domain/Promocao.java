@@ -79,6 +79,15 @@ public class Promocao implements Serializable {
 		this.categoria = categoria;
 		this.usuario = usuario;
 	}
+	
+	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo, Categoria categoria) {
+		this.id = id;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.localizacao = localizacao;
+		this.titulo = titulo;
+		this.categoria = categoria;
+	}
 
 	public Integer getId() {
 		return id;

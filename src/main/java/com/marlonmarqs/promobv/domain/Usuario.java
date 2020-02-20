@@ -57,6 +57,16 @@ public class Usuario implements Serializable {
 		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 	
+	public Usuario(Integer id, String nome, String apelido, String telefone, String email, TipoPerfil tipo) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.apelido = apelido;
+		this.telefone = telefone;
+		this.email = email;
+		this.tipo = (tipo == null) ? null : tipo.getCod();
+	}
+	
 	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, Promocao promocao, Notificacao notificacao, TipoPerfil tipo) {
 		super();
 		this.id = id;

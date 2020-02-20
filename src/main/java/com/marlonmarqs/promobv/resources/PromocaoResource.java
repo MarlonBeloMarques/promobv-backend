@@ -22,6 +22,8 @@ import com.marlonmarqs.promobv.domain.Usuario;
 import com.marlonmarqs.promobv.dto.PromocaoDTO;
 import com.marlonmarqs.promobv.dto.PromocaoNewDTO;
 import com.marlonmarqs.promobv.dto.PromocaoPageDTO;
+import com.marlonmarqs.promobv.dto.PromocaoUpdateDTO;
+import com.marlonmarqs.promobv.dto.UsuarioDTO;
 import com.marlonmarqs.promobv.service.PromocaoService;
 
 @RestController
@@ -45,6 +47,14 @@ public class PromocaoResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri(); // enumerar de forma crescente o id do uri
 		return ResponseEntity.created(uri).build(); 
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody PromocaoUpdateDTO objDto, @PathVariable Integer id) {
+		Promocao obj = service.fromDTO(objDto);
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)

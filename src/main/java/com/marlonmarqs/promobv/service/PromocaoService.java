@@ -14,6 +14,7 @@ import com.marlonmarqs.promobv.domain.Categoria;
 import com.marlonmarqs.promobv.domain.Promocao;
 import com.marlonmarqs.promobv.domain.Usuario;
 import com.marlonmarqs.promobv.dto.PromocaoNewDTO;
+import com.marlonmarqs.promobv.dto.PromocaoUpdateDTO;
 import com.marlonmarqs.promobv.repository.CategoriaRepository;
 import com.marlonmarqs.promobv.repository.PromocaoRepository;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
@@ -24,28 +25,28 @@ public class PromocaoService {
 
 	@Autowired
 	private PromocaoRepository repo;
-	
+
 	@Autowired
 	private UsuarioRepository userRepository;
-	
+
 	@Autowired
 	private CategoriaRepository catRepository;
-	
+
 	@Autowired
 	private UsuarioService userService;
 
 	@Autowired
 	private CategoriaService categoriaService;
-	
+
 	public Optional<Promocao> find(Integer id) {
 		Optional<Promocao> obj = repo.findById(id);
-		
-		obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id
-				+ ", Tipo: " + Promocao.class.getName()));
-		
+
+		obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Promocao.class.getName()));
+
 		return obj;
 	}
-	
+
 	public Promocao insert(Promocao obj) {
 		obj.setId(null);
 		obj = repo.save(obj);
@@ -53,35 +54,58 @@ public class PromocaoService {
 		userRepository.save(obj.getUsuario());
 		return obj;
 	}
-	
+
+	public Promocao update(Promocao obj) {
+		Optional<Promocao> newObj = find(obj.getId());
+		updateData(newObj, obj);
+
+		return repo.save(newObj.get());
+	}
+
 	public Promocao fromDTO(PromocaoNewDTO objDto) {
 		Optional<Usuario> user = userService.find(objDto.getIdUsuario());
 		Optional<Categoria> cat = categoriaService.find(objDto.getIdCategoria());
-				
-		Promocao obj = new Promocao(null, objDto.getDescricao(), objDto.getPreco(), objDto.getLocalizacao(), objDto.getTitulo(), cat.get(), user.get());
-		
+
+		Promocao obj = new Promocao(null, objDto.getDescricao(), objDto.getPreco(), objDto.getLocalizacao(),
+				objDto.getTitulo(), cat.get(), user.get());
+
 		return obj;
+	}
+
+	public Promocao fromDTO(PromocaoUpdateDTO objDto) {
+		return new Promocao(null, objDto.getDescricao(), objDto.getPreco(), objDto.getLocalizacao(), objDto.getTitulo());
+	}
+
+	private void updateData(Optional<Promocao> newObj, Promocao obj) {
+		if (obj.getTitulo() != null)
+			newObj.get().setTitulo(obj.getTitulo());
+		if (obj.getDescricao() != null)
+			newObj.get().setDescricao(obj.getDescricao());
+		if (obj.getLocalizacao() != null)
+			newObj.get().setLocalizacao(obj.getLocalizacao());
+		if (obj.getPreco() != null)
+			newObj.get().setPreco(obj.getPreco());
 	}
 
 	public List<Promocao> findAll() {
 		List<Promocao> objs = repo.findAll();
 		return objs;
 	}
-	
+
 	public List<Promocao> findAllUser(Integer idUser) {
 		List<Promocao> objs = repo.findByUsuario(userService.find(idUser));
 		return objs;
 	}
-	
-	public Page<Promocao> findPage(Integer idCat, Integer page, Integer linesPerPage, String orderBy, String direction){
-		
+
+	public Page<Promocao> findPage(Integer idCat, Integer page, Integer linesPerPage, String orderBy, String direction) {
+
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Optional<Categoria> cat = categoriaService.find(idCat);
 		return repo.findByCategoria(cat, pageRequest);
 	}
-	
-	public Page<Promocao> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
-		
+
+	public Page<Promocao> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
 	}

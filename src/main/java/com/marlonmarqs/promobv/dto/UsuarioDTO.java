@@ -16,13 +16,13 @@ public class UsuarioDTO implements Serializable {
 	
 	private Integer id;
 	
-	@NotEmpty(message="Preenchimento obrigatório")
-	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
 	private String nome;
 	
-	@NotEmpty(message="Preenchimento obrigatório")
-	@Email
 	private String email;
+	
+	private String apelido;
+	
+	private String telefone;
 	
 	public UsuarioDTO() {
 		
@@ -32,6 +32,8 @@ public class UsuarioDTO implements Serializable {
 		id = obj.getId();
 		nome = obj.getNome();
 		email = obj.getEmail();
+		apelido = obj.getApelido();
+		telefone = obj.getTelefone();
 	}
 
 	public Integer getId() {
@@ -56,6 +58,22 @@ public class UsuarioDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getApelido() {
+		return apelido;
+	}
+
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 }
