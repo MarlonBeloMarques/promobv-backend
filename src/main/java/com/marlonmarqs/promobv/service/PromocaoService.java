@@ -18,6 +18,7 @@ import com.marlonmarqs.promobv.dto.PromocaoUpdateDTO;
 import com.marlonmarqs.promobv.repository.CategoriaRepository;
 import com.marlonmarqs.promobv.repository.PromocaoRepository;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
+import com.marlonmarqs.promobv.service.exceptions.DataIntegrityException;
 import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
 
 @Service
@@ -85,6 +86,12 @@ public class PromocaoService {
 			newObj.get().setLocalizacao(obj.getLocalizacao());
 		if (obj.getPreco() != null)
 			newObj.get().setPreco(obj.getPreco());
+	}
+	
+	public void delete(Integer id) {
+		Optional<Promocao> obj = find(id);
+
+		repo.deleteById(id);
 	}
 
 	public List<Promocao> findAll() {
