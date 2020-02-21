@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marlonmarqs.promobv.domain.enums.TipoNotificacao;
 
 @Entity
@@ -19,7 +20,11 @@ public class Notificacao implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date data;
+	
+	@JsonFormat(pattern = "HH:mm:ss")
 	private Date hora;
 	
 	private Integer tipo;
