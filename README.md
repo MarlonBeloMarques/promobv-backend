@@ -95,4 +95,6 @@ Para realizar consultas, inserções, atualizações etc. Tenha instalado o Dock
 3. Execute a imagem do Docker (users-mysql): 
 * docker run -p 8086:8086 --name users-mysql --link mysql-standalone:mysql -d users-mysql
 
+Para consultar as tabelas no banco dedados, basta instalar o [MySQL Woekbench](https://www.mysql.com/products/workbench/) e criar uma conexão no localhost na porta 3306 com o seguinte usuario: "sa" e senha : "password"
+
 
