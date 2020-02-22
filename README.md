@@ -81,4 +81,18 @@ Para inserção de objetos no banco de dados, basta seguir os exemplos no arquiv
 Os caminhos para requisições podem ser encontradas na pasta resources, para que possa ser feita uma requisição,
 pode-se utilizar o [Postman](https://www.postman.com/downloads/)
 
+### Docker
+
+Para realizar consultas, inserções, atualizações etc. Tenha instalado o Docker em sua maquina e realize os seguintes comando no caminho raiz do projeto.
+
+1. Use o MySQL Image publicado pelo [Docker Hub](https://hub.docker.com/_/mysql/) para executar o container mysql
+* docker pull mysql
+* docker run -p 3306:3306 --name mysql-standalone -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=test -e MYSQL_USER=sa -e MYSQL_PASSWORD=password -d mysql:5.6
+
+2. Usando o Dockerfile, crie a imagem do Docker. No diretório Dockerfile execute: 
+* docker build . -t users-mysql
+
+3. Execute a imagem do Docker (users-mysql): 
+* docker run -p 8086:8086 --name users-mysql --link mysql-standalone:mysql -d users-mysql
+
 
