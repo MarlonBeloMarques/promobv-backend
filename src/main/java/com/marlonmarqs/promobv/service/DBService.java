@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.marlonmarqs.promobv.domain.Categoria;
 import com.marlonmarqs.promobv.domain.Notificacao;
@@ -32,14 +33,17 @@ public class DBService {
 	
 	@Autowired
 	private NotificacaoRepository notificacaoRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 
 	public void instantiateTestDatabase() throws ParseException {
 		
 		Categoria cat1 = new Categoria(null, "Auto e peças");
 		Categoria cat2 = new Categoria(null, "Eletrônicos");
 		
-		Usuario user1 = new Usuario(1, "Marlon", "marlon.belohd@gmail.com", TipoPerfil.CLIENTE);
-		Usuario user2 = new Usuario(2, "Matheus", "matheus.belo@gmail.com", TipoPerfil.CLIENTE);
+		Usuario user1 = new Usuario(1, "Marlon", "marlon.belohd@gmail.com", TipoPerfil.CLIENTE, pe.encode("123"));
+		Usuario user2 = new Usuario(2, "Matheus", "matheus.belo@gmail.com", TipoPerfil.CLIENTE, pe.encode("123"));
 		
 		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss");
