@@ -33,6 +33,9 @@ public class Usuario implements Serializable {
 	@Column(unique = true)
 	private String email;
 	
+	@JsonIgnore
+	private String senha;
+	
 	private Integer tipo;
 	
 	private Boolean emailValidado;
@@ -49,7 +52,7 @@ public class Usuario implements Serializable {
 		emailValidado = false;
 	}
 
-	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, TipoPerfil tipo) {
+	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, TipoPerfil tipo, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -57,6 +60,7 @@ public class Usuario implements Serializable {
 		this.dataDeNascimento = dataDeNascimento;
 		this.telefone = telefone;
 		this.email = email;
+		this.senha = senha;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 	
@@ -83,11 +87,12 @@ public class Usuario implements Serializable {
 		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 	
-	public Usuario(Integer id, String nome, String email, TipoPerfil tipo) {
+	public Usuario(Integer id, String nome, String email, TipoPerfil tipo, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
+		this.senha = senha;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 
@@ -169,6 +174,14 @@ public class Usuario implements Serializable {
 
 	public void setEmailValidado(Boolean emailValidado) {
 		this.emailValidado = emailValidado;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	@Override

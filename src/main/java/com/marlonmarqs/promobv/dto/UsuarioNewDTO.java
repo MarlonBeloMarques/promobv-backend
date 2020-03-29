@@ -36,6 +36,9 @@ public class UsuarioNewDTO implements Serializable {
 	@Email(message="Email inválido")
 	private String email;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
+	private String senha;
+	
 	private Integer tipo;
 	
 	
@@ -50,6 +53,7 @@ public class UsuarioNewDTO implements Serializable {
 		dataDeNascimento = obj.getDataDeNascimento();
 		telefone = obj.getTelefone();
 		email = obj.getEmail();
+		senha = obj.getSenha();
 		this.tipo = (obj.getTipo() == null) ? null : obj.getTipo();
 	}
 
@@ -109,5 +113,12 @@ public class UsuarioNewDTO implements Serializable {
 		this.tipo = tipo;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 	
 }

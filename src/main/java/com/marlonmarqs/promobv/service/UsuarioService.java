@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.marlonmarqs.promobv.domain.Usuario;
@@ -19,6 +20,9 @@ public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository repo;
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	
 	public Optional<Usuario> find(Integer id) {
 		Optional<Usuario> obj = repo.findById(id);
@@ -59,7 +63,7 @@ public class UsuarioService {
 	}
 	
 	public Usuario fromDTO(UsuarioNewDTO objDto) {
-		return new Usuario (null, objDto.getNome(), objDto.getApelido(), objDto.getDataDeNascimento(), objDto.getTelefone(), objDto.getEmail(), TipoPerfil.CLIENTE);
+		return new Usuario (null, objDto.getNome(), objDto.getApelido(), objDto.getDataDeNascimento(), objDto.getTelefone(), objDto.getEmail(), TipoPerfil.CLIENTE, pe.encode(objDto.getSenha()));
 	}
 	
 	private void updateData(Optional<Usuario> newObj, Usuario obj) {
