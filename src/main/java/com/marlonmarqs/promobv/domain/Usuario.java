@@ -35,6 +35,8 @@ public class Usuario implements Serializable {
 	
 	private Integer tipo;
 	
+	private Boolean emailValidado;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="usuario")
 	private List<Promocao> promocoes = new ArrayList<>();
@@ -44,6 +46,7 @@ public class Usuario implements Serializable {
 	private List<Notificacao> notificacoes = new ArrayList<>();
 	
 	public Usuario() {
+		emailValidado = false;
 	}
 
 	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, TipoPerfil tipo) {
@@ -158,6 +161,14 @@ public class Usuario implements Serializable {
 
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
+	}
+
+	public Boolean getEmailValidado() {
+		return emailValidado;
+	}
+
+	public void setEmailValidado(Boolean emailValidado) {
+		this.emailValidado = emailValidado;
 	}
 
 	@Override
