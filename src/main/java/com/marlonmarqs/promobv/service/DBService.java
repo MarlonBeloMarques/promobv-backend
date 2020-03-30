@@ -45,6 +45,8 @@ public class DBService {
 		Usuario user1 = new Usuario(1, "Marlon", "marlon.belohd@gmail.com", pe.encode("123"));
 		user1.addPerfil(TipoPerfil.ADMINISTRADOR);
 		Usuario user2 = new Usuario(2, "Matheus", "matheus.belo@gmail.com", pe.encode("123"));
+		Usuario user3 = new Usuario(3, "Larissa", "larissa.pantoja@gmail.com", pe.encode("123"));
+		user1.addPerfil(TipoPerfil.ADMINISTRADOR);
 		
 		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss");
@@ -63,7 +65,7 @@ public class DBService {
 		user2.setPromocoes(Arrays.asList(promo3));
 		cat1.setPromocoes(Arrays.asList(promo1, promo2));
 		
-		usuarioRepository.saveAll(Arrays.asList(user1, user2));
+		usuarioRepository.saveAll(Arrays.asList(user1, user2, user3));
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		promocaoRepository.saveAll(Arrays.asList(promo1, promo2, promo3));
 		notificacaoRepository.saveAll(Arrays.asList(not1, not2));
