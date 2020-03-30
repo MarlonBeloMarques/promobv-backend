@@ -59,11 +59,11 @@ public class UsuarioService {
 	}
 	
 	public Usuario fromDTO(UsuarioDTO objDto) {
-		return new Usuario(null, objDto.getNome(), objDto.getApelido(), objDto.getTelefone(), objDto.getEmail(), null);
+		return new Usuario(null, objDto.getNome(), objDto.getApelido(), objDto.getTelefone(), objDto.getEmail());
 	}
 	
 	public Usuario fromDTO(UsuarioNewDTO objDto) {
-		return new Usuario (null, objDto.getNome(), objDto.getApelido(), objDto.getDataDeNascimento(), objDto.getTelefone(), objDto.getEmail(), TipoPerfil.CLIENTE, pe.encode(objDto.getSenha()));
+		return new Usuario (null, objDto.getNome(), objDto.getApelido(), objDto.getDataDeNascimento(), objDto.getTelefone(), objDto.getEmail(), pe.encode(objDto.getSenha()));
 	}
 	
 	private void updateData(Optional<Usuario> newObj, Usuario obj) {
