@@ -19,6 +19,8 @@ import com.marlonmarqs.promobv.dto.PromocaoUpdateDTO;
 import com.marlonmarqs.promobv.repository.CategoriaRepository;
 import com.marlonmarqs.promobv.repository.PromocaoRepository;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
+import com.marlonmarqs.promobv.security.UserSS;
+import com.marlonmarqs.promobv.service.exceptions.AuthorizationException;
 import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
 
 @Service
@@ -97,7 +99,7 @@ public class PromocaoService {
 	public List<String> deleteCheckDenuncia(Integer idUser) {
 		String msg = "A publicação foi desativada para análise: ";
 		
-		List<Promocao> objs = findAllUser(idUser);
+		List<Promocao> objs = findAllUser();
 		List<String> messages = new ArrayList<>();
 		
 		for (Promocao promocao : objs) {
@@ -114,8 +116,15 @@ public class PromocaoService {
 		return objs;
 	}
 
-	public List<Promocao> findAllUser(Integer idUser) {
-		List<Promocao> objs = repo.findByUsuario(userService.find(idUser));
+	public List<Promocao> findAllUser() {
+		
+		UserSS user = UserService.authenticated();
+		// não ta autenticado
+		if(user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		List<Promocao> objs = repo.findByUsuario(userService.find(user.getId()));
 		return objs;
 	}
 
