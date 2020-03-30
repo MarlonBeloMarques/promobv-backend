@@ -2,10 +2,7 @@ package com.marlonmarqs.promobv.dto;
 
 import java.io.Serializable;
 
-import com.marlonmarqs.promobv.domain.Categoria;
-import com.marlonmarqs.promobv.domain.GaleriaDeImagens;
 import com.marlonmarqs.promobv.domain.Promocao;
-import com.marlonmarqs.promobv.domain.Usuario;
 
 public class PromocaoNewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -14,9 +11,9 @@ public class PromocaoNewDTO implements Serializable{
 	private String descricao;
 	private Double preco;
 	private String localizacao;
+	private String endereco;
 	private String titulo;
 	
-	private Integer idUsuario;
 	private Integer idCategoria;
 	
 	//private GaleriaDeImagens galeriaDeImagens;
@@ -30,8 +27,8 @@ public class PromocaoNewDTO implements Serializable{
 		descricao = obj.getDescricao();
 		preco = obj.getPreco();
 		localizacao = obj.getLocalizacao();
+		endereco = obj.getEndereco();
 		titulo = obj.getTitulo();
-		idUsuario = obj.getUsuario().getId();
 		idCategoria = obj.getCategoria().getId();
 		//galeriaDeImagens = (obj.getGaleriaDeImagens() == null) ? null : obj.getGaleriaDeImagens();
 	}
@@ -76,20 +73,20 @@ public class PromocaoNewDTO implements Serializable{
 		this.titulo = titulo;
 	}
 
-	public Integer getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-
 	public Integer getIdCategoria() {
 		return idCategoria;
 	}
 
 	public void setIdCategoria(Integer idCategoria) {
 		this.idCategoria = idCategoria;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 }
