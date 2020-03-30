@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.marlonmarqs.promobv.security.JWTAuthenticationFilter;
+import com.marlonmarqs.promobv.security.JWTAuthorizationFilter;
 import com.marlonmarqs.promobv.security.JWTUtil;
 
 @Configuration
@@ -61,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated(); // para todo o resto, se exige autenticação
 			//registrando o filtro                                            
 			http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil)); // authenticationManager ja é um metodo disponivel da classe
+			http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 			http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // para asegura que o back end não vai criar a sessão de usuario
 		}
 		
