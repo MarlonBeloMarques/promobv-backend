@@ -54,7 +54,7 @@ public class NotificacaoService {
 		
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		List<Promocao> promocoes = promocaoService.findAllUser(idUser);
+		List<Promocao> promocoes = promocaoService.findAllUser();
 		for (Promocao promocao : promocoes) {
 		 	objs.addAll(repo.findByPromocao(promocao));
 		}
