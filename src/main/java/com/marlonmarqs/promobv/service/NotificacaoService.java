@@ -3,6 +3,7 @@ package com.marlonmarqs.promobv.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,11 +16,12 @@ import com.marlonmarqs.promobv.domain.Notificacao;
 import com.marlonmarqs.promobv.domain.Promocao;
 import com.marlonmarqs.promobv.domain.Usuario;
 import com.marlonmarqs.promobv.domain.enums.TipoNotificacao;
+import com.marlonmarqs.promobv.dto.CategoriaDTO;
+import com.marlonmarqs.promobv.dto.NotificacaoDTO;
 import com.marlonmarqs.promobv.dto.NotificacaoNewDTO;
 import com.marlonmarqs.promobv.repository.NotificacaoRepository;
 import com.marlonmarqs.promobv.repository.PromocaoRepository;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
-import com.marlonmarqs.promobv.service.exceptions.DataIntegrityException;
 import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
 
 @Service
@@ -49,14 +51,14 @@ public class NotificacaoService {
 		return obj;
 	}
 	
-	public Page<Notificacao> findPage(Integer idUser, Integer page, Integer linesPerPage, String orderBy, String direction){
-		List<Notificacao> objs = new ArrayList<>();
+	public Page<NotificacaoDTO> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+		List<NotificacaoDTO> objs = new ArrayList<>();
 		
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
 		List<Promocao> promocoes = promocaoService.findAllUser();
 		for (Promocao promocao : promocoes) {
-		 	objs.addAll(repo.findByPromocao(promocao));
+		 	objs.addAll(repo.findByPromocao(promocao).stream().map(obj -> new NotificacaoDTO(obj)).collect(Collectors.toList()));
 		}
 				
 		return new PageImpl<>(objs, pageRequest, objs.size());

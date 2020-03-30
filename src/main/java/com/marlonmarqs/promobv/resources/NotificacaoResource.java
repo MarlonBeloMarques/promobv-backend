@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.marlonmarqs.promobv.domain.Notificacao;
+import com.marlonmarqs.promobv.dto.NotificacaoDTO;
 import com.marlonmarqs.promobv.dto.NotificacaoNewDTO;
 import com.marlonmarqs.promobv.service.NotificacaoService;
 
@@ -27,14 +28,13 @@ public class NotificacaoResource {
 	@Autowired
 	private NotificacaoService service;
 	
-	@RequestMapping(value="/user/{id}", method=RequestMethod.GET) 
-	public ResponseEntity<Page<Notificacao>> findAll(
-			@PathVariable Integer id,
+	@RequestMapping(method=RequestMethod.GET) 
+	public ResponseEntity<Page<NotificacaoDTO>> findAll(
 			@RequestParam(value="page", defaultValue="0")Integer page, // valor padrão 
 			@RequestParam(value="linesPerPage", defaultValue="24")Integer linesPerPage, 
 			@RequestParam(value="orderBy", defaultValue="data")String orderBy, 
 			@RequestParam(value="direction", defaultValue="DESC")String direction) { 
-		Page<Notificacao> list = service.findPage(id, page, linesPerPage, orderBy, direction);
+		Page<NotificacaoDTO> list = service.findPage(page, linesPerPage, orderBy, direction);
 		return ResponseEntity.ok().body(list); 
 	}
 	
