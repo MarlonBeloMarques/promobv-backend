@@ -66,17 +66,24 @@ public class PromocaoService {
 	}
 
 	public Promocao fromDTO(PromocaoNewDTO objDto) {
-		Optional<Usuario> user = userService.find(objDto.getIdUsuario());
+		
+		UserSS user = UserService.authenticated();
+		// não ta autenticado
+		if(user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		Optional<Usuario> usuario = userService.find(user.getId());
 		Optional<Categoria> cat = categoriaService.find(objDto.getIdCategoria());
 
-		Promocao obj = new Promocao(null, objDto.getDescricao(), objDto.getPreco(), objDto.getLocalizacao(),
-				objDto.getTitulo(), cat.get(), user.get());
+		Promocao obj = new Promocao(null, objDto.getDescricao(), objDto.getPreco(), objDto.getLocalizacao(), objDto.getEndereco(),
+				objDto.getTitulo(), cat.get(), usuario.get());
 
 		return obj;
 	}
 
 	public Promocao fromDTO(PromocaoUpdateDTO objDto) {
-		return new Promocao(null, objDto.getDescricao(), objDto.getPreco(), objDto.getLocalizacao(), objDto.getTitulo());
+		return new Promocao(null, objDto.getDescricao(), objDto.getPreco(), objDto.getLocalizacao(), objDto.getEndereco(), objDto.getTitulo());
 	}
 
 	private void updateData(Optional<Promocao> newObj, Promocao obj) {

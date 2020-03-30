@@ -26,6 +26,7 @@ public class Promocao implements Serializable {
 	private String descricao;
 	private Double preco;
 	private String localizacao;
+	private String endereco;
 	private String titulo;
 	private boolean publicada;
 	
@@ -48,23 +49,25 @@ public class Promocao implements Serializable {
 		setPublicada(true);
 	}
 
-	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo) {
+	public Promocao(Integer id, String descricao, Double preco, String localizacao, String endereco, String titulo) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.preco = preco;
 		this.localizacao = localizacao;
 		this.titulo = titulo;
+		this.endereco = endereco;
 		setPublicada(true);
 
 	}
 	
-	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo, Categoria categoria, Usuario usuario, GaleriaDeImagens galeriaDeImagens, Notificacao notificacao) {
+	public Promocao(Integer id, String descricao, Double preco, String localizacao, String endereco, String titulo, Categoria categoria, Usuario usuario, GaleriaDeImagens galeriaDeImagens, Notificacao notificacao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.preco = preco;
 		this.localizacao = localizacao;
+		this.endereco = endereco;
 		this.titulo = titulo;
 		this.categoria = categoria;
 		this.usuario = usuario;
@@ -74,7 +77,7 @@ public class Promocao implements Serializable {
 
 	}
 	
-	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo, Categoria categoria, Usuario usuario) {
+	public Promocao(Integer id, String descricao, Double preco, String localizacao, String endereco, String titulo, Categoria categoria, Usuario usuario) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -83,17 +86,19 @@ public class Promocao implements Serializable {
 		this.titulo = titulo;
 		this.categoria = categoria;
 		this.usuario = usuario;
+		this.endereco = endereco;
 		setPublicada(true);
 
 	}
 	
-	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo, Categoria categoria) {
+	public Promocao(Integer id, String descricao, Double preco, String localizacao, String endereco, String titulo, Categoria categoria) {
 		this.id = id;
 		this.descricao = descricao;
 		this.preco = preco;
 		this.localizacao = localizacao;
 		this.titulo = titulo;
 		this.categoria = categoria;
+		this.endereco = endereco;
 		setPublicada(true);
 
 	}
@@ -176,6 +181,14 @@ public class Promocao implements Serializable {
 
 	public void setPublicada(boolean publicada) {
 		this.publicada = publicada;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	@Override

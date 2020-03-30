@@ -2,10 +2,7 @@ package com.marlonmarqs.promobv.dto;
 
 import java.io.Serializable;
 
-import com.marlonmarqs.promobv.domain.Categoria;
-import com.marlonmarqs.promobv.domain.GaleriaDeImagens;
 import com.marlonmarqs.promobv.domain.Promocao;
-import com.marlonmarqs.promobv.domain.Usuario;
 
 public class PromocaoUpdateDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -14,6 +11,7 @@ public class PromocaoUpdateDTO implements Serializable{
 	private String descricao;
 	private Double preco;
 	private String localizacao;
+	private String endereco;
 	private String titulo;
 	
 	private Integer idCategoria;
@@ -27,6 +25,7 @@ public class PromocaoUpdateDTO implements Serializable{
 		descricao = obj.getDescricao();
 		preco = obj.getPreco();
 		localizacao = obj.getLocalizacao();
+		endereco = obj.getEndereco();
 		titulo = obj.getTitulo();
 		idCategoria = obj.getCategoria().getId();
 	}
@@ -77,6 +76,14 @@ public class PromocaoUpdateDTO implements Serializable{
 
 	public void setIdCategoria(Integer idCategoria) {
 		this.idCategoria = idCategoria;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 }
