@@ -2,6 +2,9 @@ package com.marlonmarqs.promobv.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -10,6 +13,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marlonmarqs.promobv.domain.Usuario;
+import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
 import com.marlonmarqs.promobv.service.validation.UsuarioInsert;
 
 @UsuarioInsert
@@ -37,10 +41,7 @@ public class UsuarioNewDTO implements Serializable {
 	private String email;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
-	private String senha;
-	
-	private Integer tipo;
-	
+	private String senha;	
 	
 	public UsuarioNewDTO() {
 		
@@ -54,7 +55,6 @@ public class UsuarioNewDTO implements Serializable {
 		telefone = obj.getTelefone();
 		email = obj.getEmail();
 		senha = obj.getSenha();
-		this.tipo = (obj.getTipo() == null) ? null : obj.getTipo();
 	}
 
 	public Integer getId() {
@@ -103,14 +103,6 @@ public class UsuarioNewDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Integer getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
 	}
 
 	public String getSenha() {

@@ -3,10 +3,16 @@ package com.marlonmarqs.promobv.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,10 +41,12 @@ public class Usuario implements Serializable {
 	
 	@JsonIgnore
 	private String senha;
-	
-	private Integer tipo;
-	
+		
 	private Boolean emailValidado;
+	
+	@ElementCollection(fetch=FetchType.EAGER) //ao ser buscado o usuario, vem junto os perfis
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<Integer>();
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="usuario")
@@ -49,10 +57,12 @@ public class Usuario implements Serializable {
 	private List<Notificacao> notificacoes = new ArrayList<>();
 	
 	public Usuario() {
+		//todo perfil por padrão usuario
+		addPerfil(TipoPerfil.CLIENTE);
 		emailValidado = false;
 	}
 
-	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, TipoPerfil tipo, String senha) {
+	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -61,20 +71,20 @@ public class Usuario implements Serializable {
 		this.telefone = telefone;
 		this.email = email;
 		this.senha = senha;
-		this.tipo = (tipo == null) ? null : tipo.getCod();
+		addPerfil(TipoPerfil.CLIENTE);
 	}
 	
-	public Usuario(Integer id, String nome, String apelido, String telefone, String email, TipoPerfil tipo) {
+	public Usuario(Integer id, String nome, String apelido, String telefone, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.apelido = apelido;
 		this.telefone = telefone;
 		this.email = email;
-		this.tipo = (tipo == null) ? null : tipo.getCod();
+		addPerfil(TipoPerfil.CLIENTE);
 	}
 	
-	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, Promocao promocao, Notificacao notificacao, TipoPerfil tipo) {
+	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, Promocao promocao, Notificacao notificacao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -84,16 +94,16 @@ public class Usuario implements Serializable {
 		this.email = email;
 		this.promocoes.add(promocao);
 		this.notificacoes.add(notificacao);
-		this.tipo = (tipo == null) ? null : tipo.getCod();
+		addPerfil(TipoPerfil.CLIENTE);
 	}
 	
-	public Usuario(Integer id, String nome, String email, TipoPerfil tipo, String senha) {
+	public Usuario(Integer id, String nome, String email, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		this.tipo = (tipo == null) ? null : tipo.getCod();
+		addPerfil(TipoPerfil.CLIENTE);
 	}
 
 	public Integer getId() {
@@ -160,14 +170,6 @@ public class Usuario implements Serializable {
 		this.notificacoes = notificacoes;
 	}
 
-	public Integer getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
-	}
-
 	public Boolean getEmailValidado() {
 		return emailValidado;
 	}
@@ -182,6 +184,14 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public Set<TipoPerfil> getPerfis(){ // retorna os perfis do cliente
+		return perfis.stream().map(x -> TipoPerfil.toEnum(x)).collect(Collectors.toSet());
+	}
+
+	public void addPerfil(TipoPerfil perfil) {
+		perfis.add(perfil.getCod());
 	}
 
 	@Override
