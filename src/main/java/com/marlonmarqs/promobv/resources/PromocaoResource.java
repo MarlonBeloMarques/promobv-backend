@@ -3,6 +3,7 @@ package com.marlonmarqs.promobv.resources;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -18,12 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.marlonmarqs.promobv.domain.Promocao;
-import com.marlonmarqs.promobv.domain.Usuario;
 import com.marlonmarqs.promobv.dto.PromocaoDTO;
 import com.marlonmarqs.promobv.dto.PromocaoNewDTO;
 import com.marlonmarqs.promobv.dto.PromocaoPageDTO;
 import com.marlonmarqs.promobv.dto.PromocaoUpdateDTO;
-import com.marlonmarqs.promobv.dto.UsuarioDTO;
 import com.marlonmarqs.promobv.service.PromocaoService;
 
 @RestController
@@ -75,9 +74,10 @@ public class PromocaoResource {
 	}
 	
 	@RequestMapping(value="/user", method=RequestMethod.GET)
-	public ResponseEntity<List<Promocao>> findAllUser() {
-		List<Promocao> obj = service.findAllUser();
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<List<PromocaoPageDTO>> findAllUser() {
+		List<Promocao> objs = service.findAllUser();
+		List<PromocaoPageDTO> listDto = objs.stream().map(obj -> new PromocaoPageDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 	
 	@RequestMapping(value="/check-denuncias/user/{id}", method=RequestMethod.GET)
