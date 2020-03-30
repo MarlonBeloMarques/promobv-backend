@@ -97,10 +97,10 @@ public class Usuario implements Serializable {
 		addPerfil(TipoPerfil.CLIENTE);
 	}
 	
-	public Usuario(Integer id, String nome, String email, String senha) {
+	public Usuario(Integer id, String apelido, String email, String senha) {
 		super();
 		this.id = id;
-		this.nome = nome;
+		this.apelido = apelido;
 		this.email = email;
 		this.senha = senha;
 		addPerfil(TipoPerfil.CLIENTE);
