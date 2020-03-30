@@ -12,6 +12,8 @@ import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
 import com.marlonmarqs.promobv.dto.UsuarioDTO;
 import com.marlonmarqs.promobv.dto.UsuarioNewDTO;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
+import com.marlonmarqs.promobv.security.UserSS;
+import com.marlonmarqs.promobv.service.exceptions.AuthorizationException;
 import com.marlonmarqs.promobv.service.exceptions.DataIntegrityException;
 import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
 
@@ -25,6 +27,14 @@ public class UsuarioService {
 	private BCryptPasswordEncoder pe;
 	
 	public Optional<Usuario> find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		// faz a busca e verifica se não é nulo ou se não é admin e se o id é diferente do qual foi buscado
+		if(user==null || !user.hasRole(TipoPerfil.ADMINISTRADOR) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+
+		
 		Optional<Usuario> obj = repo.findById(id);
 		
 		obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id
