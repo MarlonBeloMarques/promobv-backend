@@ -50,7 +50,7 @@ public class UsuarioResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) { 
 		service.delete(id);

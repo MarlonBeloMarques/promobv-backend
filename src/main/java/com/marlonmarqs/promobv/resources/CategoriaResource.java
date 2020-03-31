@@ -43,7 +43,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) { // @RequestBody = faz o json ser convertido para objeto java
 		Categoria obj = service.fromDTO(objDto);
@@ -54,7 +54,7 @@ public class CategoriaResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) { 
 		Categoria obj = service.fromDTO(objDto);
@@ -63,7 +63,7 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) { 
 		service.delete(id);

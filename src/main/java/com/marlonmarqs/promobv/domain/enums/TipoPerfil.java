@@ -2,8 +2,8 @@ package com.marlonmarqs.promobv.domain.enums;
 
 public enum TipoPerfil {
 
-	ADMINISTRADOR(1, "Administrador"),
-	CLIENTE(2, "Cliente");
+	ADMIN(1, "ROLE_ADMIN"),
+	CLIENTE(2, "ROLE_CLIENTE");
 	
 	private Integer cod;
 	private String descricao;

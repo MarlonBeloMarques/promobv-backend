@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,13 @@ public class PromocaoResource {
 		Optional<Promocao> obj = service.find(id);
 		Optional<PromocaoDTO> objDto = obj.map(promo -> new PromocaoDTO(promo));
 		return ResponseEntity.ok().body(objDto);
+	}
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	@RequestMapping(value="/active/{id}", method=RequestMethod.GET)
+	public ResponseEntity<Void> active(@PathVariable Integer id) {
+		service.active(id);
+		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(method=RequestMethod.POST) 
@@ -78,12 +86,6 @@ public class PromocaoResource {
 		List<Promocao> objs = service.findAllUser();
 		List<PromocaoPageDTO> listDto = objs.stream().map(obj -> new PromocaoPageDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
-	}
-	
-	@RequestMapping(value="/check-denuncias/user/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> checkDenuncias(@PathVariable Integer id) {
-		List<String> msgs = service.deleteCheckDenuncia(id);
-		return ResponseEntity.ok().body(msgs);
 	}
 	
 	@RequestMapping(value="/categoria/{id}", method=RequestMethod.GET) 

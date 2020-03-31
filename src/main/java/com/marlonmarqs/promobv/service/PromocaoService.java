@@ -1,7 +1,5 @@
 package com.marlonmarqs.promobv.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -101,19 +99,18 @@ public class PromocaoService {
 		repo.deleteById(id);
 	}
 	
-	public List<String> deleteCheckDenuncia(Integer idUser) {
-		String msg = "A publicação foi desativada para análise: ";
+	public void disable(Integer id) {
+		Optional<Promocao> obj = find(id);
 		
-		List<Promocao> objs = findAllUser();
-		List<String> messages = new ArrayList<>();
+		obj.get().setPublicada(false);
 		
-		for (Promocao promocao : objs) {
-			if(promocao.getNotificacoes().stream().map(obj -> obj.getTipo().compareTo(2)).count() >= 10) {
-				messages.add(msg + promocao.getTitulo());
-			}
-		}
-		
-		return messages.isEmpty() ? Arrays.asList("Não há publicações denunciadas") : messages;
+		repo.save(obj.get());
+	}
+	
+	public void active(Integer id) {
+		Optional<Promocao> obj = find(id);
+		obj.get().setPublicada(true);
+		repo.save(obj.get());
 	}
 
 	public List<Promocao> findAll() {
@@ -137,12 +134,12 @@ public class PromocaoService {
 
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Optional<Categoria> cat = categoriaService.find(idCat);
-		return repo.findByCategoria(cat, pageRequest);
+		return repo.findByCategoria(true, cat.get().getId(), pageRequest);
 	}
 
 	public Page<Promocao> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-
+		
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		return repo.findAll(pageRequest);
+		return repo.findAll(true, pageRequest);
 	}
 }

@@ -30,7 +30,7 @@ public class UsuarioService {
 		
 		UserSS user = UserService.authenticated();
 		// faz a busca e verifica se não é nulo ou se não é admin e se o id é diferente do qual foi buscado
-		if(user==null || !user.hasRole(TipoPerfil.ADMINISTRADOR) && !id.equals(user.getId())) {
+		if(user==null || !user.hasRole(TipoPerfil.ADMIN) && !id.equals(user.getId())) {
 			throw new AuthorizationException("Acesso negado");
 		}
 

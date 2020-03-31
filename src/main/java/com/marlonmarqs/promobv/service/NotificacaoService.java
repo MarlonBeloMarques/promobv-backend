@@ -1,6 +1,7 @@
 package com.marlonmarqs.promobv.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,7 +17,6 @@ import com.marlonmarqs.promobv.domain.Notificacao;
 import com.marlonmarqs.promobv.domain.Promocao;
 import com.marlonmarqs.promobv.domain.Usuario;
 import com.marlonmarqs.promobv.domain.enums.TipoNotificacao;
-import com.marlonmarqs.promobv.dto.CategoriaDTO;
 import com.marlonmarqs.promobv.dto.NotificacaoDTO;
 import com.marlonmarqs.promobv.dto.NotificacaoNewDTO;
 import com.marlonmarqs.promobv.repository.NotificacaoRepository;
@@ -83,5 +83,39 @@ public class NotificacaoService {
 		Optional<Promocao> promo = promocaoService.find(objDto.getIdPromocao());
 		
 		return new Notificacao(null, objDto.getData(), objDto.getHora(), promo.get(), user.get(), TipoNotificacao.toEnum(objDto.getTipo()));
+	}
+	
+	public List<String> disableCheckDenuncia(Integer idUser) {
+		String msg = "A publicação foi desativada para análise: ";
+		
+		List<Promocao> objs = promocaoService.findAllUser();
+		List<String> messages = new ArrayList<>();
+		
+		for (Promocao promocao : objs) {
+			if(promocao.getNotificacoes().stream().map(obj -> obj.getTipo().compareTo(2)).count() >= 10) {
+				promocaoService.disable(promocao.getId());
+				messages.add(msg + promocao.getTitulo());
+			}
+		}
+		
+		return messages.isEmpty() ? Arrays.asList("Não há publicações denunciadas") : messages;
+	}
+	
+	public List<String> disableCheckDenuncia() {
+		String msg = "A publicação foi desativada para análise:";
+		
+		List<Promocao> objs = promocaoService.findAll();
+		List<String> messages = new ArrayList<>();
+		
+		for (Promocao promocao : objs) {
+			if(promocao.getNotificacoes().stream().map(obj -> obj.getTipo().compareTo(2)).count() >= 10) {
+				promocaoService.disable(promocao.getId());
+				messages.add(msg + 
+						" (Titulo: " + promocao.getTitulo() +
+						", Id: " + promocao.getId() + ")");
+			}
+		}
+		
+		return messages.isEmpty() ? Arrays.asList("Não há publicações denunciadas") : messages;
 	}
 }
