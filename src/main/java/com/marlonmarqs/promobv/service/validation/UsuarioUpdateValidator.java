@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
 import com.marlonmarqs.promobv.domain.Usuario;
-import com.marlonmarqs.promobv.dto.UsuarioDTO;
+import com.marlonmarqs.promobv.dto.UsuarioUpdateDTO;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
 import com.marlonmarqs.promobv.resources.exceptions.FieldMessage;
 
-public class UsuarioUpdateValidator implements ConstraintValidator<UsuarioUpdate, UsuarioDTO> {
+public class UsuarioUpdateValidator implements ConstraintValidator<UsuarioUpdate, UsuarioUpdateDTO> {
 
 	@Autowired
 	private HttpServletRequest request; // permite obter o parametro da URI
@@ -29,7 +29,7 @@ public class UsuarioUpdateValidator implements ConstraintValidator<UsuarioUpdate
 	}
 
 	@Override
-	public boolean isValid(UsuarioDTO objDto, ConstraintValidatorContext context) {
+	public boolean isValid(UsuarioUpdateDTO objDto, ConstraintValidatorContext context) {
 
 		// converte um tipo URI para map
 		@SuppressWarnings("unchecked") // tirar mensagem "chata"
