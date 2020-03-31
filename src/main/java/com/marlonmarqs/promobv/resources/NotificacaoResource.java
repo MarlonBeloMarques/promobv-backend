@@ -1,12 +1,14 @@
 package com.marlonmarqs.promobv.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +38,19 @@ public class NotificacaoResource {
 			@RequestParam(value="direction", defaultValue="DESC")String direction) { 
 		Page<NotificacaoDTO> list = service.findPage(page, linesPerPage, orderBy, direction);
 		return ResponseEntity.ok().body(list); 
+	}
+	
+	@RequestMapping(value="/check-denuncias/user/{id}", method=RequestMethod.GET)
+	public ResponseEntity<?> checkDenunciasUser(@PathVariable Integer id) {
+		List<String> msgs = service.disableCheckDenuncia(id);
+		return ResponseEntity.ok().body(msgs);
+	}
+	
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	@RequestMapping(value="/check-denuncias", method=RequestMethod.GET)
+	public ResponseEntity<?> checkDenuncias() {
+		List<String> msgs = service.disableCheckDenuncia();
+		return ResponseEntity.ok().body(msgs);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST) 
