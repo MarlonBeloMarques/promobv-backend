@@ -31,6 +31,7 @@ public class Usuario implements Serializable {
 	private Integer id;
 	private String nome;
 	private String apelido;
+	private String cpf;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataDeNascimento;
@@ -62,7 +63,7 @@ public class Usuario implements Serializable {
 		emailValidado = false;
 	}
 
-	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, String senha) {
+	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, String senha, String cpf) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -71,16 +72,17 @@ public class Usuario implements Serializable {
 		this.telefone = telefone;
 		this.email = email;
 		this.senha = senha;
+		this.cpf = cpf;
 		addPerfil(TipoPerfil.CLIENTE);
 	}
 	
-	public Usuario(Integer id, String nome, String apelido, String telefone, String email) {
+	public Usuario(Integer id, String nome, String cpf, String telefone, Date dataDeNascimento) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.apelido = apelido;
+		this.cpf = cpf;
 		this.telefone = telefone;
-		this.email = email;
+		this.dataDeNascimento = dataDeNascimento;
 		addPerfil(TipoPerfil.CLIENTE);
 	}
 	
@@ -192,6 +194,14 @@ public class Usuario implements Serializable {
 
 	public void addPerfil(TipoPerfil perfil) {
 		perfis.add(perfil.getCod());
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	@Override

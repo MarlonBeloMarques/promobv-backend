@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.marlonmarqs.promobv.domain.Usuario;
 import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
-import com.marlonmarqs.promobv.dto.UsuarioDTO;
 import com.marlonmarqs.promobv.dto.UsuarioNewDTO;
+import com.marlonmarqs.promobv.dto.UsuarioUpdateDTO;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
 import com.marlonmarqs.promobv.security.UserSS;
 import com.marlonmarqs.promobv.service.exceptions.AuthorizationException;
@@ -68,8 +68,8 @@ public class UsuarioService {
 		return repo.save(newObj.get());
 	}
 	
-	public Usuario fromDTO(UsuarioDTO objDto) {
-		return new Usuario(null, objDto.getNome(), objDto.getApelido(), objDto.getTelefone(), objDto.getEmail());
+	public Usuario fromDTO(UsuarioUpdateDTO objDto) {
+		return new Usuario(null, objDto.getNome(), objDto.getCpf(), objDto.getTelefone(), objDto.getDataDeNascimento());
 	}
 	
 	public Usuario fromDTO(UsuarioNewDTO objDto) {
@@ -79,11 +79,13 @@ public class UsuarioService {
 	private void updateData(Optional<Usuario> newObj, Usuario obj) {
 		if(obj.getNome() != null)
 			newObj.get().setNome(obj.getNome());
-		if(obj.getEmail() != null)
-			newObj.get().setEmail(obj.getEmail());
-		if(obj.getApelido() != null) 
-			newObj.get().setApelido(obj.getApelido());
+		if(obj.getCpf() != null)
+			newObj.get().setCpf(obj.getCpf());
+		if(obj.getDataDeNascimento() != null)
+			newObj.get().setDataDeNascimento(obj.getDataDeNascimento());
 		if(obj.getTelefone() != null)
 			newObj.get().setTelefone(obj.getTelefone());
+		if(obj.getDataDeNascimento() != null)
+			newObj.get().setDataDeNascimento(obj.getDataDeNascimento());
 	}
 }

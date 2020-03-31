@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.marlonmarqs.promobv.domain.Usuario;
-import com.marlonmarqs.promobv.dto.UsuarioDTO;
 import com.marlonmarqs.promobv.dto.UsuarioNewDTO;
+import com.marlonmarqs.promobv.dto.UsuarioUpdateDTO;
 import com.marlonmarqs.promobv.service.UsuarioService;
 
 @RestController
@@ -43,7 +43,7 @@ public class UsuarioResource {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody UsuarioDTO objDto, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@Valid @RequestBody UsuarioUpdateDTO objDto, @PathVariable Integer id) {
 		Usuario obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
