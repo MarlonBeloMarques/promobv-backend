@@ -1,8 +1,11 @@
 package com.marlonmarqs.promobv.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.marlonmarqs.promobv.domain.GaleriaDeImagens;
+import com.marlonmarqs.promobv.domain.Notificacao;
 import com.marlonmarqs.promobv.domain.Promocao;
 
 public class PromocaoDTO implements Serializable{
@@ -20,6 +23,8 @@ public class PromocaoDTO implements Serializable{
 	private String emailUsuario;
 	
 	private GaleriaDeImagens galeriaDeImagens;
+	
+	private List<Notificacao> notificacoes = new ArrayList<>();
 
 	public PromocaoDTO() {
 
@@ -36,6 +41,7 @@ public class PromocaoDTO implements Serializable{
 		nomeUsuario = obj.getUsuario().getNome(); 
 		emailUsuario = obj.getUsuario().getEmail();
 		galeriaDeImagens = (obj.getGaleriaDeImagens() == null) ? null : obj.getGaleriaDeImagens();
+		notificacoes = obj.getNotificacoes();
 	}
 
 	public Integer getId() {
@@ -116,6 +122,14 @@ public class PromocaoDTO implements Serializable{
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public List<Notificacao> getNotificacoes() {
+		return notificacoes;
+	}
+
+	public void setNotificacoes(List<Notificacao> notificacoes) {
+		this.notificacoes = notificacoes;
 	}
 
 }

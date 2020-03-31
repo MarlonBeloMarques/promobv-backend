@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Promocao implements Serializable {
@@ -38,7 +38,8 @@ public class Promocao implements Serializable {
 	@JoinColumn(name="categoria_id")
 	private Categoria categoria;
 	
-	@JsonIgnore
+	//@JsonIgnore
+	@JsonManagedReference // anotação para os primeiros objetos instanciados
 	@OneToMany(mappedBy="promocao")
 	private List<Notificacao> notificacoes = new ArrayList<>();
 	
@@ -167,8 +168,15 @@ public class Promocao implements Serializable {
 		this.galeriaDeImagens = galeriaDeImagens;
 	}
 
-	public List<Notificacao> getNotificacoes() {
-		return notificacoes;
+	public List<Notificacao> getNotificacoes() {	
+		List<Notificacao> objs = new ArrayList<Notificacao>();
+		for (Notificacao notificacao : notificacoes) {
+			if(notificacao.getTipo() == 1) {
+				objs.add(notificacao);
+			}
+		}
+		
+		return objs;
 	}
 
 	public void setNotificacoes(List<Notificacao> notificacoes) {
