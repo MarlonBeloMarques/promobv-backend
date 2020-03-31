@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marlonmarqs.promobv.domain.enums.TipoNotificacao;
 
 @Entity
@@ -31,6 +31,7 @@ public class Notificacao implements Serializable {
 	private Integer tipo;
 	
 	@ManyToOne
+	@JsonBackReference // anotação para os segundos objetos instanciados
 	@JoinColumn(name="promocao_id")
 	private Promocao promocao;
 	
