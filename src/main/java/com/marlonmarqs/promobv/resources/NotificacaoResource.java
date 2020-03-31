@@ -54,18 +54,12 @@ public class NotificacaoResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST) 
-	public ResponseEntity<Void> insert(@Valid @RequestBody NotificacaoNewDTO objDto) {	
+	public ResponseEntity<Void> interact(@Valid @RequestBody NotificacaoNewDTO objDto) {	
 		Notificacao obj = service.fromDTO(objDto);
-		obj = service.insert(obj);
+		obj = service.interact(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri(); // enumerar de forma crescente o id do uri
 		return ResponseEntity.created(uri).build(); 
-	}
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id) { 
-		service.remove(id);
-		return ResponseEntity.noContent().build();
 	}
 	
 }
