@@ -98,8 +98,6 @@ public class PromocaoService {
 	}
 	
 	public void delete(Integer id) {
-		Optional<Promocao> obj = find(id);
-
 		repo.deleteById(id);
 	}
 	
