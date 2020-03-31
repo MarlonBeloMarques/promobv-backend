@@ -75,7 +75,7 @@ public class DBService {
 		promo1.setNotificacoes(Arrays.asList(not1));
 		promo2.setNotificacoes(Arrays.asList(not2, not3, not4, not5, not6, not7, not8, not9, not10, not11, not12, not13));
 		user1.setPromocoes(Arrays.asList(promo1, promo2));
-		user1.setNotificacoes(Arrays.asList(not1, not2));
+		user1.setNotificacoes(Arrays.asList(not1, not2, not3, not4, not5, not6, not7, not8, not9, not10, not11, not12, not13));
 		user2.setPromocoes(Arrays.asList(promo3, promo4));
 		cat1.setPromocoes(Arrays.asList(promo1, promo2, promo3));
 		cat2.setPromocoes(Arrays.asList(promo4));
