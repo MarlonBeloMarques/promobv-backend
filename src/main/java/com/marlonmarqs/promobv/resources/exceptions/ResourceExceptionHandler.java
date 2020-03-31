@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.marlonmarqs.promobv.service.exceptions.AuthorizationException;
+import com.marlonmarqs.promobv.service.exceptions.BusinessRuleException;
 import com.marlonmarqs.promobv.service.exceptions.DataIntegrityException;
 import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
 
@@ -28,6 +29,13 @@ public class ResourceExceptionHandler {
 
 		StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+	
+	@ExceptionHandler(BusinessRuleException.class) // tratador de excecao do tipo passado
+	public ResponseEntity<StandardError> businessRule (BusinessRuleException e, HttpServletRequest request){
+
+		StandardError err = new StandardError(HttpStatus.ACCEPTED.value(), e.getMessage(), System.currentTimeMillis());
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(err);
 	}
 	
 	@ExceptionHandler(AuthorizationException.class) // tratador de exceçao do tipo passado

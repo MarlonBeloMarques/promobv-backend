@@ -22,6 +22,7 @@ import com.marlonmarqs.promobv.dto.NotificacaoNewDTO;
 import com.marlonmarqs.promobv.repository.NotificacaoRepository;
 import com.marlonmarqs.promobv.repository.PromocaoRepository;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
+import com.marlonmarqs.promobv.service.exceptions.BusinessRuleException;
 import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
 
 @Service
@@ -64,11 +65,21 @@ public class NotificacaoService {
 		return new PageImpl<>(objs, pageRequest, objs.size());
 	}
 	
-	public Notificacao insert(Notificacao obj) {
+	public Notificacao interact(Notificacao obj) throws BusinessRuleException {
 		obj.setId(null);
 		obj = repo.save(obj);
 		userRepository.save(obj.getUsuario());
 		promocaoRepository.save(obj.getPromocao());
+		
+		List<Notificacao> objs = obj.getPromocao().getNotificacoes();
+		
+		for (Notificacao notificacao : objs) {
+			if(notificacao.getUsuario().getId() == obj.getUsuario().getId()) {
+				remove(obj.getId());
+				throw new BusinessRuleException("Notificação removida");
+			}
+		}
+		
 		return obj;
 	}
 	
