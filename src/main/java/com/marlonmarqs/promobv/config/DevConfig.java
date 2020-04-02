@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.marlonmarqs.promobv.service.DBService;
+import com.marlonmarqs.promobv.service.EmailService;
+import com.marlonmarqs.promobv.service.SmtpEmailService;
 
 @Configuration
 @Profile("dev")
@@ -30,5 +32,11 @@ public class DevConfig {
 		
 		dbService.instantiateTestDatabase();
 		return true;
+	}
+	
+	@Bean
+	//envio de email com smtp, obs: chega no email
+	public EmailService emailService() {
+		return new SmtpEmailService();
 	}
 }

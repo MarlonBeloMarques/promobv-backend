@@ -42,7 +42,7 @@ public class DBService {
 		Categoria cat1 = new Categoria(null, "Auto e peças");
 		Categoria cat2 = new Categoria(null, "Eletrônicos");
 		
-		Usuario user1 = new Usuario(1, "Marlon", "marlon.belohd@gmail.com", pe.encode("123"));
+		Usuario user1 = new Usuario(1, "Marlon", "marlonmarqsbr@gmail.com", pe.encode("123"));
 		user1.addPerfil(TipoPerfil.ADMIN);
 		Usuario user2 = new Usuario(2, "Matheus", "matheus.belo@gmail.com", pe.encode("123"));
 		Usuario user3 = new Usuario(3, "Larissa", "larissa.pantoja@gmail.com", pe.encode("123"));
