@@ -38,7 +38,8 @@ public class AuthService {
 		usuario.setSenha(pe.encode(newPass));
 
 		repo.save(usuario);
-		emailService.sendNewPasswordEmail(usuario, newPass);
+		//emailService.sendNewPasswordEmail(usuario, newPass);
+		emailService.sendNewPasswordEmailHtml(usuario, newPass);
 	}
 	
 	// gerar senha aleatoria
