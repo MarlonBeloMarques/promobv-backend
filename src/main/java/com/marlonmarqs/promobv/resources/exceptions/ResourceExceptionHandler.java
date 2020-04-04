@@ -38,7 +38,7 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(BusinessRuleException.class) // tratador de excecao do tipo passado
 	public ResponseEntity<StandardError> businessRule (BusinessRuleException e, HttpServletRequest request){
 
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.ACCEPTED.value(), "Remoção efetuada", e.getMessage(), request.getRequestURI());
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.ACCEPTED.value(), "Erro de regra de negócio", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(err);
 	}
 	
