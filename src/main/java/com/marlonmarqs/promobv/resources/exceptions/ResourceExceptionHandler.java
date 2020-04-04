@@ -50,7 +50,7 @@ public class ResourceExceptionHandler {
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class) // tratador de exceçao do tipo passado
-	public ResponseEntity<StandardError> datIntegrity (MethodArgumentNotValidException e, HttpServletRequest request){
+	public ResponseEntity<StandardError> validation (MethodArgumentNotValidException e, HttpServletRequest request){
 
 		ValidationError err = new ValidationError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Erro de validação", e.getMessage(), request.getRequestURI());
 
