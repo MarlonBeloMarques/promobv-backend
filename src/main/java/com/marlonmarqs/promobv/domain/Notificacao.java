@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marlonmarqs.promobv.domain.enums.TipoNotificacao;
 
 @Entity
@@ -19,12 +21,17 @@ public class Notificacao implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date data;
+	
+	@JsonFormat(pattern = "HH:mm:ss")
 	private Date hora;
 	
 	private Integer tipo;
 	
 	@ManyToOne
+	@JsonBackReference // anotação para os segundos objetos instanciados
 	@JoinColumn(name="promocao_id")
 	private Promocao promocao;
 	
@@ -41,7 +48,7 @@ public class Notificacao implements Serializable {
 		this.id = id;
 		this.data = data;
 		this.hora = hora;
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 	
 	public Notificacao(Integer id, Date data, Date hora, Promocao promocao, Usuario usuario, TipoNotificacao tipo) {
@@ -51,7 +58,7 @@ public class Notificacao implements Serializable {
 		this.hora = hora;
 		this.promocao = promocao;
 		this.usuario = usuario;
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 
 	public Integer getId() {

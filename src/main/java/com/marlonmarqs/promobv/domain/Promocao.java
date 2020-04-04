@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Promocao implements Serializable {
@@ -26,7 +26,9 @@ public class Promocao implements Serializable {
 	private String descricao;
 	private Double preco;
 	private String localizacao;
+	private String endereco;
 	private String titulo;
+	private boolean publicada;
 	
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
@@ -36,7 +38,8 @@ public class Promocao implements Serializable {
 	@JoinColumn(name="categoria_id")
 	private Categoria categoria;
 	
-	@JsonIgnore
+	//@JsonIgnore
+	@JsonManagedReference // anotação para os primeiros objetos instanciados
 	@OneToMany(mappedBy="promocao")
 	private List<Notificacao> notificacoes = new ArrayList<>();
 	
@@ -44,32 +47,38 @@ public class Promocao implements Serializable {
 	private GaleriaDeImagens galeriaDeImagens;
 	
 	public Promocao() {
-		
+		setPublicada(true);
 	}
 
-	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo) {
+	public Promocao(Integer id, String descricao, Double preco, String localizacao, String endereco, String titulo) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.preco = preco;
 		this.localizacao = localizacao;
 		this.titulo = titulo;
+		this.endereco = endereco;
+		setPublicada(true);
+
 	}
 	
-	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo, Categoria categoria, Usuario usuario, GaleriaDeImagens galeriaDeImagens, Notificacao notificacao) {
+	public Promocao(Integer id, String descricao, Double preco, String localizacao, String endereco, String titulo, Categoria categoria, Usuario usuario, GaleriaDeImagens galeriaDeImagens, Notificacao notificacao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.preco = preco;
 		this.localizacao = localizacao;
+		this.endereco = endereco;
 		this.titulo = titulo;
 		this.categoria = categoria;
 		this.usuario = usuario;
 		this.galeriaDeImagens = galeriaDeImagens;
 		this.notificacoes.add(notificacao);
+		setPublicada(true);
+
 	}
 	
-	public Promocao(Integer id, String descricao, Double preco, String localizacao, String titulo, Categoria categoria, Usuario usuario) {
+	public Promocao(Integer id, String descricao, Double preco, String localizacao, String endereco, String titulo, Categoria categoria, Usuario usuario) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -78,6 +87,21 @@ public class Promocao implements Serializable {
 		this.titulo = titulo;
 		this.categoria = categoria;
 		this.usuario = usuario;
+		this.endereco = endereco;
+		setPublicada(true);
+
+	}
+	
+	public Promocao(Integer id, String descricao, Double preco, String localizacao, String endereco, String titulo, Categoria categoria) {
+		this.id = id;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.localizacao = localizacao;
+		this.titulo = titulo;
+		this.categoria = categoria;
+		this.endereco = endereco;
+		setPublicada(true);
+
 	}
 
 	public Integer getId() {
@@ -144,12 +168,35 @@ public class Promocao implements Serializable {
 		this.galeriaDeImagens = galeriaDeImagens;
 	}
 
-	public List<Notificacao> getNotificacoes() {
-		return notificacoes;
+	public List<Notificacao> getNotificacoes() {	
+		List<Notificacao> objs = new ArrayList<Notificacao>();
+		for (Notificacao notificacao : notificacoes) {
+			if(notificacao.getTipo() == 1) {
+				objs.add(notificacao);
+			}
+		}
+		
+		return objs;
 	}
 
 	public void setNotificacoes(List<Notificacao> notificacoes) {
 		this.notificacoes = notificacoes;
+	}
+
+	public boolean isPublicada() {
+		return publicada;
+	}
+
+	public void setPublicada(boolean publicada) {
+		this.publicada = publicada;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package com.marlonmarqs.promobv.domain;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -24,10 +23,12 @@ public class GaleriaDeImagens implements Serializable {
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer id;
+		
+	private Integer amount;
 
 	/*Conjunto, não tem repetição nessa coleção*/
 	@ElementCollection
-	@CollectionTable(name="URLIMAGENS") // nome da tabela auxiliar para guardar os telefones
+	@CollectionTable(name="IMAGENS")
 	private Set<String> urlImagens = new HashSet<>();
 	
 	@JsonIgnore
@@ -37,20 +38,7 @@ public class GaleriaDeImagens implements Serializable {
 	private Promocao promocao;
 	
 	public GaleriaDeImagens() {
-		
-	}
-
-	public GaleriaDeImagens(Integer id, Set<String> urlImagens) {
-		super();
-		this.id = id;
-		this.urlImagens = urlImagens;
-	}
-	
-	public GaleriaDeImagens(Integer id, Set<String> urlImagens, Promocao promocao) {
-		super();
-		this.id = id;
-		this.urlImagens = urlImagens;
-		this.promocao = promocao;
+		amount = 0;
 	}
 
 	public Integer getId() {
@@ -65,8 +53,9 @@ public class GaleriaDeImagens implements Serializable {
 		return urlImagens;
 	}
 
-	public void setUrlImagens(Set<String> urlImagens) {
-		this.urlImagens = urlImagens;
+	public void setUrlImagem(String urlImagem) {
+		this.amount++;
+		this.urlImagens.add(urlImagem);
 	}
 
 	public Promocao getPromocao() {
@@ -75,6 +64,10 @@ public class GaleriaDeImagens implements Serializable {
 
 	public void setPromocao(Promocao promocao) {
 		this.promocao = promocao;
+	}
+
+	public Integer getAmount() {
+		return amount;
 	}
 
 	@Override
