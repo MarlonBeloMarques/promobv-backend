@@ -37,6 +37,8 @@ public class Usuario implements Serializable {
 	private Date dataDeNascimento;
 	private String telefone;
 	
+	private String imageUrl;
+	
 	@Column(unique = true)
 	private String email;
 	
@@ -202,6 +204,14 @@ public class Usuario implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	@Override
