@@ -1,11 +1,13 @@
 package com.marlonmarqs.promobv.service;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.marlonmarqs.promobv.domain.Usuario;
 import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
@@ -25,6 +27,9 @@ public class UsuarioService {
 	
 	@Autowired
 	private BCryptPasswordEncoder pe;
+	
+	@Autowired
+	private S3Service s3Service;
 	
 	public Optional<Usuario> find(Integer id) {
 		
@@ -87,5 +92,9 @@ public class UsuarioService {
 			newObj.get().setTelefone(obj.getTelefone());
 		if(obj.getDataDeNascimento() != null)
 			newObj.get().setDataDeNascimento(obj.getDataDeNascimento());
+	}
+	
+	public URI uploadProfilePicture(MultipartFile multipartFile) {
+		return s3Service.uploadFile(multipartFile);
 	}
 }
