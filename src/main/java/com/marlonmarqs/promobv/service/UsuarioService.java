@@ -39,6 +39,9 @@ public class UsuarioService {
 	@Value("${img.prefix.client.profile}")
 	private String prefix;
 	
+	@Value("${img.profile.size}")
+	private Integer size;
+	
 	public Optional<Usuario> find(Integer id) {
 		
 		UserSS user = UserService.authenticated();
@@ -111,6 +114,11 @@ public class UsuarioService {
 
 		//extrai jpg através do enviado pela requisição
 		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
+		//recorta
+		jpgImage = imageService.cropSquare(jpgImage);
+		//redimensionar
+		jpgImage = imageService.resize(jpgImage, size);
+
 		//definindo o nome do arquivo
 		String fileName = prefix + user.getId() + ".jpg";
 				
