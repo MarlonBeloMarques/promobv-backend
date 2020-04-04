@@ -9,12 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.marlonmarqs.promobv.domain.Categoria;
+import com.marlonmarqs.promobv.domain.GaleriaDeImagens;
 import com.marlonmarqs.promobv.domain.Notificacao;
 import com.marlonmarqs.promobv.domain.Promocao;
 import com.marlonmarqs.promobv.domain.Usuario;
 import com.marlonmarqs.promobv.domain.enums.TipoNotificacao;
 import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
 import com.marlonmarqs.promobv.repository.CategoriaRepository;
+import com.marlonmarqs.promobv.repository.GaleriaDeImagensRepository;
 import com.marlonmarqs.promobv.repository.NotificacaoRepository;
 import com.marlonmarqs.promobv.repository.PromocaoRepository;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
@@ -33,6 +35,9 @@ public class DBService {
 	
 	@Autowired
 	private NotificacaoRepository notificacaoRepository;
+	
+	@Autowired
+	private GaleriaDeImagensRepository glrRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder pe;
@@ -56,6 +61,22 @@ public class DBService {
 		Promocao promo3 = new Promocao(null, "Aulas de japones com material didatico", 60.00, "Rua ZZZ", "N 453", "Aulas de Japones", cat1, user2);
 		Promocao promo4 = new Promocao(null, "Roupas esportivas", 60.00, "Rua ZZZ", "N 453", "Roupas", cat2, user2);
 		
+		GaleriaDeImagens glr1 = new GaleriaDeImagens();
+		glr1.setPromocao(promo1);
+		glr1.setUrlImagem("123");
+		
+		GaleriaDeImagens glr2 = new GaleriaDeImagens();
+		glr2.setPromocao(promo2);
+		glr2.setUrlImagem("123");
+		
+		GaleriaDeImagens glr3 = new GaleriaDeImagens();
+		glr3.setPromocao(promo3);
+		glr3.setUrlImagem("123");
+		
+		GaleriaDeImagens glr4 = new GaleriaDeImagens();
+		glr4.setPromocao(promo4);
+		glr4.setUrlImagem("123");
+		
 		Notificacao not1 = new Notificacao(null, sdf1.parse("20/01/2020"), sdf2.parse("12:30:00"), promo1, user1, TipoNotificacao.CURTIDA);
 		Notificacao not2 = new Notificacao(null, sdf1.parse("20/01/2020"), sdf2.parse("14:30:00"), promo2, user1,  TipoNotificacao.CURTIDA);
 		
@@ -72,6 +93,11 @@ public class DBService {
 		Notificacao not13 = new Notificacao(null, sdf1.parse("20/01/2020"), sdf2.parse("14:30:00"), promo2, user1,  TipoNotificacao.DENUNCIA);
 
 		
+		promo1.setGaleriaDeImagens(glr1);
+		promo2.setGaleriaDeImagens(glr2);
+		promo3.setGaleriaDeImagens(glr3);
+		promo4.setGaleriaDeImagens(glr4);
+		
 		promo1.setNotificacoes(Arrays.asList(not1));
 		promo2.setNotificacoes(Arrays.asList(not2, not3, not4, not5, not6, not7, not8, not9, not10, not11, not12, not13));
 		user1.setPromocoes(Arrays.asList(promo1, promo2));
@@ -81,8 +107,10 @@ public class DBService {
 		cat2.setPromocoes(Arrays.asList(promo4));
 		
 		usuarioRepository.saveAll(Arrays.asList(user1, user2, user3));
+		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		promocaoRepository.saveAll(Arrays.asList(promo1, promo2, promo3, promo4));
+		glrRepository.saveAll(Arrays.asList(glr1, glr2, glr3, glr4));
 		notificacaoRepository.saveAll(Arrays.asList(not1, not2, not3, not4, not5, not6, not7, not8, not9, not10, not11, not12, not13));
 	}
 }

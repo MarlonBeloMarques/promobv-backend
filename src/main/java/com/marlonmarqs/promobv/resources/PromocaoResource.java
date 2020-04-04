@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.marlonmarqs.promobv.domain.Promocao;
@@ -98,5 +99,11 @@ public class PromocaoResource {
 		Page<Promocao> list = service.findPage(id, page, linesPerPage, orderBy, direction);
 		Page<PromocaoPageDTO> pageDto = list.map(obj -> new PromocaoPageDTO(obj));
 		return ResponseEntity.ok().body(pageDto); 
+	}
+	
+	@RequestMapping(value="/{id}/picture", method=RequestMethod.POST)
+	public ResponseEntity<Void> uploadProfilePicture(@PathVariable Integer id, @RequestParam(name="file") MultipartFile file){ // @RequestParam(name="file") = reconhcer que chegou uma requisição do http 
+		URI uri = service.uploadPromotionPhotos(file, id);
+		return ResponseEntity.created(uri).build();
 	}
 }
