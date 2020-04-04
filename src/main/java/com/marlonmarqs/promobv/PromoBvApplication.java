@@ -19,9 +19,7 @@ public class PromoBvApplication implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		
-		s3Service.uploadFile("/Users/marlonmarques/downloads/perfil.jpg");
-		
+				
 	}
 
 }
