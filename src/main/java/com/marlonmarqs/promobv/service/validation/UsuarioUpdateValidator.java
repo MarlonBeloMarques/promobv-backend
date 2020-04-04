@@ -15,6 +15,7 @@ import com.marlonmarqs.promobv.domain.Usuario;
 import com.marlonmarqs.promobv.dto.UsuarioUpdateDTO;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
 import com.marlonmarqs.promobv.resources.exceptions.FieldMessage;
+import com.marlonmarqs.promobv.service.validation.utils.BR;
 
 public class UsuarioUpdateValidator implements ConstraintValidator<UsuarioUpdate, UsuarioUpdateDTO> {
 
@@ -39,6 +40,10 @@ public class UsuarioUpdateValidator implements ConstraintValidator<UsuarioUpdate
 		List<FieldMessage> list = new ArrayList<>();
 
 		// inclua os testes aqui, inserindo erros na lista
+		
+		if(!BR.isValidCPF(objDto.getCpf())) {
+			list.add(new FieldMessage("cpf", "CPF inválido"));
+		}
 
 		Usuario aux = repo.findByEmail(objDto.getEmail());
 		if(aux != null && !aux.getId().equals(uriId)) {
