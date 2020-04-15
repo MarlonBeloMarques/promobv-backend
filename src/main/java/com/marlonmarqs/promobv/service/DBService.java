@@ -63,19 +63,19 @@ public class DBService {
 		
 		GaleriaDeImagens glr1 = new GaleriaDeImagens();
 		glr1.setPromocao(promo1);
-		glr1.setUrlImagem("123");
+		glr1.setUrlImagem("https://promobv-dev.s3-sa-east-1.amazonaws.com/promo1-1.jpg");
 		
 		GaleriaDeImagens glr2 = new GaleriaDeImagens();
 		glr2.setPromocao(promo2);
-		glr2.setUrlImagem("123");
+		glr2.setUrlImagem("https://promobv-dev.s3-sa-east-1.amazonaws.com/promo2-1.jpg");
 		
 		GaleriaDeImagens glr3 = new GaleriaDeImagens();
 		glr3.setPromocao(promo3);
-		glr3.setUrlImagem("123");
+		glr3.setUrlImagem("https://promobv-dev.s3-sa-east-1.amazonaws.com/promo3-1.jpg");
 		
 		GaleriaDeImagens glr4 = new GaleriaDeImagens();
 		glr4.setPromocao(promo4);
-		glr4.setUrlImagem("123");
+		glr4.setUrlImagem("https://promobv-dev.s3-sa-east-1.amazonaws.com/promo4-1.jpg");
 		
 		Notificacao not1 = new Notificacao(null, sdf1.parse("20/01/2020"), sdf2.parse("12:30:00"), promo1, user1, TipoNotificacao.CURTIDA);
 		Notificacao not2 = new Notificacao(null, sdf1.parse("20/01/2020"), sdf2.parse("14:30:00"), promo2, user1,  TipoNotificacao.CURTIDA);
