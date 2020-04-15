@@ -3,6 +3,7 @@ package com.marlonmarqs.promobv.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.marlonmarqs.promobv.domain.GaleriaDeImagens;
 import com.marlonmarqs.promobv.domain.Notificacao;
@@ -22,6 +23,8 @@ public class PromocaoDTO implements Serializable{
 	private String nomeUsuario;
 	private String emailUsuario;
 	
+	private Optional<String> imagem;
+	
 	private GaleriaDeImagens galeriaDeImagens;
 	
 	private List<Notificacao> notificacoes = new ArrayList<>();
@@ -38,8 +41,9 @@ public class PromocaoDTO implements Serializable{
 		endereco = obj.getEndereco();
 		titulo = obj.getTitulo();
 		idUsuario = obj.getUsuario().getId();
-		nomeUsuario = obj.getUsuario().getNome(); 
+		nomeUsuario = obj.getUsuario().getApelido(); 
 		emailUsuario = obj.getUsuario().getEmail();
+		imagem = obj.getGaleriaDeImagens() == null? null : obj.getGaleriaDeImagens().getUrlImagens().stream().findFirst();
 		galeriaDeImagens = (obj.getGaleriaDeImagens() == null) ? null : obj.getGaleriaDeImagens();
 		notificacoes = obj.getNotificacoes();
 	}
@@ -130,6 +134,14 @@ public class PromocaoDTO implements Serializable{
 
 	public void setNotificacoes(List<Notificacao> notificacoes) {
 		this.notificacoes = notificacoes;
+	}
+
+	public Optional<String> getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(Optional<String> imagem) {
+		this.imagem = imagem;
 	}
 
 }
