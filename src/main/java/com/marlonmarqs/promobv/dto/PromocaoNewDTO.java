@@ -16,8 +16,6 @@ public class PromocaoNewDTO implements Serializable{
 	
 	private Integer idCategoria;
 	
-	//private GaleriaDeImagens galeriaDeImagens;
-
 	public PromocaoNewDTO() {
 
 	}
@@ -30,7 +28,6 @@ public class PromocaoNewDTO implements Serializable{
 		endereco = obj.getEndereco();
 		titulo = obj.getTitulo();
 		idCategoria = obj.getCategoria().getId();
-		//galeriaDeImagens = (obj.getGaleriaDeImagens() == null) ? null : obj.getGaleriaDeImagens();
 	}
 
 	public Integer getId() {
