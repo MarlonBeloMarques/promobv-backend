@@ -17,8 +17,8 @@ public class NotificacaoDTO implements Serializable{
 	private Date hora;
 
 	private Integer tipo;
-	
 	private String userApelido;
+	private String userUrlProfile;
 	private String promoTitulo;
 	
 	public NotificacaoDTO() {
@@ -32,6 +32,7 @@ public class NotificacaoDTO implements Serializable{
 		tipo = (obj.getTipo() == null) ? null : obj.getTipo();
 		userApelido = obj.getUsuario().getApelido();
 		promoTitulo = obj.getPromocao().getTitulo();
+		userUrlProfile = obj.getUsuario().getUrlProfile();
 	}
 
 	public Integer getId() {
@@ -80,6 +81,14 @@ public class NotificacaoDTO implements Serializable{
 
 	public void setPromoTitulo(String promoTitulo) {
 		this.promoTitulo = promoTitulo;
+	}
+
+	public String getUserUrlProfile() {
+		return userUrlProfile;
+	}
+
+	public void setUserUrlProfile(String userUrlProfile) {
+		this.userUrlProfile = userUrlProfile;
 	}
 
 }

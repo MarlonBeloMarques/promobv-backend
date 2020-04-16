@@ -111,6 +111,8 @@ public class UsuarioService {
 		if(user == null) {
 			throw new AuthorizationException("Acesso negado");
 		}
+		
+		Optional<Usuario> obj = find(user.getId());
 
 		//extrai jpg através do enviado pela requisição
 		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
@@ -121,6 +123,10 @@ public class UsuarioService {
 
 		//definindo o nome do arquivo
 		String fileName = prefix + user.getId() + ".jpg";
+		
+		obj.get().setUrlProfile(fileName);
+		
+		repo.save(obj.get());
 				
 		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
 	}

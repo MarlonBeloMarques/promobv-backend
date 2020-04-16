@@ -33,6 +33,8 @@ public class Usuario implements Serializable {
 	private String apelido;
 	private String cpf;
 	
+	private String urlProfile;
+	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataDeNascimento;
 	private String telefone;
@@ -202,6 +204,14 @@ public class Usuario implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public String getUrlProfile() {
+		return urlProfile;
+	}
+
+	public void setUrlProfile(String urlProfile) {
+		this.urlProfile = urlProfile;
 	}
 
 	@Override
