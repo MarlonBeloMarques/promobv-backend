@@ -124,10 +124,12 @@ public class UsuarioService {
 		//definindo o nome do arquivo
 		String fileName = prefix + user.getId() + ".jpg";
 		
-		obj.get().setUrlProfile(fileName);
+		URI uri = s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
+		
+		obj.get().setUrlProfile(uri.toString());
 		
 		repo.save(obj.get());
 				
-		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
+		return uri;
 	}
 }
