@@ -20,7 +20,8 @@ public class PromocaoDTO implements Serializable{
 	private String titulo;
 	
 	private Integer idUsuario;
-	private String nomeUsuario;
+	private String apelidoUsuario;
+	private String userUrlProfile;
 	private String emailUsuario;
 	
 	private Optional<String> imagem;
@@ -41,8 +42,9 @@ public class PromocaoDTO implements Serializable{
 		endereco = obj.getEndereco();
 		titulo = obj.getTitulo();
 		idUsuario = obj.getUsuario().getId();
-		nomeUsuario = obj.getUsuario().getApelido(); 
+		apelidoUsuario = obj.getUsuario().getApelido(); 
 		emailUsuario = obj.getUsuario().getEmail();
+		userUrlProfile = obj.getUsuario().getUrlProfile();
 		imagem = obj.getGaleriaDeImagens() == null? null : obj.getGaleriaDeImagens().getUrlImagens().stream().findFirst();
 		galeriaDeImagens = (obj.getGaleriaDeImagens() == null) ? null : obj.getGaleriaDeImagens();
 		notificacoes = obj.getNotificacoes();
@@ -96,12 +98,12 @@ public class PromocaoDTO implements Serializable{
 		this.idUsuario = idUsuario;
 	}
 
-	public String getNomeUsuario() {
-		return nomeUsuario;
+	public String getApelidoUsuario() {
+		return apelidoUsuario;
 	}
 
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setApelidoUsuario(String apelidoUsuario) {
+		this.apelidoUsuario = apelidoUsuario;
 	}
 
 	public String getEmailUsuario() {
@@ -134,6 +136,14 @@ public class PromocaoDTO implements Serializable{
 
 	public void setNotificacoes(List<Notificacao> notificacoes) {
 		this.notificacoes = notificacoes;
+	}
+
+	public String getUserUrlProfile() {
+		return userUrlProfile;
+	}
+
+	public void setUserUrlProfile(String userUrlProfile) {
+		this.userUrlProfile = userUrlProfile;
 	}
 
 	public Optional<String> getImagem() {
