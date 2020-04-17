@@ -41,7 +41,7 @@ public class UsuarioUpdateValidator implements ConstraintValidator<UsuarioUpdate
 
 		// inclua os testes aqui, inserindo erros na lista
 		
-		if(!BR.isValidCPF(objDto.getCpf())) {
+		if(objDto.getCpf() != null && !BR.isValidCPF(objDto.getCpf())) {
 			list.add(new FieldMessage("cpf", "CPF inválido"));
 		}
 
