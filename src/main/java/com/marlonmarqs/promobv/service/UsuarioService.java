@@ -59,6 +59,22 @@ public class UsuarioService {
 		return obj;
 	}
 	
+	public Usuario findByEmail(String email) throws ObjectNotFoundException {
+		
+		UserSS user = UserService.authenticated();
+		if(user == null || !email.equals(user.getUsername())) { // se é nulo ou  não é adm e o email não é igual do usuario autenticado
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		Usuario obj = repo.findByEmail(email);
+		
+		if(obj == null) {
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + user.getId()
+					+ ", Tipo: " + Usuario.class.getName());
+		}
+		return obj;
+	}
+	
 	public List<Usuario> findAll() {
 		return repo.findAll();
 	}

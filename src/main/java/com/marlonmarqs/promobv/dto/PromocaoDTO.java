@@ -22,6 +22,7 @@ public class PromocaoDTO implements Serializable{
 	private Integer idUsuario;
 	private String apelidoUsuario;
 	private String userUrlProfile;
+	private String userTelefone;
 	private String emailUsuario;
 	
 	private Optional<String> imagem;
@@ -46,6 +47,7 @@ public class PromocaoDTO implements Serializable{
 		emailUsuario = obj.getUsuario().getEmail();
 		userUrlProfile = obj.getUsuario().getUrlProfile();
 		imagem = obj.getGaleriaDeImagens() == null? null : obj.getGaleriaDeImagens().getUrlImagens().stream().findFirst();
+		userTelefone = obj.getUsuario().getTelefone();
 		galeriaDeImagens = (obj.getGaleriaDeImagens() == null) ? null : obj.getGaleriaDeImagens();
 		notificacoes = obj.getNotificacoes();
 	}
@@ -152,6 +154,14 @@ public class PromocaoDTO implements Serializable{
 
 	public void setImagem(Optional<String> imagem) {
 		this.imagem = imagem;
+	}
+
+	public String getUserTelefone() {
+		return userTelefone;
+	}
+
+	public void setUserTelefone(String userTelefone) {
+		this.userTelefone = userTelefone;
 	}
 
 }
