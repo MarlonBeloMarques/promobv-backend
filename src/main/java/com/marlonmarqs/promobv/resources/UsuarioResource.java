@@ -35,6 +35,12 @@ public class UsuarioResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@RequestMapping(value="/email", method=RequestMethod.GET)
+	public ResponseEntity<Usuario> find(@RequestParam(value="value") String email){ // recebe um valor que é o email
+		Usuario obj = service.findByEmail(email); // chama o serviço e retorna o obj
+		return ResponseEntity.ok().body(obj); // na requisicao
+	}
+	
 	@RequestMapping(method=RequestMethod.POST) 
 	public ResponseEntity<Void> insert(@Valid @RequestBody UsuarioNewDTO objDto) {	
 		Usuario obj = service.fromDTO(objDto);
