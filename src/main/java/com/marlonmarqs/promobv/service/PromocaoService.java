@@ -2,6 +2,7 @@ package com.marlonmarqs.promobv.service;
 
 import java.awt.image.BufferedImage;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,7 +93,7 @@ public class PromocaoService {
 	public Promocao update(Promocao obj) {
 		Optional<Promocao> newObj = find(obj.getId());
 		updateData(newObj, obj);
-
+									
 		return repo.save(newObj.get());
 	}
 
@@ -115,7 +116,20 @@ public class PromocaoService {
 	}
 
 	public Promocao fromDTO(PromocaoUpdateDTO objDto) {
-		return new Promocao(null, objDto.getDescricao(), objDto.getPreco(), objDto.getLocalizacao(), objDto.getEndereco(), objDto.getTitulo());
+		Promocao obj = new Promocao();
+
+		obj.setId(null);
+		obj.setDescricao(objDto.getDescricao());
+		obj.setPreco(objDto.getPreco());
+		obj.setLocalizacao(objDto.getLocalizacao());
+		obj.setEndereco(objDto.getEndereco());
+		obj.setTitulo(objDto.getTitulo());
+		
+		Optional<Categoria> cat = categoriaService.find(objDto.getIdCategoria());
+		
+		obj.setCategoria(cat.get());
+		
+		return obj;
 	}
 
 	private void updateData(Optional<Promocao> newObj, Promocao obj) {
@@ -127,6 +141,10 @@ public class PromocaoService {
 			newObj.get().setLocalizacao(obj.getLocalizacao());
 		if (obj.getPreco() != null)
 			newObj.get().setPreco(obj.getPreco());
+		
+		if(obj.getCategoria() != null) {
+			newObj.get().setCategoria(obj.getCategoria());		
+		}
 	}
 	
 	public void delete(Integer id) {
