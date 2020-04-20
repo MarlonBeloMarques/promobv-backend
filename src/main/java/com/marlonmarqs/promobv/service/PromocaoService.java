@@ -125,16 +125,21 @@ public class PromocaoService {
 		obj.setEndereco(objDto.getEndereco());
 		obj.setTitulo(objDto.getTitulo());
 		
-		Optional<Categoria> cat = categoriaService.find(objDto.getIdCategoria());
-		
-		obj.setCategoria(cat.get());
-		
+		if(objDto.getIdCategoria() != null) {
+			Optional<Categoria> cat = categoriaService.find(objDto.getIdCategoria());
+			obj.setCategoria(cat.get());
+		}
+						
 		return obj;
 	}
 
 	private void updateData(Optional<Promocao> newObj, Promocao obj) {
+		
+		
 		if (obj.getTitulo() != null)
 			newObj.get().setTitulo(obj.getTitulo());
+		if(obj.getEndereco() != null)
+			newObj.get().setEndereco(obj.getEndereco());
 		if (obj.getDescricao() != null)
 			newObj.get().setDescricao(obj.getDescricao());
 		if (obj.getLocalizacao() != null)
@@ -145,6 +150,7 @@ public class PromocaoService {
 		if(obj.getCategoria() != null) {
 			newObj.get().setCategoria(obj.getCategoria());		
 		}
+		
 	}
 	
 	public void delete(Integer id) {
