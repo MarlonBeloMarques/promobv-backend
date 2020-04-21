@@ -97,7 +97,7 @@ public class PromocaoService {
 		return repo.save(newObj.get());
 	}
 
-	public Promocao fromDTO(PromocaoNewDTO objDto) {
+	public Promocao fromDTO(PromocaoNewDTO objDto) throws AuthorizationException {
 		
 		UserSS user = UserService.authenticated();
 		// não ta autenticado

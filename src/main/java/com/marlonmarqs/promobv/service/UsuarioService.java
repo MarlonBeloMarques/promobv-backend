@@ -121,7 +121,7 @@ public class UsuarioService {
 			newObj.get().setDataDeNascimento(obj.getDataDeNascimento());
 	}
 	
-	public URI uploadProfilePicture(MultipartFile multipartFile) {
+	public URI uploadProfilePicture(MultipartFile multipartFile) throws AuthorizationException {
 		
 		UserSS user = UserService.authenticated();
 		if(user == null) {
