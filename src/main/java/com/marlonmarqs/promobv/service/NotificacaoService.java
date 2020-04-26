@@ -65,20 +65,20 @@ public class NotificacaoService {
 		return new PageImpl<>(objs, pageRequest, objs.size());
 	}
 	
-	public Notificacao interact(Notificacao obj) throws BusinessRuleException {
-		obj.setId(null);
-		obj = repo.save(obj);
-		userRepository.save(obj.getUsuario());
-		promocaoRepository.save(obj.getPromocao());
-		
+	public Notificacao interact(Notificacao obj) throws BusinessRuleException {	
 		List<Notificacao> objs = obj.getPromocao().getNotificacoes();
-		
+				
 		for (Notificacao notificacao : objs) {
+			System.out.println(notificacao.getUsuario().getId() + "    " +obj.getUsuario().getId());
 			if(notificacao.getUsuario().getId() == obj.getUsuario().getId()) {
-				remove(obj.getId());
+				remove(notificacao.getId());
 				throw new BusinessRuleException("Notificação removida");
 			}
 		}
+		
+		obj.setId(null);
+		
+		obj = repo.save(obj);
 		
 		return obj;
 	}
