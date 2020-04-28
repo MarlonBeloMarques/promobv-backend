@@ -62,16 +62,17 @@ public class NotificacaoService {
 	public Notificacao interact(Notificacao obj) throws BusinessRuleException {	
 		
 		List<Notificacao> objs = obj.getPromocao().getNotificacoes();
+		List<Notificacao> objs2 = obj.getPromocao().getDenuncias();
 		
-		if(obj.getTipo() == 1) {
+		if(obj.getTipo().equals(1)) {
 			for (Notificacao notificacao : objs) {
 				if(notificacao.getUsuario().getId() == obj.getUsuario().getId()) {
 					remove(notificacao.getId());
 					throw new BusinessRuleException("Notificação removida");
 				}
 			}
-		} else if(obj.getTipo() == 2) {
-			for (Notificacao notificacao : objs) {
+		} else if(obj.getTipo().equals(2)) {
+			for (Notificacao notificacao : objs2) {
 				if(notificacao.getUsuario().getId() == obj.getUsuario().getId()) {
 					throw new BusinessRuleException("Você já denunciou essa promoção.");
 				}
@@ -99,29 +100,29 @@ public class NotificacaoService {
 	}
 	
 	public List<String> disableCheckDenuncia(Integer idUser) {
-		String msg = "A publicação foi desativada para análise: ";
+		String msg = "A promoção foi desativada para análise: ";
 		
 		List<Promocao> objs = promocaoService.findAllUser();
 		List<String> messages = new ArrayList<>();
 		
 		for (Promocao promocao : objs) {
-			if(promocao.getNotificacoes().stream().map(obj -> obj.getTipo().compareTo(2)).count() >= 10) {
+			if(promocao.getDenuncias().stream().count() >= 10) {
 				promocaoService.disable(promocao.getId());
 				messages.add(msg + promocao.getTitulo());
 			}
 		}
 		
-		return messages.isEmpty() ? Arrays.asList("Não há publicações denunciadas") : messages;
+		return messages.isEmpty() ? Arrays.asList("Não há promoções denunciadas") : messages;
 	}
 	
 	public List<String> disableCheckDenuncia() {
-		String msg = "A publicação foi desativada para análise:";
+		String msg = "A promoção foi desativada para análise:";
 		
 		List<Promocao> objs = promocaoService.findAll();
 		List<String> messages = new ArrayList<>();
 		
 		for (Promocao promocao : objs) {
-			if(promocao.getNotificacoes().stream().map(obj -> obj.getTipo().compareTo(2)).count() >= 10) {
+			if(promocao.getDenuncias().stream().count() >= 10) {
 				promocaoService.disable(promocao.getId());
 				messages.add(msg + 
 						" (Titulo: " + promocao.getTitulo() +
@@ -129,6 +130,6 @@ public class NotificacaoService {
 			}
 		}
 		
-		return messages.isEmpty() ? Arrays.asList("Não há publicações denunciadas") : messages;
+		return messages.isEmpty() ? Arrays.asList("Não há promoções denunciadas") : messages;
 	}
 }
