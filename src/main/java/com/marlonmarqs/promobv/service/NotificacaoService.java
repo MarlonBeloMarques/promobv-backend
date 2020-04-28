@@ -32,12 +32,6 @@ public class NotificacaoService {
 	private NotificacaoRepository repo;
 	
 	@Autowired
-	private PromocaoRepository promocaoRepository;
-	
-	@Autowired
-	private UsuarioRepository userRepository;
-	
-	@Autowired
 	private PromocaoService promocaoService;
 	
 	@Autowired
@@ -66,21 +60,29 @@ public class NotificacaoService {
 	}
 	
 	public Notificacao interact(Notificacao obj) throws BusinessRuleException {	
+		
 		List<Notificacao> objs = obj.getPromocao().getNotificacoes();
-				
-		for (Notificacao notificacao : objs) {
-			System.out.println(notificacao.getUsuario().getId() + "    " +obj.getUsuario().getId());
-			if(notificacao.getUsuario().getId() == obj.getUsuario().getId()) {
-				remove(notificacao.getId());
-				throw new BusinessRuleException("Notificação removida");
+		
+		if(obj.getTipo() == 1) {
+			for (Notificacao notificacao : objs) {
+				if(notificacao.getUsuario().getId() == obj.getUsuario().getId()) {
+					remove(notificacao.getId());
+					throw new BusinessRuleException("Notificação removida");
+				}
+			}
+		} else if(obj.getTipo() == 2) {
+			for (Notificacao notificacao : objs) {
+				if(notificacao.getUsuario().getId() == obj.getUsuario().getId()) {
+					throw new BusinessRuleException("Você já denunciou essa promoção.");
+				}
 			}
 		}
 		
 		obj.setId(null);
-		
 		obj = repo.save(obj);
 		
 		return obj;
+		
 	}
 	
 	public void remove(Integer id) {
