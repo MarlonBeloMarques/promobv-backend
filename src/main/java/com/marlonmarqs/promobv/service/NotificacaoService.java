@@ -99,7 +99,7 @@ public class NotificacaoService {
 		return new Notificacao(null, objDto.getData(), objDto.getHora(), promo.get(), user.get(), TipoNotificacao.toEnum(objDto.getTipo()));
 	}
 	
-	public List<String> disableCheckDenuncia(Integer idUser) {
+	public List<String> disableCheckDenuncia(Integer idUser) throws BusinessRuleException {
 		String msg = "A promoção foi desativada para análise: ";
 		
 		List<Promocao> objs = promocaoService.findAllUser();
@@ -112,7 +112,11 @@ public class NotificacaoService {
 			}
 		}
 		
-		return messages.isEmpty() ? Arrays.asList("Não há promoções denunciadas") : messages;
+		if(messages.size() == 0) {
+			throw new BusinessRuleException("Não há promoções denunciadas");
+		}
+		
+		return messages;
 	}
 	
 	public List<String> disableCheckDenuncia() {
