@@ -178,6 +178,17 @@ public class Promocao implements Serializable {
 		
 		return objs;
 	}
+	
+	public List<Notificacao> getDenuncias() {
+		List<Notificacao> objs = new ArrayList<Notificacao>();
+		for (Notificacao notificacao : notificacoes) {
+			if(notificacao.getTipo() == 2) {
+				objs.add(notificacao);
+			}
+		}
+		
+		return objs;
+	}
 
 	public void setNotificacoes(List<Notificacao> notificacoes) {
 		this.notificacoes = notificacoes;
