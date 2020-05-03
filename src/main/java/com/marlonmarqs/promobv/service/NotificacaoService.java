@@ -20,8 +20,6 @@ import com.marlonmarqs.promobv.domain.enums.TipoNotificacao;
 import com.marlonmarqs.promobv.dto.NotificacaoDTO;
 import com.marlonmarqs.promobv.dto.NotificacaoNewDTO;
 import com.marlonmarqs.promobv.repository.NotificacaoRepository;
-import com.marlonmarqs.promobv.repository.PromocaoRepository;
-import com.marlonmarqs.promobv.repository.UsuarioRepository;
 import com.marlonmarqs.promobv.service.exceptions.BusinessRuleException;
 import com.marlonmarqs.promobv.service.exceptions.ObjectNotFoundException;
 
