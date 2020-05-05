@@ -28,6 +28,7 @@ public class Promocao implements Serializable {
 	private String localizacao;
 	private String endereco;
 	private String titulo;
+	private String numeroContato;
 	private boolean publicada;
 	
 	@ManyToOne
@@ -78,7 +79,7 @@ public class Promocao implements Serializable {
 
 	}
 	
-	public Promocao(Integer id, String descricao, Double preco, String localizacao, String endereco, String titulo, Categoria categoria, Usuario usuario) {
+	public Promocao(Integer id, String descricao, Double preco, String localizacao, String endereco, String titulo, String numeroContato, Categoria categoria, Usuario usuario) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -88,6 +89,7 @@ public class Promocao implements Serializable {
 		this.categoria = categoria;
 		this.usuario = usuario;
 		this.endereco = endereco;
+		this.numeroContato = numeroContato;
 		setPublicada(true);
 
 	}
@@ -208,6 +210,14 @@ public class Promocao implements Serializable {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getNumeroContato() {
+		return numeroContato;
+	}
+
+	public void setNumeroContato(String numeroContato) {
+		this.numeroContato = numeroContato;
 	}
 
 	@Override

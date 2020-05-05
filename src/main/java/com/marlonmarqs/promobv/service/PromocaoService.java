@@ -109,7 +109,7 @@ public class PromocaoService {
 		Optional<Categoria> cat = categoriaService.find(objDto.getIdCategoria());
 
 		Promocao obj = new Promocao(null, objDto.getDescricao(), objDto.getPreco(), objDto.getLocalizacao(), objDto.getEndereco(),
-				objDto.getTitulo(), cat.get(), usuario.get());
+				objDto.getTitulo(), objDto.getNumeroContato(), cat.get(), usuario.get());
 
 		return obj;
 	}
@@ -123,6 +123,7 @@ public class PromocaoService {
 		obj.setLocalizacao(objDto.getLocalizacao());
 		obj.setEndereco(objDto.getEndereco());
 		obj.setTitulo(objDto.getTitulo());
+		obj.setNumeroContato(objDto.getNumeroContato());
 		
 		if(objDto.getIdCategoria() != null) {
 			Optional<Categoria> cat = categoriaService.find(objDto.getIdCategoria());
@@ -145,6 +146,8 @@ public class PromocaoService {
 			newObj.get().setLocalizacao(obj.getLocalizacao());
 		if (obj.getPreco() != null)
 			newObj.get().setPreco(obj.getPreco());
+		if (obj.getNumeroContato() != null)
+			newObj.get().setNumeroContato(obj.getNumeroContato());
 		
 		if(obj.getCategoria() != null) {
 			newObj.get().setCategoria(obj.getCategoria());		

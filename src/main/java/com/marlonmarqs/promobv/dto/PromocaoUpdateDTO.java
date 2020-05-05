@@ -13,6 +13,7 @@ public class PromocaoUpdateDTO implements Serializable{
 	private String localizacao;
 	private String endereco;
 	private String titulo;
+	private String numeroContato;
 	
 	private Integer idCategoria;
 	
@@ -27,6 +28,7 @@ public class PromocaoUpdateDTO implements Serializable{
 		localizacao = obj.getLocalizacao();
 		endereco = obj.getEndereco();
 		titulo = obj.getTitulo();
+		numeroContato = obj.getNumeroContato();
 		idCategoria = obj.getCategoria().getId();
 	}
 
@@ -84,6 +86,14 @@ public class PromocaoUpdateDTO implements Serializable{
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getNumeroContato() {
+		return numeroContato;
+	}
+
+	public void setNumeroContato(String numeroContato) {
+		this.numeroContato = numeroContato;
 	}
 
 }
