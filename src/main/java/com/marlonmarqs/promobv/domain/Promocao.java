@@ -40,7 +40,7 @@ public class Promocao implements Serializable {
 	
 	//@JsonIgnore
 	@JsonManagedReference // anotação para os primeiros objetos instanciados
-	@OneToMany(mappedBy="promocao")
+	@OneToMany(mappedBy="promocao", cascade={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
 	private List<Notificacao> notificacoes = new ArrayList<>();
 	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="promocao") // necessario, pois da erro de identidade transiente quando vai salvar uma promocao e a galeria
