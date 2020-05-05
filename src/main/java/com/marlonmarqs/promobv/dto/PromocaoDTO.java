@@ -19,6 +19,7 @@ public class PromocaoDTO implements Serializable{
 	private String localizacao;
 	private String endereco;
 	private String titulo;
+	private String numeroContato;
 	
 	private Integer idUsuario;
 	private String apelidoUsuario;
@@ -45,6 +46,7 @@ public class PromocaoDTO implements Serializable{
 		localizacao = obj.getLocalizacao();
 		endereco = obj.getEndereco();
 		titulo = obj.getTitulo();
+		numeroContato = obj.getNumeroContato();
 		idUsuario = obj.getUsuario().getId();
 		apelidoUsuario = obj.getUsuario().getApelido(); 
 		emailUsuario = obj.getUsuario().getEmail();
@@ -174,6 +176,14 @@ public class PromocaoDTO implements Serializable{
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public String getNumeroContato() {
+		return numeroContato;
+	}
+
+	public void setNumeroContato(String numeroContato) {
+		this.numeroContato = numeroContato;
 	}
 
 }

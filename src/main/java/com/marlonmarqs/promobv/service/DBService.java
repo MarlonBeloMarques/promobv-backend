@@ -72,20 +72,20 @@ public class DBService {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss");
 		
-		Promocao promo1 = new Promocao(null, "Aulas de espanhol com material didatico", 50.00, "Rua XXX", "N 453", "Aulas de Espanhol", cat18, user1);
-		Promocao promo2 = new Promocao(null, "Aulas de ingles com material didatico", 50.00, "Rua YYY", "N 453", "Aulas de Ingles", cat18, user1);
-		Promocao promo3 = new Promocao(null, "Aulas de japones com material didatico", 60.00, "Rua ZZZ", "N 453", "Aulas de Japones", cat18, user2);
-		Promocao promo4 = new Promocao(null, "Roupas esportivas", 60.00, "Rua ZZZ", "N 453", "Roupas", cat5, user2);
-		Promocao promo5 = new Promocao(null, "Aulas de Música com violino e violão", 80.00, "Rua TV", "N 43", "Aulas de Música", cat18, user3);
-		Promocao promo6 = new Promocao(null, "Cadeiras de couro para estudo.", 100.00, "Rua ZZZ", "N 34", "Cadeiras", cat6, user2);
-		Promocao promo7 = new Promocao(null, "Diarista, faz comida, lava casa, rouppa.", 120.00, "Rua ZZZ", "N 43", "Diarista", cat18, user2);
-		Promocao promo8 = new Promocao(null, "Taxista particular diario", 80.00, "Rua ZZZ", "N 453", "Taxista", cat16, user1);
-		Promocao promo9 = new Promocao(null, "Cachorro pitbull filhote castrado", 150.00, "Rua ZZZ", "N 43", "Filhotes de Pitbull", cat8, user1);
-		Promocao promo10 = new Promocao(null, "Roupas esportivas para correr e caminhar", 40.00, "Rua ZZZ", "N 45", "Roupas esportivas", cat5, user1);
-		Promocao promo11 = new Promocao(null, "Serviços de manutenção a centrais de ar.", 200.00, "Rua TV T 10", "N 553", "Manutenção a centrais de ar", cat17, user1);
-		Promocao promo12 = new Promocao(null, "Notebook dell com memória ram ddr3 8 GB, HD de 500 GB.", 500.00, "Rua Tim Maia", "N 431", "Notebook DELL", cat2, user2);
-		Promocao promo13 = new Promocao(null, "Roupas Infantis de 8 a 10 anos de idade.", 60.00, "Rua ZZZ", "N 413", "Roupas Infantis", cat7, user1);
-		Promocao promo14 = new Promocao(null, "Limpeza de Banheiros", 60.00, "Rua ZZZ", "N 453", "Limpeza de Banheiros", cat12, user1);
+		Promocao promo1 = new Promocao(null, "Aulas de espanhol com material didatico", 50.00, "Rua XXX", "N 453", "Aulas de Espanhol", "95984041795", cat18, user1);
+		Promocao promo2 = new Promocao(null, "Aulas de ingles com material didatico", 50.00, "Rua YYY", "N 453", "Aulas de Ingles", "95984041795", cat18, user1);
+		Promocao promo3 = new Promocao(null, "Aulas de japones com material didatico", 60.00, "Rua ZZZ", "N 453", "Aulas de Japones", "95984041795", cat18, user2);
+		Promocao promo4 = new Promocao(null, "Roupas esportivas", 60.00, "Rua ZZZ", "N 453", "Roupas", "95984041795", cat5, user2);
+		Promocao promo5 = new Promocao(null, "Aulas de Música com violino e violão", 80.00, "Rua TV", "N 43", "Aulas de Música", "95984041795", cat18, user3);
+		Promocao promo6 = new Promocao(null, "Cadeiras de couro para estudo.", 100.00, "Rua ZZZ", "N 34", "Cadeiras", "95984041795", cat6, user2);
+		Promocao promo7 = new Promocao(null, "Diarista, faz comida, lava casa, rouppa.", 120.00, "Rua ZZZ", "N 43", "Diarista", "95984041795", cat18, user2);
+		Promocao promo8 = new Promocao(null, "Taxista particular diario", 80.00, "Rua ZZZ", "N 453", "Taxista", "95984041795", cat16, user1);
+		Promocao promo9 = new Promocao(null, "Cachorro pitbull filhote castrado", 150.00, "Rua ZZZ", "N 43", "Filhotes de Pitbull", "95984041795", cat8, user1);
+		Promocao promo10 = new Promocao(null, "Roupas esportivas para correr e caminhar", 40.00, "Rua ZZZ", "N 45", "Roupas esportivas", "95984041795", cat5, user1);
+		Promocao promo11 = new Promocao(null, "Serviços de manutenção a centrais de ar.", 200.00, "Rua TV T 10", "N 553", "Manutenção a centrais de ar", "95984041795", cat17, user1);
+		Promocao promo12 = new Promocao(null, "Notebook dell com memória ram ddr3 8 GB, HD de 500 GB.", 500.00, "Rua Tim Maia", "N 431", "Notebook DELL", "95984041795", cat2, user2);
+		Promocao promo13 = new Promocao(null, "Roupas Infantis de 8 a 10 anos de idade.", 60.00, "Rua ZZZ", "N 413", "Roupas Infantis", "95984041795", cat7, user1);
+		Promocao promo14 = new Promocao(null, "Limpeza de Banheiros", 60.00, "Rua ZZZ", "N 453", "Limpeza de Banheiros", "95984041795", cat12, user1);
 		
 		GaleriaDeImagens glr1 = new GaleriaDeImagens();
 		glr1.setPromocao(promo1);
