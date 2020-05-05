@@ -2,18 +2,26 @@ package com.marlonmarqs.promobv.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.marlonmarqs.promobv.domain.Promocao;
 
 public class PromocaoNewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String descricao;
+	@NotEmpty(message="Preenchimento obrigatório")
 	private Double preco;
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String localizacao;
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String endereco;
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String titulo;
-	
+	private String numeroContato;
+	@NotEmpty(message="Preenchimento obrigatório")
 	private Integer idCategoria;
 	
 	public PromocaoNewDTO() {
@@ -27,6 +35,7 @@ public class PromocaoNewDTO implements Serializable{
 		localizacao = obj.getLocalizacao();
 		endereco = obj.getEndereco();
 		titulo = obj.getTitulo();
+		numeroContato = obj.getNumeroContato();
 		idCategoria = obj.getCategoria().getId();
 	}
 
@@ -84,6 +93,14 @@ public class PromocaoNewDTO implements Serializable{
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getNumeroContato() {
+		return numeroContato;
+	}
+
+	public void setNumeroContato(String numeroContato) {
+		this.numeroContato = numeroContato;
 	}
 
 }
