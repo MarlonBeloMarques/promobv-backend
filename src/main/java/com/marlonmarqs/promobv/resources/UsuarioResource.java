@@ -3,11 +3,13 @@ package com.marlonmarqs.promobv.resources;
 import java.net.URI;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,9 +44,9 @@ public class UsuarioResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST) 
-	public ResponseEntity<Void> insert(@Valid @RequestBody UsuarioNewDTO objDto) {	
+	public ResponseEntity<Void> insert(@Valid @RequestBody UsuarioNewDTO objDto, HttpServletRequest request, Errors errors) {	
 		Usuario obj = service.fromDTO(objDto);
-		obj = service.insert(obj);
+		obj = service.insert(obj, request, errors);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri(); // enumerar de forma crescente o id do uri
 		return ResponseEntity.created(uri).build(); 
@@ -69,5 +71,11 @@ public class UsuarioResource {
 	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name="file") MultipartFile file){ // @RequestParam(name="file") = reconhcer que chegou uma requisição do http 
 		URI uri = service.uploadProfilePicture(file);
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/regitrationConfirm", method=RequestMethod.GET)
+	public ResponseEntity<String> registrationConfirm(@RequestParam(value="token") String token){ // recebe um valor que é o email
+		String msg = service.regitrationConfirm(token); // chama o serviço e retorna o obj
+		return ResponseEntity.ok().body(msg); // na requisicao
 	}
 }

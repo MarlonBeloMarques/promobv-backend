@@ -13,6 +13,7 @@ import com.marlonmarqs.promobv.domain.GaleriaDeImagens;
 import com.marlonmarqs.promobv.domain.Notificacao;
 import com.marlonmarqs.promobv.domain.Promocao;
 import com.marlonmarqs.promobv.domain.Usuario;
+import com.marlonmarqs.promobv.domain.VerificaToken;
 import com.marlonmarqs.promobv.domain.enums.TipoNotificacao;
 import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
 import com.marlonmarqs.promobv.repository.CategoriaRepository;
@@ -20,6 +21,7 @@ import com.marlonmarqs.promobv.repository.GaleriaDeImagensRepository;
 import com.marlonmarqs.promobv.repository.NotificacaoRepository;
 import com.marlonmarqs.promobv.repository.PromocaoRepository;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
+import com.marlonmarqs.promobv.repository.VerificaTokenRepository;
 
 @Service
 public class DBService {
@@ -32,6 +34,9 @@ public class DBService {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private VerificaTokenRepository tokenRepository;
 	
 	@Autowired
 	private NotificacaoRepository notificacaoRepository;
@@ -65,9 +70,16 @@ public class DBService {
 		
 		Usuario user1 = new Usuario(1, "Marlon", "marlonmarqsbr@gmail.com", pe.encode("123"));
 		user1.addPerfil(TipoPerfil.ADMIN);
+		user1.setAtivado(true);
 		Usuario user2 = new Usuario(2, "Matheus", "matheus.belo@gmail.com", pe.encode("123"));
+		user2.setAtivado(true);
 		Usuario user3 = new Usuario(3, "Larissa", "larissa.pantoja@gmail.com", pe.encode("123"));
 		user1.addPerfil(TipoPerfil.ADMIN);
+		user3.setAtivado(true);
+		
+		VerificaToken token1 = new VerificaToken("123456", user1);
+		VerificaToken token2 = new VerificaToken("123457", user2);
+		VerificaToken token3 = new VerificaToken("123458", user3);
 		
 		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss");
@@ -193,7 +205,7 @@ public class DBService {
 		cat12.setPromocoes(Arrays.asList(promo14));
 		
 		usuarioRepository.saveAll(Arrays.asList(user1, user2, user3));
-		
+		tokenRepository.saveAll(Arrays.asList(token1, token2, token3));
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8, cat9, cat10, cat11, cat12, cat13, cat14, cat15, cat16, cat17, cat18));
 		promocaoRepository.saveAll(Arrays.asList(promo1, promo2, promo3, promo4, promo5, promo6, promo7, promo8, promo9, promo10, promo11, promo12, promo13, promo14));
 		glrRepository.saveAll(Arrays.asList(glr1, glr2, glr3, glr4, glr5, glr6, glr7, glr8, glr9, glr10, glr11, glr12, glr13, glr14));
