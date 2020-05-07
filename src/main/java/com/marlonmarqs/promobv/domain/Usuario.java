@@ -45,7 +45,8 @@ public class Usuario implements Serializable {
 	@JsonIgnore
 	private String senha;
 		
-	private Boolean emailValidado;
+	@Column(name = "ativado")
+	private Boolean ativado;
 	
 	@ElementCollection(fetch=FetchType.EAGER) //ao ser buscado o usuario, vem junto os perfis
 	@CollectionTable(name="PERFIS")
@@ -62,7 +63,7 @@ public class Usuario implements Serializable {
 	public Usuario() {
 		//todo perfil por padrão usuario
 		addPerfil(TipoPerfil.CLIENTE);
-		emailValidado = false;
+		ativado = false;
 	}
 
 	public Usuario(Integer id, String nome, String apelido, Date dataDeNascimento, String telefone, String email, String senha, String cpf) {
@@ -107,6 +108,7 @@ public class Usuario implements Serializable {
 		this.apelido = apelido;
 		this.email = email;
 		this.senha = senha;
+		setAtivado(false);
 		addPerfil(TipoPerfil.CLIENTE);
 	}
 
@@ -174,12 +176,12 @@ public class Usuario implements Serializable {
 		this.notificacoes = notificacoes;
 	}
 
-	public Boolean getEmailValidado() {
-		return emailValidado;
+	public Boolean getAtivado() {
+		return ativado;
 	}
 
-	public void setEmailValidado(Boolean emailValidado) {
-		this.emailValidado = emailValidado;
+	public void setAtivado(Boolean ativado) {
+		this.ativado = ativado;
 	}
 
 	public String getSenha() {
