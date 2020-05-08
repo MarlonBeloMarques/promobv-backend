@@ -14,6 +14,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import com.marlonmarqs.promobv.domain.Categoria;
 import com.marlonmarqs.promobv.domain.GaleriaDeImagens;
@@ -62,6 +65,10 @@ public class PromocaoService {
 	
 	@Value("${img.profile.size}")
 	private Integer size;
+	
+	//html
+	@Autowired
+	private TemplateEngine templateEngine;
 
 	public Optional<Promocao> find(Integer id) {
 		Optional<Promocao> obj = repo.findById(id);
@@ -237,5 +244,12 @@ public class PromocaoService {
 		
 		throw new BusinessRuleException("A galeria so permite no máximo 6 imagens");
 		
+	}
+	
+	public ModelAndView redirectDetails(String id) {
+		String appUrl = "promobv://details/" + id;
+		ModelAndView modelAndView = new ModelAndView("redirectDetails");
+		modelAndView.addObject("appUrl", appUrl);
+		return modelAndView;
 	}
 }
