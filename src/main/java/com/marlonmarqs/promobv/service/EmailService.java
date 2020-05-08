@@ -14,7 +14,10 @@ public interface EmailService {
 	
 	//HTML
 	
-	void sendNewPasswordEmailHtml(Usuario usuario, String newPass);
+	void sendNewPasswordEmailHtml(Usuario usuario, String link);
 
 	void sendHtmlEmail(MimeMessage msg);
+	
+	void sendRegistrationEmailHtml(Usuario usuario, String link);
+
 }
