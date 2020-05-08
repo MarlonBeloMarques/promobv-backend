@@ -31,15 +31,12 @@ public class AuthService {
 	private BCryptPasswordEncoder pe;
 	
 	@Autowired
-	private EmailService emailService;
-	
-	@Autowired
 	ApplicationEventPublisher eventPublisher;
 	
 	private Random rand = new Random();
 	
 	// verifica se o email existe
-	public void sendNewPassword(String email) {
+	/*public void sendNewPassword(String email) {
 		
 		//pega a pessoa com o email
 		Usuario usuario = repo.findByEmail(email);
@@ -54,7 +51,7 @@ public class AuthService {
 		repo.save(usuario);
 		//emailService.sendNewPasswordEmail(usuario, newPass);
 		emailService.sendNewPasswordEmailHtml(usuario, newPass);
-	}
+	}*/
 	
 	// gerar senha aleatoria
 	private String newPassword() {

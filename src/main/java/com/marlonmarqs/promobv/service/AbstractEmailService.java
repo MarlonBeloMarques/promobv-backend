@@ -47,33 +47,64 @@ public abstract class AbstractEmailService implements EmailService {
 	}
 	
 	//HTML
-	protected String htmlFromTemplateNewSenha(String newPass) {
+	protected String htmlFromTemplateNewSenha(String link) {
 		Context context = new Context(); // acessar o timeleaf
-		context.setVariable("newPass", newPass); // apelido e referencia obj nova senha
+		context.setVariable("link", link);
 		return templateEngine.process("email/novaSenha", context); // pega o html
+	}
+	
+	protected String htmlFromTemplateRegistration(String link) {
+		Context context = new Context(); // acessar o timeleaf
+		context.setVariable("link", link); // apelido e referencia obj nova senha
+		return templateEngine.process("email/registration", context); // pega o html
 	}
 
 	@Override
-	public void sendNewPasswordEmailHtml(Usuario u, String newPass) {
+	public void sendNewPasswordEmailHtml(Usuario u, String link) {
 		try {
 			//tenta enviar a nova senha
-			MimeMessage mm = prepareMimelMessagenewPassword(u, newPass);
+			MimeMessage mm = prepareMimelMessagenewPassword(u, link);
 				sendHtmlEmail(mm);
 			}
 			catch(MessagingException e){
 				//envia modo sem html
-				sendNewPasswordEmail(u, newPass);
+				//sendNewPasswordEmail(u, newPass);
 			}
 	}
 
-	protected MimeMessage prepareMimelMessagenewPassword(Usuario usuario, String newPass) throws MessagingException {
+	protected MimeMessage prepareMimelMessagenewPassword(Usuario usuario, String link) throws MessagingException {
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage(); //cria mensagem
 		MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true);//instancia
 		mmh.setTo(usuario.getEmail()); // destinatario
 		mmh.setFrom(sender); // remetente
 		mmh.setSubject("Solicitação de nova senha"); // titulo
 		mmh.setSentDate(new Date(System.currentTimeMillis())); //temppo
-		mmh.setText(htmlFromTemplateNewSenha(newPass), true);// conteudo
+		mmh.setText(htmlFromTemplateNewSenha(link), true);// conteudo
 		return mimeMessage;
 	}
+	
+	protected MimeMessage prepareMimelMessagenRegistration(Usuario usuario, String link) throws MessagingException {
+		MimeMessage mimeMessage = javaMailSender.createMimeMessage(); //cria mensagem
+		MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true);//instancia
+		mmh.setTo(usuario.getEmail()); // destinatario
+		mmh.setFrom(sender); // remetente
+		mmh.setSubject("Concluir cadastro no PromoBV"); // titulo
+		mmh.setSentDate(new Date(System.currentTimeMillis())); //temppo
+		mmh.setText(htmlFromTemplateRegistration(link), true);// conteudo
+		return mimeMessage;
+	}
+	
+	@Override
+	public void sendRegistrationEmailHtml(Usuario u, String link) {
+		try {
+			//tenta enviar a nova senha
+			MimeMessage mm = prepareMimelMessagenRegistration(u, link);
+				sendHtmlEmail(mm);
+			}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+			
+	}
+		
 }
