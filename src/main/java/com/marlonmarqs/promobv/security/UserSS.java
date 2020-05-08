@@ -16,17 +16,19 @@ public class UserSS implements UserDetails {
 	private Integer id;
 	private String email;
 	private String senha;
+	private Boolean ativado;
 	private Collection<? extends GrantedAuthority> authorities;
 
 	public UserSS() {
 
 	}
 
-	public UserSS(Integer id, String email, String senha, Set<TipoPerfil> perfis) {
+	public UserSS(Integer id, String email, String senha, Boolean ativado, Set<TipoPerfil> perfis) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.senha = senha;
+		this.ativado = ativado;
 		this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
 	}
 
@@ -34,6 +36,10 @@ public class UserSS implements UserDetails {
 
 	public Integer getId() {
 		return id;
+	}
+	
+	public Boolean getAtivado() {
+		return ativado;
 	}
 
 	@Override

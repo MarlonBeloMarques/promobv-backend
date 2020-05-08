@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.marlonmarqs.promobv.domain.Promocao;
@@ -105,5 +106,13 @@ public class PromocaoResource {
 	public ResponseEntity<Void> uploadProfilePicture(@PathVariable Integer id, @RequestParam(name="file") MultipartFile file){ // @RequestParam(name="file") = reconhcer que chegou uma requisição do http 
 		URI uri = service.uploadPromotionPhotos(file, id);
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/redirect-details", method=RequestMethod.GET)
+	public ModelAndView redirectDetails(@RequestParam(value="id") String id) {
+		String appUrl = "promobv://details/" + id;
+		ModelAndView modelAndView = new ModelAndView("redirectDetails");
+		modelAndView.addObject("appUrl", appUrl);
+		return modelAndView;
 	}
 }

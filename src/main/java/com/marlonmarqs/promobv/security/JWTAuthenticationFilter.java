@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marlonmarqs.promobv.dto.CredenciaisDTO;
+import com.marlonmarqs.promobv.service.exceptions.BusinessRuleException;
 
 //filtro de autenticação extendendo especifico para login
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -59,8 +61,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	protected void successfulAuthentication(HttpServletRequest req,
 											HttpServletResponse res,
 											FilterChain chain,
-											Authentication auth) throws IOException, ServletException{
+											Authentication auth) throws IOException, ServletException, BusinessRuleException{
 
+		Boolean ativado = ((UserSS) auth.getPrincipal()).getAtivado();
+		
+		if(!ativado) {
+			throw new IOException("Seu email não está ativado.");
+		}
+			
 		//gerar um token e acresentar na resposta da requisição
 		                                //getprincipal retorna o usuario do spring security, fazendo um casting com o UserSS, pega o email e armazena em username
 		String username = ((UserSS) auth.getPrincipal()).getUsername();

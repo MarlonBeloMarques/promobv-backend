@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:remove="all">Redirect Details</title>
+<meta http-equiv="Refresh" th:content="|0; url=${appUrl}|" />
+</head>
+<body>
+	<div>
+		<h2>
+			<a th:href="@{${appUrl}}">Abrir promoção</a> 
+		</h2>
+		<button
+    		th:data-url="@{${appUrl}}"
+    		onclick="window.open(this.getAttribute('data-url'))">Abrir promoção
+    	</button>
+	</div>
+</body>
+</html> 
