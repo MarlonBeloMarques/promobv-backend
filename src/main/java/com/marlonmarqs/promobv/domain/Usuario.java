@@ -44,6 +44,8 @@ public class Usuario implements Serializable {
 	
 	@JsonIgnore
 	private String senha;
+	@JsonIgnore
+	private String senhaSecundaria;
 		
 	@Column(name = "ativado")
 	private Boolean ativado;
@@ -192,6 +194,14 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 	
+	public String getSenhaSecundaria() {
+		return senhaSecundaria;
+	}
+
+	public void setSenhaSecundaria(String senhaSecundaria) {
+		this.senhaSecundaria = senhaSecundaria;
+	}
+
 	public Set<TipoPerfil> getPerfis(){ // retorna os perfis do cliente
 		return perfis.stream().map(x -> TipoPerfil.toEnum(x)).collect(Collectors.toSet());
 	}

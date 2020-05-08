@@ -21,7 +21,7 @@ import com.marlonmarqs.promobv.domain.VerificaToken;
 import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
 import com.marlonmarqs.promobv.dto.UsuarioNewDTO;
 import com.marlonmarqs.promobv.dto.UsuarioUpdateDTO;
-import com.marlonmarqs.promobv.registration.OnRegistrationCompleteEvent;
+import com.marlonmarqs.promobv.event.OnRegistrationCompleteEvent;
 import com.marlonmarqs.promobv.repository.UsuarioRepository;
 import com.marlonmarqs.promobv.repository.VerificaTokenRepository;
 import com.marlonmarqs.promobv.security.UserSS;
