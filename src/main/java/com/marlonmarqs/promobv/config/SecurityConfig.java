@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				"/categorias/**",
 				"/usuarios/**",
 				"/auth/updatePassword",
-				"/check_email"
+				"/auth/check_email"
 		};
 		
 		private static final String[] PUBLIC_MATCHERS_POST = {
