@@ -3,6 +3,7 @@ package com.marlonmarqs.promobv.dto;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.marlonmarqs.promobv.domain.Promocao;
 
@@ -12,7 +13,7 @@ public class PromocaoNewDTO implements Serializable{
 	private Integer id;
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String descricao;
-	@NotEmpty(message="Preenchimento obrigatório")
+	@NotNull(message="Preenchimento obrigatório")
 	private Double preco;
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String localizacao;
@@ -21,7 +22,7 @@ public class PromocaoNewDTO implements Serializable{
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String titulo;
 	private String numeroContato;
-	@NotEmpty(message="Preenchimento obrigatório")
+	@NotNull(message="Preenchimento obrigatório")
 	private Integer idCategoria;
 	
 	public PromocaoNewDTO() {
