@@ -110,7 +110,7 @@ public class PromocaoResource {
 	
 	@RequestMapping(value="/redirect-details", method=RequestMethod.GET)
 	public ModelAndView redirectDetails(@RequestParam(value="id") String id) {
-		String appUrl = "promobv://details/" + id;
+		String appUrl = "promobv:///details/" + id;
 		ModelAndView modelAndView = new ModelAndView("redirectDetails");
 		modelAndView.addObject("appUrl", appUrl);
 		return modelAndView;
