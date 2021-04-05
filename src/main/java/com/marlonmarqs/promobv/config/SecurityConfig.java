@@ -2,8 +2,11 @@ package com.marlonmarqs.promobv.config;
 
 import java.util.Arrays;
 
+import com.marlonmarqs.promobv.security.OAuth2Util;
 import com.marlonmarqs.promobv.security.oauth2.CustomOAuth2UserService;
 import com.marlonmarqs.promobv.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.marlonmarqs.promobv.security.oauth2.OAuth2AuthenticationFailureHandler;
+import com.marlonmarqs.promobv.security.oauth2.OAuth2AuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,11 +45,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private JWTUtil jwtUtil;
+
+	@Autowired
+	private OAuth2Util oAuth2Util;
 	
 	// liberado
 		private static final String[] PUBLIC_MATCHERS = {
 				"/h2-console/**",
-				"/oauth2/**"
+				"/oauth2/**",
 		};
 
 		// liberado, so vai poder recuperar os dados
@@ -83,6 +89,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 			http.cors().and().csrf().disable(); // ativando o cors e desativando o csrf
 			http.authorizeRequests()
+			.antMatchers("/",
+				"/error",
+				"/favicon.ico",
+				"/**/*.png",
+				"/**/*.gif",
+				"/**/*.svg",
+				"/**/*.jpg",
+				"/**/*.html",
+				"/**/*.css",
+				"/**/*.js")
+			.permitAll()
 			.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
 			.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll() // meotodo so para pegar dados, não permitindo alterar
 			.antMatchers(PUBLIC_MATCHERS).permitAll() // toda autenticação feita em public_matchers é permitida
@@ -97,7 +114,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.baseUri("/oauth2/callback/*")
 			.and()
 			.userInfoEndpoint()
-			.userService(customOAuth2UserService);
+			.userService(customOAuth2UserService)
+			.and()
+			.successHandler(new OAuth2AuthenticationSuccessHandler(cookieAuthorizationRequestRepository(), oAuth2Util, jwtUtil))
+			.failureHandler(new OAuth2AuthenticationFailureHandler(cookieAuthorizationRequestRepository()));
 
 			//registrando o filtro                                            
 			http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil)); // authenticationManager ja é um metodo disponivel da classe
