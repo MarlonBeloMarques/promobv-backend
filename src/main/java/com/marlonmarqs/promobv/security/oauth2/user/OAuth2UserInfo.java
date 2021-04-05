@@ -1,4 +1,4 @@
-package com.marlonmarqs.promobv.security.oauth2;
+package com.marlonmarqs.promobv.security.oauth2.user;
 
 import java.util.Map;
 

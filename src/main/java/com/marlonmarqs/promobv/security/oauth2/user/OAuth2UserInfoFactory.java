@@ -1,4 +1,4 @@
-package com.marlonmarqs.promobv.security.oauth2;
+package com.marlonmarqs.promobv.security.oauth2.user;
 
 import com.marlonmarqs.promobv.domain.enums.AuthProvider;
 import com.marlonmarqs.promobv.security.exceptions.OAuth2AuthenticationProcessingException;

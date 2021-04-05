@@ -2,6 +2,8 @@ package com.marlonmarqs.promobv.config;
 
 import java.util.Arrays;
 
+import com.marlonmarqs.promobv.security.oauth2.CustomOAuth2UserService;
+import com.marlonmarqs.promobv.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,13 +36,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// instancia
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
+
+	@Autowired
+	private CustomOAuth2UserService customOAuth2UserService;
+
 	@Autowired
 	private JWTUtil jwtUtil;
 	
 	// liberado
 		private static final String[] PUBLIC_MATCHERS = {
-				"/h2-console/**"
+				"/h2-console/**",
+				"/oauth2/**"
 		};
 
 		// liberado, so vai poder recuperar os dados
@@ -58,6 +64,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				"/usuarios/picture"
 		};
 
+	/*
+ 	Por padrão, o Spring OAuth2 usa HttpSessionOAuth2AuthorizationRequestRepository para salvar
+  	o pedido de autorização. Mas, como nosso serviço é apátrida, não podemos salvá-lo na
+  	sessão. Em vez disso, salvaremos a solicitação em um cookie codificado em Base64.
+	*/
+	@Bean
+	public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
+		return new HttpCookieOAuth2AuthorizationRequestRepository();
+	}
+
 		@Override                //do framework
 		protected void configure(HttpSecurity http) throws Exception{
 
@@ -70,7 +86,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
 			.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll() // meotodo so para pegar dados, não permitindo alterar
 			.antMatchers(PUBLIC_MATCHERS).permitAll() // toda autenticação feita em public_matchers é permitida
-			.anyRequest().authenticated(); // para todo o resto, se exige autenticação
+			.anyRequest().authenticated() // para todo o resto, se exige autenticação
+			.and()
+			.oauth2Login()
+			.authorizationEndpoint()
+			.baseUri("/oauth2/authorize")
+			.authorizationRequestRepository(cookieAuthorizationRequestRepository())
+			.and()
+			.redirectionEndpoint()
+			.baseUri("/oauth2/callback/*")
+			.and()
+			.userInfoEndpoint()
+			.userService(customOAuth2UserService);
+
 			//registrando o filtro                                            
 			http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil)); // authenticationManager ja é um metodo disponivel da classe
 			http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
