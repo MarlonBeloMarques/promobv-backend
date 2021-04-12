@@ -8,19 +8,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.marlonmarqs.promobv.domain.enums.AuthProvider;
 import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
+import com.sun.istack.NotNull;
 
 @Entity
 public class Usuario implements Serializable {
@@ -61,6 +55,12 @@ public class Usuario implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy="usuario")
 	private List<Notificacao> notificacoes = new ArrayList<>();
+
+	@NotNull
+	@Enumerated(javax.persistence.EnumType.STRING)
+	private AuthProvider provider;
+
+	private String providerId;
 	
 	public Usuario() {
 		//todo perfil por padrão usuario
@@ -224,6 +224,22 @@ public class Usuario implements Serializable {
 
 	public void setUrlProfile(String urlProfile) {
 		this.urlProfile = urlProfile;
+	}
+
+	public AuthProvider getProvider() {
+		return provider;
+	}
+
+	public void setProvider(AuthProvider provider) {
+		this.provider = provider;
+	}
+
+	public String getProviderId() {
+		return providerId;
+	}
+
+	public void setProviderId(String providerId) {
+		this.providerId = providerId;
 	}
 
 	@Override
