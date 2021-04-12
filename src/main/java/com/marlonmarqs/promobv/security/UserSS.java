@@ -1,16 +1,17 @@
 package com.marlonmarqs.promobv.security;
 
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import com.marlonmarqs.promobv.domain.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.marlonmarqs.promobv.domain.enums.TipoPerfil;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
-public class UserSS implements UserDetails {
+public class UserSS implements UserDetails, OAuth2User {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
@@ -18,6 +19,7 @@ public class UserSS implements UserDetails {
 	private String senha;
 	private Boolean ativado;
 	private Collection<? extends GrantedAuthority> authorities;
+	private Map<String, Object> attributes;
 
 	public UserSS() {
 
@@ -32,7 +34,15 @@ public class UserSS implements UserDetails {
 		this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
 	}
 
+	public static UserSS create(Usuario usuario) {
+		return new UserSS(usuario.getId(), usuario.getEmail(), usuario.getSenha(), usuario.getAtivado(), new HashSet<>());
+	}
 
+	public static UserSS create(Usuario usuario, Map<String, Object> attributes) {
+		UserSS userSS = UserSS.create(usuario);
+		userSS.setAttributes(attributes);
+		return userSS;
+	}
 
 	public Integer getId() {
 		return id;
@@ -48,6 +58,15 @@ public class UserSS implements UserDetails {
 	}
 
 	@Override
+	public Map<String, Object> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(Map<String, Object> attributes) {
+		this.attributes = attributes;
+	}
+
+	@Override
 	public String getPassword() {
 		return senha;
 	}
@@ -55,6 +74,11 @@ public class UserSS implements UserDetails {
 	@Override
 	public String getUsername() {
 		return email;
+	}
+
+	@Override
+	public String getName() {
+		return String.valueOf(id);
 	}
 
 	@Override
