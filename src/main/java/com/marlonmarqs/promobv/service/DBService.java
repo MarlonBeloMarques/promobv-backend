@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
+import com.marlonmarqs.promobv.domain.enums.AuthProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -71,12 +72,15 @@ public class DBService {
 		Usuario user1 = new Usuario(1, "Marlon", "marlonmarqsbr@gmail.com", pe.encode("123"));
 		user1.addPerfil(TipoPerfil.ADMIN);
 		user1.setAtivado(true);
+		user1.setProvider(AuthProvider.local);
 		Usuario user2 = new Usuario(2, "Matheus", "matheus.belo@gmail.com", pe.encode("123"));
 		user2.setAtivado(true);
+		user2.setProvider(AuthProvider.local);
 		Usuario user3 = new Usuario(3, "Larissa", "larissa.pantoja@gmail.com", pe.encode("123"));
-		user1.addPerfil(TipoPerfil.ADMIN);
+		user3.addPerfil(TipoPerfil.ADMIN);
 		user3.setAtivado(true);
-		
+		user3.setProvider(AuthProvider.local);
+
 		VerificaToken token1 = new VerificaToken("123456", user1);
 		VerificaToken token2 = new VerificaToken("123457", user2);
 		VerificaToken token3 = new VerificaToken("123458", user3);
