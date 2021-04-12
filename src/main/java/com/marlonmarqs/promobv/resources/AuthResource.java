@@ -39,7 +39,7 @@ public class AuthResource {
 	AuthenticationManager authenticationManager;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<?> authenticateUser(@RequestBody CredenciaisDTO creds, HttpServletResponse res)  throws IOException {
+	public void authenticateUser(@RequestBody CredenciaisDTO creds, HttpServletResponse res)  throws IOException {
 
 		try {
 			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(creds.getEmail(), creds.getSenha(), new ArrayList<>());
@@ -58,8 +58,6 @@ public class AuthResource {
 			res.setContentType("application/json");
 			res.getWriter().append(json());
 		}
-
-		return ResponseEntity.ok().build();
 	}
 	
 	//tem que ta logado para acessar
