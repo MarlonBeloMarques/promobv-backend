@@ -55,7 +55,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             usuario = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
         }
 
-        return (OAuth2User) new UserSS(usuario.getId(), usuario.getEmail(), usuario.getSenha(), usuario.getAtivado(), usuario.getPerfis());
+        return new UserSS(usuario.getId(), usuario.getEmail(), usuario.getSenha(), usuario.getAtivado(), usuario.getPerfis());
     }
 
     private Usuario registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
@@ -64,6 +64,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         usuario.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
         usuario.setProviderId(oAuth2UserInfo.getId());
         usuario.setNome(oAuth2UserInfo.getName());
+        usuario.setAtivado(true);
         usuario.setEmail(oAuth2UserInfo.getEmail());
         usuario.setUrlProfile(oAuth2UserInfo.getImageUrl());
 

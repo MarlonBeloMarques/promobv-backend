@@ -38,7 +38,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 		
 		//verifica se é valido
 		if(header != null && header.startsWith("Bearer")) { // verifica se a estrutura do cabeçalho começa com bearer
-			UsernamePasswordAuthenticationToken auth = getAuthentication(header.substring(6)); // vai converter para tipo security token pegando somente o codigo token
+			UsernamePasswordAuthenticationToken auth = getAuthentication(header.substring(7)); // vai converter para tipo security token pegando somente o codigo token
 			if(auth != null) {
 				SecurityContextHolder.getContext().setAuthentication(auth);
 			}
