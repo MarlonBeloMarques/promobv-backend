@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.marlonmarqs.promobv.dto.CredenciaisDTO;
+import com.marlonmarqs.promobv.service.exceptions.AuthorizationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -46,6 +47,12 @@ public class AuthResource {
 
 			Authentication auth = authenticationManager.authenticate(authToken); // verificar se esses dados são validos
 			SecurityContextHolder.getContext().setAuthentication(auth);
+
+			Boolean ativado = ((UserSS) auth.getPrincipal()).getAtivado();
+
+			if(!ativado) {
+				throw new AuthorizationException("Seu email não está ativado.");
+			}
 
 			String username = ((UserSS) auth.getPrincipal()).getUsername();
 			String token = jwtUtil.generateToken(username);
