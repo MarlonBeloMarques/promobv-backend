@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.marlonmarqs.promobv.service.exceptions.AuthorizationException;
 import org.apache.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -64,9 +65,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 											Authentication auth) throws IOException, ServletException, BusinessRuleException{
 
 		Boolean ativado = ((UserSS) auth.getPrincipal()).getAtivado();
-		
+
 		if(!ativado) {
-			throw new IOException("Seu email não está ativado.");
+			throw new AuthorizationException("Seu email não está ativado.");
 		}
 			
 		//gerar um token e acresentar na resposta da requisição
