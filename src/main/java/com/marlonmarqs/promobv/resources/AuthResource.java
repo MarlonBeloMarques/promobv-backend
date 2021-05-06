@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import com.marlonmarqs.promobv.dto.CredenciaisDTO;
 import com.marlonmarqs.promobv.service.exceptions.AuthorizationException;
+import com.marlonmarqs.promobv.service.exceptions.BusinessRuleException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -51,7 +52,7 @@ public class AuthResource {
 			Boolean ativado = ((UserSS) auth.getPrincipal()).getAtivado();
 
 			if(!ativado) {
-				throw new AuthorizationException("Seu email não está ativado.");
+				throw new BusinessRuleException("Seu email não está ativado.");
 			}
 
 			String username = ((UserSS) auth.getPrincipal()).getUsername();

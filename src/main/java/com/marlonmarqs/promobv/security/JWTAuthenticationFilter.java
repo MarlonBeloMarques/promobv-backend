@@ -67,7 +67,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		Boolean ativado = ((UserSS) auth.getPrincipal()).getAtivado();
 
 		if(!ativado) {
-			throw new AuthorizationException("Seu email não está ativado.");
+			throw new BusinessRuleException("Seu email não está ativado.");
 		}
 			
 		//gerar um token e acresentar na resposta da requisição
