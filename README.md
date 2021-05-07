@@ -1,10 +1,10 @@
 # PromoBV - Back-End
 
-O PromoBV é uma aplicação onde o usuário pode compartilhar suas promoções de diversas categorias. Esse é um projeto completo desde o back-end ao front-end(mobile). Aqui você encontrará os detalhes para rodar localmente a aplicação back-end ou em um docker, para que possa ser totalmente util o back-end, você pode encontrar o projeto da aplicação mobile [aqui](https://github.com/MarlonBeloMarques/promobv-mobile).
+O PromoBV é uma aplicação onde o usuário pode compartilhar suas promoções de diversas categorias. Esse é um projeto completo desde o back-end ao front-end(mobile). Aqui você encontrará os detalhes para rodar localmente a aplicação back-end ou em um docker. Para que possa ser totalmente util o back-end, você pode encontrar o projeto da aplicação mobile [aqui](https://github.com/MarlonBeloMarques/promobv-mobile) e realizar a comunicação com o back-end. Para os detalhes da comunicação você pode encontrar no readme do projeto mobile.
 
 Esse é um projeto que foi idealizado pela [Larissa Pantoja](https://github.com/Pantoja49).
 
-### O que você pode fazer?
+## O que você pode fazer?
 
 * Cadastro e Acesso em duas etapas por e-mail
 * Alterar senha em duas etapas por e-mail
@@ -23,7 +23,7 @@ Esse é um projeto que foi idealizado pela [Larissa Pantoja](https://github.com/
 * Buscar categorias
 * E muito mais...
 
-O Projeto é composto pelas seguintes pastas:
+## O Projeto é composto pelas seguintes pastas:
 
 * config - Configurações da aplicação.
 * domain - Classes de dominio.
@@ -44,27 +44,64 @@ O Projeto é composto pelas seguintes pastas:
     * validation - Validação dos dtos.
         * utils - Utilitários.
 
-### Necessário
+## Ambientes
+   Você pode rodar a aplicação conforme o ambiente que deseja, para rodar localmente recomendasse utilizar o ambiente de dev, para rodar em um docker, utilizar ambiente de docker e assim sucessivamente. Como posso fazer isso?
+  
+  ### Alterando o ambiente da aplicação:
+  Navegue até:
+  
+      +---src
+        +---main
+            +---resources
+                |   application.properties
+                |   application-dev.properties
+                |   application-prod.properties
+                |   application-test.properties
+                |   application-docker.properties
+
+   Após encontrar a pasta resources, abra o application.properties e altere a linha `spring.profiles.active`e adicione o ambiente de configuração que deseja.
+   
+   Exemplo:
+   
+      spring.profiles.active=dev
+      
+   ### Variáveis de Ambiente
+   Para usufruir de todo o poder do back-end, como login com Oauth2, autenticação em duas etapas, comunicação com AWS S3 etc. Você precisar adicionar as váriaveis de ambiente da sua configuração (Verifique mais a baixo como você pode configurar suas variáveis de ambiente).
+   
+   As variáveis de ambientes necessárias para rodar a aplicação com sucesso, são:
+   * USER_EMAIL
+   * USER_PASSWORD
+   * EMAIL
+   * AWS_ACCESS_KEY_ID
+   * AWS_SECRET_ACCESS_KEY
+   * S3_BUCKET
+   * S3_REGION
+   * GOOGLE_CLIENT_ID
+   * GOOGLE_CLIENT_SECRET
+   * FACEBOOK_CLIENT_ID
+   * FACEBOOK_CLIENT_SECRET
+
+## Necessário
 
 * XAMPP - Iniciar as portas Apache e MySQL.
 * MVN - Instalar variáveis de Ambiente.
 * Java - JDK/JRE
 
-### Inicialização 
+## Inicialização 
 
 Na pasta do projeto execute o seguinte comando: 
 
 ```sh
 $ mvn spring-boot:run
 ```
-### Observação
+## Observação
 
 Para inserção de objetos no banco de dados, basta seguir os exemplos no arquivo `PromoBvApplication.java`.
 
 Os caminhos para requisições podem ser encontradas na pasta resources, para que possa ser feita uma requisição,
 pode-se utilizar o [Postman](https://www.postman.com/downloads/)
 
-### Docker
+## Docker
 
 Para realizar consultas, inserções, atualizações etc. Tenha instalado o Docker em sua maquina e realize os seguintes comando no caminho raiz do projeto.
 
