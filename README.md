@@ -81,6 +81,70 @@ Esse é um projeto que foi idealizado pela [Larissa Pantoja](https://github.com/
    * FACEBOOK_CLIENT_ID
    * FACEBOOK_CLIENT_SECRET
 
+   ### Como configurar suas Variáveis de Ambiente
+   Abaixo veremos como configurar as variávies de ambiente para que você possa rodar com sucesso a aplicação.
+   
+   #### USER_EMAIL
+   Adicione o nome do seu e-mail, se seu e-mail é `marlonmarqsbr@gmail.com` então adicione somente, `marlonmarqsbr`.
+   
+   #### USER_PASSWORD
+   Adicione a senha do `USER_EMAIL`.
+   
+   #### EMAIL
+   Adicione o seu e-mail completo.
+   
+   #### AWS_ACCESS_KEY_ID
+   Para as configurações da AWS é necessário primeiro ter uma conta na AWS, então acesse [aqui](https://portal.aws.amazon.com/billing/signup#/start) para realizar o cadastro.
+   Após realizar o acesso, navegue até *Identity and Access Management (IAM)* > *Users*, e crie um usuário. Ao fim salve as credenciais para que possa usa-las nas demais etapas da AWS.
+   Agora com as credenciais em mãos, você pode usar o **access_key_id**.
+   
+   #### AWS_SECRET_ACCESS_KEY
+   Se você realizou a etapa anterior da AWS_ACCESS_KEY_ID, basta pegar no arquivo baixado das credenciais o **secret_access_key**.
+   
+   #### S3_BUCKET
+   Agora que você tem uma conta na AWS, basta ir em *Service* > *Storage* > *S3*, e crie um bucket com o nome `promobv-dev` por exemplo. Esse será o seu **S3_BUCKET**.
+   
+   #### S3_REGION
+   No momomento de criação do bucket você seleciona a região, mas você também pode encontrar em seus buckets **AWS REGION**, esse será o seu **S3_REGION**.
+   
+   #### GOOGLE_CLIENT_ID
+   Para você conseguir realizar login com o Google com Oauth2, primeiro é preciso criar um projeto no Google Cloud Developer. Então faça o login no [Google Developer](https://developers.google.com/) e crie um projeto com o nome `promobv` por exemplo.
+   Após ter o projeto criado, Vá em *Tela de consentimento OAuth* > *Prepare-se para a verificação*, adicione apenas algumas informações importantes:
+   * Nome do app
+   * E-mail para suporte do usuário
+   * Dominios Autorizados (Somente se não for localhost)
+
+   Em seguida vá em *Credenciais* > *Criar credenciais* > *ID do Cliente OAuth*, selecione tipo **Aplicativo da Web** e adicione as URIS de origem autorizadas e URIS de redirecionamento autorizados.
+   
+   Para o nosso caso, basta somente as URIS de redirecionamento autorizados, segue exemplo abaixo:
+      
+   * http://localhost:8080/oauth2/callback/google
+   
+   Após as credenciais serem criadas, você já terá acess ao ID do cliente, então adicione em **GOOGLE_CLIENT_ID**.
+   
+   #### GOOGLE_CLIENT_SECRET
+   Após concluida a etapa anterior, basta obter a Chave secreta do cliente e adicionar em **GOOGLE_CLIENT_SECRET**.
+   
+   #### FACEBOOK_CLIENT_ID
+   Para você conseguir realizar login com o Facebook com Oauth2, primeiro é preciso criar um projeto no [Facebook Developers](https://developers.facebook.com/), indo em *Meus Aplicativos* > *Criar aplicativo*, selecione Consumidor e dê um nome ao aplicativo como `promobv` por exemplo.
+   Após isso, vá em *Configurações* > *Básico*, e insira:
+   * Email de contato
+   * Url de política de privacidade
+   * Url dos termos de serviço
+   * Categoria
+   * Informações de contato do encarregado da proteção dos dados
+   * Domínios do aplicativo (Exemplo: localhost)
+   
+   Em Produtos, adicione **Login do Facebook**, em seguida vá em configurações do Login do Facebook e faça o seguinte:
+   * Login no OAuth do cliente (Sim)
+   * Login do OAuth na Web (Sim)
+   * Login de dispositivos (Sim)
+
+   Por fim, volte em *Configurações* > *Básico* e pegue o **ID do Aplicativo** e adicione em **FACEBOOK_CLIENT_ID**.
+   
+   #### FACEBOOK_CLIENT_SECRET
+   Após feito as etapas anteriores, basta obter a **Chave Secreta do Aplicativo** em *Configurações* > *Básico* e adicionar em **FACEBOOK_CLIENT_SECRET**.
+
 ## Necessário
 
 * XAMPP - Iniciar as portas Apache e MySQL.
