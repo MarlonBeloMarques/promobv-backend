@@ -1,65 +1,48 @@
-# PromoBV - Modelo Conceitual
+# PromoBV - Back-End
 
-O modelo conceitual consiste em criar a estrutura do back-end, tais como requisições, repositorios, classes de dominio etc.
+O PromoBV é uma aplicação onde o usuário pode compartilhar suas promoções de diversas categorias. Esse é um projeto completo desde o back-end ao front-end(mobile). Aqui você encontrará os detalhes para rodar localmente a aplicação back-end ou em um docker, para que possa ser totalmente util o back-end, você pode encontrar o projeto da aplicação mobile [aqui](https://github.com/MarlonBeloMarques/promobv-mobile).
 
-### Estrutura
+Esse é um projeto que foi idealizado pela [Larissa Pantoja](https://github.com/Pantoja49).
 
-O projeto está estruturado conforme abaixo:
+### O que você pode fazer?
 
-    +---src
-        +---main
-            +---java/com/marlonmarqs/promobv
-                |   PromoBvApplication.java
-                |
-                +---domain
-                    |   Categoria.java
-                    |   GaleriaDeImagens.java
-                    |   Notificacao.java
-                    |   Promocao.java
-                    |   Usuario.java
-                    |
-                    +---enums
-                        |   TipoNotificacao.java
-                        |   TipoPerfil.java
-                        |
-                +---repository
-                        |   CategoriaRepository.java
-                        |   GaleriaDeImagensRepository.java
-                        |   NotificacaoRepository.java
-                        |   PromocaoRepository.java
-                        |   UsuarioRepository.java
-                        |
-                +---resources
-                        |   CategoriaResource.java
-                        |   NotificacaoResource.java
-                        |   PromocaoResource.java
-                        |   UsuarioResource.java
-                        |
-                        +---exceptions
-                            |   ResourceExceptionHandler.java
-                            |   StandardError.java
-                            |
-                +---service
-                        |   CategoriaService.java
-                        |   NotificacaoService.java
-                        |   PromocaoService.java
-                        |   UsuarioService.java
-                        |
-                        +---exceptions
-                            |   ObjectNotFoundEception.java
-                            |
-            +---resources
-                |   application.properties
-                |
-                
-Pode-se observar que o projeto é composto pelas pastas:
+* Cadastro e Acesso em duas etapas por e-mail
+* Alterar senha em duas etapas por e-mail
+* Autenticação e Autorização por token
+* Acesso por google ou facebook utilizando Oauth2
+* Alterar informações do usuário
+* Adicionar promoções
+* Alterar promoções
+* Deletar promoções
+* Curtir promoções
+* Denunciar promoções
+* Buscar todas promoções
+* Buscar promoções por categoria
+* Compartilhar promoções
+* Adicionar categorias
+* Buscar categorias
+* E muito mais...
 
-* Domain - Destinada as classes de dominio.
-* Enums - Os tipos presentes.
-* Repository - Os repositorios.
-* Service - Onde contém as regras e comunicação com repository.
-* Resources - Comunicação através de requisições HTTP.
-* Exception - excessões.
+O Projeto é composto pelas seguintes pastas:
+
+* config - Configurações da aplicação.
+* domain - Classes de dominio.
+    * enums - Tipos presentes.
+* dto - Objetos para transferência de dados.
+* event - Eventos.
+* filters - Configurações de filtragem.
+* repository - Repositórios usados.
+* resources - Comunicação via requisições HTTP.
+    * exceptions - Exceções da camada de comunicação.
+* security - Configurações gerais de segurança.
+    * exceptions - Exceções de seguraça.
+    * oauth2 - Configurações de acesso por redes sociais.
+        * user - Informações por tipo de acesso.
+    * utils - Utilitários.   
+* service - Contém as regras de serviço e comunicação com o Repository.
+    * exceptions - Exceções de serviço.
+    * validation - Validação dos dtos.
+        * utils - Utilitários.
 
 ### Necessário
 
