@@ -1,10 +1,18 @@
-# PromoBV - Back-End
+<h1 align="center">
+PromoBV - Back-End
+</h1>
+<p align="center">
+  <a href="https://github.com/MarlonBeloMarques">
+    <img alt="Made by Marlon Marques" src="https://img.shields.io/badge/made%20by-Marlon%20Marques-brightgreen">
+  </a>
+</p>
 
-O PromoBV é uma aplicação onde o usuário pode compartilhar suas promoções de diversas categorias. Esse é um projeto completo desde o back-end ao front-end(mobile). Aqui você encontrará os detalhes para rodar localmente a aplicação back-end ou em um docker. Para que possa ser totalmente util o back-end, você pode encontrar o projeto da aplicação mobile [aqui](https://github.com/MarlonBeloMarques/promobv-mobile) e realizar a comunicação com o back-end. Para os detalhes da comunicação você pode encontrar no readme do projeto mobile.
+
+O PromoBV é uma aplicação onde o usuário pode compartilhar suas promoções de diversas categorias. Esse é um projeto completo desde o back-end ao front-end(mobile). Aqui você encontrará os detalhes para rodar localmente a aplicação back-end ou em um container. Para que possa ser totalmente util o back-end, você pode encontrar o projeto da aplicação mobile [aqui](https://github.com/MarlonBeloMarques/promobv-mobile) e realizar a comunicação com o back-end. Para os detalhes da comunicação você pode encontrar no readme do projeto mobile.
 
 Esse é um projeto que foi idealizado pela [Larissa Pantoja](https://github.com/Pantoja49).
 
-## O que você pode fazer?
+## :star: O que você pode fazer?
 
 * Cadastro e Acesso em duas etapas por e-mail
 * Alterar senha em duas etapas por e-mail
@@ -23,7 +31,7 @@ Esse é um projeto que foi idealizado pela [Larissa Pantoja](https://github.com/
 * Buscar categorias
 * E muito mais...
 
-## O Projeto é composto pelas seguintes pastas:
+## :file_folder: O Projeto é composto pelas seguintes pastas:
 
 * config - Configurações da aplicação.
 * domain - Classes de dominio.
@@ -44,10 +52,16 @@ Esse é um projeto que foi idealizado pela [Larissa Pantoja](https://github.com/
     * validation - Validação dos dtos.
         * utils - Utilitários.
 
-## Ambientes
+## :rocket: Começando
+Antes de você já chegar rodando a aplicação e se deparar com os erros :sob: ... Primeiro você precisa preparar o seu ambiente e realizar algumas configurações.
+   * Ambiente
+   * Necessário
+   * Inicialização
+
+   ### Ambiente
    Você pode rodar a aplicação conforme o ambiente que deseja, para rodar localmente recomendasse utilizar o ambiente de dev, para rodar em um docker, utilizar ambiente de docker e assim sucessivamente. Como posso fazer isso?
   
-  ### Alterando o ambiente da aplicação:
+  #### Alterando o ambiente da aplicação:
   Navegue até:
   
       +---src
@@ -65,7 +79,7 @@ Esse é um projeto que foi idealizado pela [Larissa Pantoja](https://github.com/
    
       spring.profiles.active=dev
       
-   ### Variáveis de Ambiente
+   #### Variáveis de Ambiente
    Para usufruir de todo o poder do back-end, como login com Oauth2, autenticação em duas etapas, comunicação com AWS S3 etc. Você precisar adicionar as váriaveis de ambiente da sua configuração (Verifique mais a baixo como você pode configurar suas variáveis de ambiente).
    
    As variáveis de ambientes necessárias para rodar a aplicação com sucesso, são:
@@ -81,33 +95,33 @@ Esse é um projeto que foi idealizado pela [Larissa Pantoja](https://github.com/
    * FACEBOOK_CLIENT_ID
    * FACEBOOK_CLIENT_SECRET
 
-   ### Como configurar suas Variáveis de Ambiente
+   #### Como configurar suas Variáveis de Ambiente
    Abaixo veremos como configurar as variávies de ambiente para que você possa rodar com sucesso a aplicação.
    
-   #### USER_EMAIL
+   #### `USER_EMAIL`  
    Adicione o nome do seu e-mail, se seu e-mail é `marlonmarqsbr@gmail.com` então adicione somente, `marlonmarqsbr`.
    
-   #### USER_PASSWORD
+   ##### `USER_PASSWORD`
    Adicione a senha do `USER_EMAIL`.
    
-   #### EMAIL
+   ##### `EMAIL`
    Adicione o seu e-mail completo.
    
-   #### AWS_ACCESS_KEY_ID
+   ##### `AWS_ACCESS_KEY_ID`
    Para as configurações da AWS é necessário primeiro ter uma conta na AWS, então acesse [aqui](https://portal.aws.amazon.com/billing/signup#/start) para realizar o cadastro.
    Após realizar o acesso, navegue até *Identity and Access Management (IAM)* > *Users*, e crie um usuário. Ao fim salve as credenciais para que possa usa-las nas demais etapas da AWS.
    Agora com as credenciais em mãos, você pode usar o **access_key_id**.
    
-   #### AWS_SECRET_ACCESS_KEY
-   Se você realizou a etapa anterior da AWS_ACCESS_KEY_ID, basta pegar no arquivo baixado das credenciais o **secret_access_key**.
+   ##### `AWS_SECRET_ACCESS_KEY`
+   Se você realizou a etapa anterior da **AWS_ACCESS_KEY_ID**, basta pegar no arquivo baixado das credenciais o **secret_access_key**.
    
-   #### S3_BUCKET
+   ##### `S3_BUCKET`
    Agora que você tem uma conta na AWS, basta ir em *Service* > *Storage* > *S3*, e crie um bucket com o nome `promobv-dev` por exemplo. Esse será o seu **S3_BUCKET**.
    
-   #### S3_REGION
+   ##### `S3_REGION`
    No momomento de criação do bucket você seleciona a região, mas você também pode encontrar em seus buckets **AWS REGION**, esse será o seu **S3_REGION**.
    
-   #### GOOGLE_CLIENT_ID
+   ##### `GOOGLE_CLIENT_ID`
    Para você conseguir realizar login com o Google com Oauth2, primeiro é preciso criar um projeto no Google Cloud Developer. Então faça o login no [Google Developer](https://developers.google.com/) e crie um projeto com o nome `promobv` por exemplo.
    Após ter o projeto criado, Vá em *Tela de consentimento OAuth* > *Prepare-se para a verificação*, adicione apenas algumas informações importantes:
    * Nome do app
@@ -122,10 +136,10 @@ Esse é um projeto que foi idealizado pela [Larissa Pantoja](https://github.com/
    
    Após as credenciais serem criadas, você já terá acess ao ID do cliente, então adicione em **GOOGLE_CLIENT_ID**.
    
-   #### GOOGLE_CLIENT_SECRET
+   ##### `GOOGLE_CLIENT_SECRET`
    Após concluida a etapa anterior, basta obter a Chave secreta do cliente e adicionar em **GOOGLE_CLIENT_SECRET**.
    
-   #### FACEBOOK_CLIENT_ID
+   ##### `FACEBOOK_CLIENT_ID`
    Para você conseguir realizar login com o Facebook com Oauth2, primeiro é preciso criar um projeto no [Facebook Developers](https://developers.facebook.com/), indo em *Meus Aplicativos* > *Criar aplicativo*, selecione Consumidor e dê um nome ao aplicativo como `promobv` por exemplo.
    Após isso, vá em *Configurações* > *Básico*, e insira:
    * Email de contato
@@ -142,28 +156,25 @@ Esse é um projeto que foi idealizado pela [Larissa Pantoja](https://github.com/
 
    Por fim, volte em *Configurações* > *Básico* e pegue o **ID do Aplicativo** e adicione em **FACEBOOK_CLIENT_ID**.
    
-   #### FACEBOOK_CLIENT_SECRET
+   ##### `FACEBOOK_CLIENT_SECRET`
    Após feito as etapas anteriores, basta obter a **Chave Secreta do Aplicativo** em *Configurações* > *Básico* e adicionar em **FACEBOOK_CLIENT_SECRET**.
 
-## Necessário
+### Necessário
+Para você rodar a aplicação na sua máquina local, é preciso antes de algumas configurações no seu ambiente.
 
-* XAMPP - Iniciar as portas Apache e MySQL.
-* MVN - Instalar variáveis de Ambiente.
-* Java - JDK/JRE
+   #### XAMPP
+   Realize o donwload do [XAMPP](https://www.apachefriends.org/pt_br/download.html) para ter acesso de forma facil a portas Apache e MySQL. Após ter baixado e instalado, basta iniciar as portas Apache e MySQL.
+   #### Maven
+   Você vai precisar do **Maven** para rodar a aplicação via linha de comando, caso você não tenha, então veja como instalar [aqui](https://www.apachefriends.org/pt_br/download.html).
+   #### Java 1.8
+   Como o projeto foi desenvolvido em Java na versão 1.8, você vai precisar instalar algumas dependência, então baixe o [JDK](https://www.oracle.com/br/java/technologies/javase/javase-jdk8-downloads.html) e o [JRE](https://www.oracle.com/br/java/technologies/javase-jre8-downloads.html), em seguida instale na sua máquina.
 
-## Inicialização 
-
+### Inicialização 
 Na pasta do projeto execute o seguinte comando: 
 
 ```sh
 $ mvn spring-boot:run
 ```
-## Observação
-
-Para inserção de objetos no banco de dados, basta seguir os exemplos no arquivo `PromoBvApplication.java`.
-
-Os caminhos para requisições podem ser encontradas na pasta resources, para que possa ser feita uma requisição,
-pode-se utilizar o [Postman](https://www.postman.com/downloads/)
 
 ## Docker
 
@@ -180,5 +191,13 @@ Para realizar consultas, inserções, atualizações etc. Tenha instalado o Dock
 * docker run -p 8086:8086 -e USER_EMAIL='' -e USER_PASSWORD='' -e EMAIL='' -e AWS_ACCESS_KEY_ID='' -e AWS_SECRET_ACCESS_KEY='' -e S3_BUCKET='' -e S3_REGION='' -e GOOGLE_CLIENT_ID='' -e GOOGLE_CLIENT_SECRET='' -e FACEBOOK_CLIENT_ID='' -e FACEBOOK_CLIENT_SECRET='' --name promobv --link mysql-standalone:mysql -d promobv
 
 Para consultar as tabelas no banco dedados, basta instalar o [MySQL Woekbench](https://www.mysql.com/products/workbench/) e criar uma conexão no localhost na porta 3306 com o seguinte usuario: "sa" e senha : "password"
+
+## Observação
+
+Para inserção de objetos no banco de dados, basta seguir os exemplos no arquivo `PromoBvApplication.java`.
+
+Os caminhos para requisições podem ser encontradas na pasta resources, para que possa ser feita uma requisição,
+pode-se utilizar o [Postman](https://www.postman.com/downloads/)
+
 
 
