@@ -213,6 +213,10 @@ Para rodar em um container, siga as etapas abaixo:
 
 Para consultar as tabelas no banco de dados, basta instalar o [MySQL Woekbench](https://www.mysql.com/products/workbench/) e criar uma conexão no localhost na porta 3306 com o seguinte usuario: "sa" e senha : "password".
 
+## :green_book: Documentação
+Para visualizar as rotas disponíveis de acesso para consultas, envios, atualizações etc. Utilize o swagger UI para isso. Após a aplicação estar rodando, basta acessar:
+* http://localhost:8080/swagger-ui.html
+
 ## :pushpin: Suporte
 
 Entre em contato comigo em um dos seguintes lugares!
