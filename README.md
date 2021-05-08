@@ -1,3 +1,8 @@
+<p align="center">
+<a href="https://github.com/MarlonBeloMarques/promobv-backend">
+    <img alt="PromoBV" src="./readme/icon.png" width="250px" />
+</a>
+</p>
 <h1 align="center">
 PromoBV - Back-End
 </h1>
@@ -190,7 +195,7 @@ Ou você pode utilizar o [IntelliJ](https://www.jetbrains.com/pt-br/idea/).
 
 Pronto, agora você a aplicação deve estar rodando com sucesso :fireworks::sparkler::fireworks:
 
-## Docker
+## :whale: Docker
 Caso você queira utilizar em um container a aplicação, então você tem que primeiro ter executado as etapas de **Ambiente**.
 Para rodar em um container, siga as etapas abaixo:
 
@@ -206,4 +211,9 @@ Para rodar em um container, siga as etapas abaixo:
 
 Para consultar as tabelas no banco de dados, basta instalar o [MySQL Woekbench](https://www.mysql.com/products/workbench/) e criar uma conexão no localhost na porta 3306 com o seguinte usuario: "sa" e senha : "password".
 
+## :pushpin: Suporte
 
+Entre em contato comigo em um dos seguintes lugares!
+
+- Instagram em [@marlomarquesbr](https://www.instagram.com/marlonmarqsbr/)
+- Linkedin em [Marlon Marques](https://www.linkedin.com/in/marlon-marques-0b509813b/)
