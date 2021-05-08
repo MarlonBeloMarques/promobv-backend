@@ -170,34 +170,33 @@ Para você rodar a aplicação na sua máquina local, é preciso antes de alguma
    Como o projeto foi desenvolvido em Java na versão 1.8, você vai precisar instalar algumas dependência, então baixe o [JDK](https://www.oracle.com/br/java/technologies/javase/javase-jdk8-downloads.html) e o [JRE](https://www.oracle.com/br/java/technologies/javase-jre8-downloads.html), em seguida instale na sua máquina.
 
 ### Inicialização 
-Na pasta do projeto execute o seguinte comando: 
+Se você executou todos os passos anteriores, então você rodará sua aplicação com sucesso :sunglasses:.
+Com o **XAMMP** aberto e rodando as portas Apache e MYSQL e com as variáveis de ambientes já definidas, recomenda-se rodar a aplicação com o profile de dev.
+Mas antes de rodar, primeiro é preciso criar um banco de dados no mysql com o nome `promobv`.
+  * Se você estiver usando o XAMMP, então basta acessar `http://localhost/phpmyadmin`.
 
+Na pasta do projeto execute o seguinte comando: 
 ```sh
 $ mvn spring-boot:run
 ```
+Ou você pode utilizar o [IntelliJ](https://www.jetbrains.com/pt-br/idea/).
+
+Pronto, agora você a aplicação deve estar rodando com sucesso :fireworks::sparkler::fireworks:
 
 ## Docker
-
-Para realizar consultas, inserções, atualizações etc. Tenha instalado o Docker em sua maquina e realize os seguintes comando no caminho raiz do projeto.
+Caso você queira utilizar em um container a aplicação, então você tem que primeiro ter executado as etapas de **Ambiente**.
+Para rodar em um container, siga as etapas abaixo:
 
 1. Use o MySQL Image publicado pelo [Docker Hub](https://hub.docker.com/_/mysql/) para executar o container mysql
 * docker pull mysql
 * docker run -p 3306:3306 --name mysql-standalone -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=promobv -e MYSQL_USER=sa -e MYSQL_PASSWORD=password -d mysql
 
-2. Usando o Dockerfile, crie a imagem do Docker. No diretório Dockerfile execute: 
+2. Usando o Dockerfile, crie a imagem do Docker. No diretório raiz do projeto contém o Dockerfile, então execute: 
 * docker build . -t promobv
 
-3. Execute a imagem do Docker (promobv): 
+3. Execute a imagem do Docker (promobv), não esqueça de passar os valores das variáveis de ambiente: 
 * docker run -p 8086:8086 -e USER_EMAIL='' -e USER_PASSWORD='' -e EMAIL='' -e AWS_ACCESS_KEY_ID='' -e AWS_SECRET_ACCESS_KEY='' -e S3_BUCKET='' -e S3_REGION='' -e GOOGLE_CLIENT_ID='' -e GOOGLE_CLIENT_SECRET='' -e FACEBOOK_CLIENT_ID='' -e FACEBOOK_CLIENT_SECRET='' --name promobv --link mysql-standalone:mysql -d promobv
 
-Para consultar as tabelas no banco dedados, basta instalar o [MySQL Woekbench](https://www.mysql.com/products/workbench/) e criar uma conexão no localhost na porta 3306 com o seguinte usuario: "sa" e senha : "password"
-
-## Observação
-
-Para inserção de objetos no banco de dados, basta seguir os exemplos no arquivo `PromoBvApplication.java`.
-
-Os caminhos para requisições podem ser encontradas na pasta resources, para que possa ser feita uma requisição,
-pode-se utilizar o [Postman](https://www.postman.com/downloads/)
-
+Para consultar as tabelas no banco de dados, basta instalar o [MySQL Woekbench](https://www.mysql.com/products/workbench/) e criar uma conexão no localhost na porta 3306 com o seguinte usuario: "sa" e senha : "password".
 
 
