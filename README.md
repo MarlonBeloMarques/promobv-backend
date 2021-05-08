@@ -18,6 +18,7 @@ PromoBV - Back-End
   <img alt="Google" src="https://img.shields.io/badge/Google-D14836?style=for-the-badge">
   <img alt="Docker" src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white">
    <img alt="AWS" src="https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white">
+   <img alt="Google" src="https://img.shields.io/badge/Swagger UI-brightgreen?style=for-the-badge">
 </p>
 
 
