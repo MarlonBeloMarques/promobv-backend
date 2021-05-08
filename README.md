@@ -10,6 +10,9 @@ PromoBV - Back-End
   <a href="https://github.com/MarlonBeloMarques">
     <img alt="Made by Marlon Marques" src="https://img.shields.io/badge/made%20by-Marlon%20Marques-brightgreen">
   </a>
+     <a href="https://github.com/Pantoja49">
+    <img alt="Idealized by Larissa Pantoja" src="https://img.shields.io/badge/idealized%20by-Larissa%20Pantoja-yellow">
+  </a>
 </p>
 <p align="center">
   <img alt="Jwt" src="https://img.shields.io/badge/-Jwt-black?style=for-the-badge">
@@ -23,8 +26,6 @@ PromoBV - Back-End
 
 
 O PromoBV é uma aplicação onde o usuário pode compartilhar suas promoções de diversas categorias. Esse é um projeto completo desde o back-end ao front-end(mobile). Aqui você encontrará os detalhes para rodar localmente a aplicação back-end ou em um container. Para que possa ser totalmente util o back-end, você pode encontrar o projeto da aplicação mobile [aqui](https://github.com/MarlonBeloMarques/promobv-mobile) e realizar a comunicação com o back-end. Para os detalhes da comunicação você pode encontrar no readme do projeto mobile.
-
-Esse é um projeto que foi idealizado pela [Larissa Pantoja](https://github.com/Pantoja49).
 
 ## :star: O que você pode fazer?
 
